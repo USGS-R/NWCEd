@@ -2,7 +2,7 @@
 % Please edit documentation in R/getNWCData.R
 \name{getNWCData}
 \alias{getNWCData}
-\title{Get data from an SOS source.}
+\title{Get data from an NWC source.}
 \usage{
 getNWCData(dataSource, huc)
 }
