@@ -7,6 +7,17 @@ dataOut<-getNWCData(dataSource="http://cida.usgs.gov/nwc/thredds/sos/watersmart/
 summary(dataOut)
 ```
 
+The following are URL addresses used to access water budget data:
+
+1. http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_eta.nc
+2. http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc
+3. http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_Q.nc
+
+
+Daily Streamflow data is obtained from http://waterservices.usgs.gov/rest/DV-Service.html
+
+
+
 Disclaimer
 ----------
 This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey, an agency of the United States Department of Interior. For more information, see the official USGS copyright policy at [http://www.usgs.gov/visual-id/credit_usgs.html#copyright](http://www.usgs.gov/visual-id/credit_usgs.html#copyright)
