@@ -1,11 +1,11 @@
 Package: NWCEd
 Type: Package
-Title: What the Package Does (Title Case)
+Title: National Water Census Education Demo
 Version: 0.1
 Date: 2016-03-22
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: David Blodgett <dblodgett@usgs.gov>
+Maintainer: Jake Nelson <jake.nelson7@gmail.com>
+Description: Package for NWC educational vignette.
+License: CC0
 LazyData: TRUE
 RoxygenNote: 5.0.1
