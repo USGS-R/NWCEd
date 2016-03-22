@@ -1,4 +1,4 @@
-#' Get data from an SOS source.
+#' Get data from an NWC source.
 #'
 #' This function builds a request and returns the the data in question.
 #'
