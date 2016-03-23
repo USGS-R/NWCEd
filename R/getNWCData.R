@@ -7,7 +7,7 @@
 #' @author David Blodgett \email{dblodgett@usgs.gov}
 #' @export
 #' @examples
-#' data<-getNWCData(huc=031601030306")
+#' data<-getNWCData(huc="031601030306")
 #'
 getNWCData<-function(huc) {
   urls<-list(huc12=list(et="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_eta.nc",

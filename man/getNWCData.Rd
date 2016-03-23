@@ -15,6 +15,10 @@ The data.
 \description{
 This function builds a request and returns the the data in question.
 }
+\examples{
+data<-getNWCData(huc="031601030306")
+
+}
 \author{
 David Blodgett \email{dblodgett@usgs.gov}
 }
