@@ -19,11 +19,22 @@ Daily Streamflow data is obtained from http://waterservices.usgs.gov/rest/DV-Ser
 # Package Vignette 
 
 Problem statement, how its relevant, example water budget data--example watersheds showing different hydrologic settings.
+Discuss learning objectives and how they relate to the problem statement (expectations of what the user is going to learn)
 
 ## Canned examples that illustrate the problem
 
+
 Need function to plot raw time series of water budget data.
 	Will require convert from monthly or daily to annual or longer.
+	
+#### Function1 (Annual Time Series Plot Function)
+    *store a list of values in a variable
+    **convert values to annual 
+    ***check the heading of the column from which the list is being pulled
+    *store a list of respective values in another variable
+    **convert values to annual
+    *function should plot the defined variables
+    **predefined plot size and plot format
 
 Link to NWC Portal for more.
 
@@ -37,6 +48,15 @@ Need a way to combine raw water budget data into a 'closed' water budget.
 Need a way to modify time series according to different types of uncertainty and generate plots.
 	End up with a plot showing original data along with adjusted data according to assumed uncertainty.
 	Also show new 'balanced' water budget based on assumed uncertainty.
+
+#### Function2 (Closed Annual Water Budget Plotting Function)	
+	*Function should be modified from function 2
+	**Should convert datasets to annual, plotting size and formats should be the same
+	*function should include user inputs for precip, ET, runoff, streamflow
+	**function should convert all datasets to annual
+	**function should calculate the closed water budget by adding/subtracting datasets
+	*function should allow user option of inputting in types of uncertainty
+	**uncertainty inputs should be defaulted to none
 	
 ## Objectives of the exercise
 
@@ -47,6 +67,10 @@ Show how a user could step through a solution.
 
 User creates their own report. 
 	Will need a function to generate the actual markdown report akin to the Vignette.
+	
+#### Function3 (Markdown Report Function)
+
+  *
 
 ## Base case - User's (or a specific chosen) Water Shed Without Changes.
 
