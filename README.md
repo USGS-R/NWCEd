@@ -50,9 +50,9 @@ Need a way to modify time series according to different types of uncertainty and
 	Also show new 'balanced' water budget based on assumed uncertainty.
 
 #### Function2 (Closed Annual Water Budget Plotting Function)	
-	*Function should be modified from function 2
+	*Function should be modified from function 1
 	**Should convert datasets to annual, plotting size and formats should be the same
-	*function should include user inputs for precip, ET, runoff, streamflow
+	*function should include user inputs for precip, ET, runoff
 	**function should convert all datasets to annual
 	**function should calculate the closed water budget by adding/subtracting datasets
 	*function should allow user option of inputting in types of uncertainty
