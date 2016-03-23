@@ -4,11 +4,9 @@
 \alias{getNWCData}
 \title{Get data from an NWC source.}
 \usage{
-getNWCData(dataSource, huc)
+getNWCData(huc)
 }
 \arguments{
-\item{dataSource}{One of the allowed data sources.}
-
 \item{huc}{The watershed of interest.}
 }
 \value{
@@ -16,10 +14,6 @@ The data.
 }
 \description{
 This function builds a request and returns the the data in question.
-}
-\examples{
-newData<-getNWCData(dataSource="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc",huc="031401020800")
-
 }
 \author{
 David Blodgett \email{dblodgett@usgs.gov}
