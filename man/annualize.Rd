@@ -4,11 +4,13 @@
 \alias{annualize}
 \title{Function to convert daily water budget data to an annualzed time series.}
 \usage{
-annualize(inputData)
+annualize(inputData, method = mean)
 }
 \arguments{
 \item{inputData}{A daily data.frame containing a Date, format
 "yyyy-mm-dd" 'date' and numerical 'data' collumn.}
+
+\item{method}{A function to use in grouping. Defaults to mean, can be sum or other statistic.}
 }
 \value{
 An annual time series data frame with a year and data collumn.

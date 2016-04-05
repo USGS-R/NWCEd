@@ -4,6 +4,7 @@
 #'
 #' @param inputData A daily data.frame containing a Date, format
 #' "yyyy-mm-dd" 'date' and numerical 'data' collumn.
+#' @param method A function to use in grouping. Defaults to mean, can be sum or other statistic.
 #' @return An annual time series data frame with a year and data collumn.
 #' @export
 #' @examples
@@ -11,10 +12,10 @@
 #' data<-getSWECSVBlock(url)
 #' annual<-annualize(data)
 #'
-annualize<-function(inputData) {
+annualize<-function(inputData, method = mean) {
   splitDate<-strsplit(as.character(inputData$date), "-")
   years<-as.character(lapply(splitDate,first<-function(x) x[1]))
-  annual<-aggregate(inputData$data, list(year=years), mean)
+  annual<-aggregate(inputData$data, list(year=years), method)
   names(annual)<-c("year","data")
   return(annual)
 }
