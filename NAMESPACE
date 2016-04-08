@@ -2,8 +2,10 @@
 
 export(annualize)
 export(getNWCData)
+export(getNWISSite)
 export(getSWECSVBlock)
 importFrom(XML,xmlParse)
 importFrom(XML,xmlTreeParse)
 importFrom(XML,xmlValue)
 importFrom(XML,xpathApply)
+importFrom(rjson,fromJSON)
