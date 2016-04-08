@@ -1,7 +1,7 @@
 context("Test Daily to Annual Conversion")
 
 test_that("Test that the function returns the right number of years, structure, and default function.", {
-  outData<-getSWECSVBlock('data/SWECSVBlock_daymet_example.xml')
+  outData<-getSWECSVBlock(system.file('extdata','SWECSVBlock_daymet_example.xml',package='NWCEd'))
   annual<-annualize(outData)
   expect_equal(length(annual),2)
   expect_equal(length(annual$data),35)
@@ -11,7 +11,7 @@ test_that("Test that the function returns the right number of years, structure, 
 })
 
 test_that("Test that the function returns sum when prompted.", {
-  outData<-getSWECSVBlock('data/SWECSVBlock_daymet_example.xml')
+  outData<-getSWECSVBlock(system.file('extdata','SWECSVBlock_daymet_example.xml',package='NWCEd'))
   annual<-annualize(outData, method=sum)
   expect_equal(length(annual),2)
   expect_equal(length(annual$data),35)
