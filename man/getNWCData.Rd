@@ -4,7 +4,7 @@
 \alias{getNWCData}
 \title{Get data from an NWC source.}
 \usage{
-getNWCData(huc)
+getNWCData(huc, local = TRUE)
 }
 \arguments{
 \item{huc}{The watershed of interest.}
