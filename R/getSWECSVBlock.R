@@ -15,22 +15,14 @@ getSWECSVBlock <- function(input) {
   mod_open <- file(input,open="r")
   content<-paste(readLines(mod_open,warn=FALSE))
   close(mod_open,type="r")
-  if (length(content)>0) {
-    test <- capture.output(tryCatch(xmlTreeParse(content, getDTD=F, useInternalNodes=TRUE), "XMLParserErrorList" = function(e) {cat("incomplete",e$message)}))
-  } else {test<-0}
-  while (length(grep("<?xml",test))==0) {
-    mod_open <- file(input,open="r")
-    content <- paste(readLines(mod_open,warn=FALSE))
-    close(mod_open,type="r")
-    if (length(content)>0) {
-      test <- capture.output(tryCatch(xmlTreeParse(content, getDTD=F, useInternalNodes=TRUE), "XMLParserErrorList" = function(e) {cat("incomplete",e$message)}))
-    } else {
-      test<-0
-    }
+
+  if (any(grepl('<ExceptionText>invalid parameter</ExceptionText>',content))) {
+    stop('An invalid parameter error was encountered. The HUC may not exist.')
   }
+
   if (length(sapply(content,nchar))>1) {
     dat <- read.delim(header = F, comment.char = "",
-                       as.is = T, sep = ",", text = xpathApply(xmlParse(input),
+                       as.is = T, sep = ",", text = xpathApply(xmlParse(content),
                                                                "//swe:values", xmlValue)[[1]])
     names(dat) <- c('date', 'data')
     dat$date <- as.Date(strptime(dat$date, format = "%Y-%m-%dT%H:%M:%SZ"))
