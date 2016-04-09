@@ -8,3 +8,8 @@ test_that("Test that the function returns the expected number of time series", {
   outData<-getNWCData("03160103")
   expect_equal(length(names(outData)),2)
 })
+
+test_that("Test that a HUC with NWIS data comes back as such.",{
+  outData<-getNWCData("121101110705", local=FALSE)
+  expect_equal(length(names(outData$streamflow)),5)
+})

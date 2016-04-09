@@ -13,12 +13,13 @@
 getNWISSite<-function(huc) {
   # Note that this file is available here: http://cida.usgs.gov/nwc/json/watershed_gages.json
   lookup<-fromJSON(file=system.file('extdata','watershed_gages.json',package='NWCEd'))
+  returnval<-NULL
   for(l in 1:length(lookup)) {
     if (grepl(huc, lookup[[l]]$hucId)) {
       if(nchar(huc)==12) {
-        return(lookup[[l]]$gageId)
+        returnval<-lookup[[l]]$gageId
       }
     }
   }
-  return(NULL)
+  return(returnval)
 }

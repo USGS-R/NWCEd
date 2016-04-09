@@ -10,16 +10,12 @@
 #' url <- "http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc?request=GetObservation&service=SOS&version=1.0.0&observedProperty=prcp&offering=031401020800"
 #' getSWECSVBlock(url)
 getSWECSVBlock <- function(input) {
-  cat(paste("Retrieving data from: \n", input, "\n",
-            sep = " "))
   mod_open <- file(input,open="r")
   content<-paste(readLines(mod_open,warn=FALSE))
   close(mod_open,type="r")
-
   if (any(grepl('<ExceptionText>invalid parameter</ExceptionText>',content))) {
     stop('An invalid parameter error was encountered. The HUC may not exist.')
   }
-
   if (length(sapply(content,nchar))>1) {
     dat <- read.delim(header = F, comment.char = "",
                        as.is = T, sep = ",", text = xpathApply(xmlParse(content),
@@ -30,10 +26,8 @@ getSWECSVBlock <- function(input) {
     dat <- as.data.frame(dat)
     attr(dat, "SRC") <- input
     class(dat) <- c("dat", "data.frame")
-    cat("Finished!\n")
     return(dat)
   } else {
-    cat("No data available for site\n")
     dat<-""
     return(dat)}
 }

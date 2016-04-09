@@ -5,6 +5,7 @@
 #' @param huc The watershed of interest.
 #' @return The data.
 #' @author David Blodgett \email{dblodgett@usgs.gov}
+#' @importFrom dataRetrieval readNWISdv
 #' @export
 #' @examples
 #' data<-getNWCData(huc="031601030306")
@@ -14,14 +15,15 @@ getNWCData<-function(huc, local=TRUE) {
                         prcp="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc"),
              huc12agg=list(et="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_eta_agg.nc",
                         prcp="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet_agg.nc",
-                        MEAN_streamflow="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_Q.nc"),
+                        streamflow="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_Q.nc"),
              huc08=list(et="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC08_data/HUC08_eta.nc",
                         prcp="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC08_data/HUC08_daymet.nc"))
-
+  nwisSite<-FALSE
   if(nchar(huc)==12 && local) {
     urlList<-urls['huc12'][[1]]
   } else if(nchar(huc)==12 && !local) {
     urlList<-urls['huc12agg'][[1]]
+    nwisSite<-getNWISSite(huc)
   } else if (nchar(huc)==8 && local) {
     urlList<-urls['huc08'][[1]]
   } else if (nchar(huc)==8 && !local) {
@@ -35,8 +37,14 @@ getNWCData<-function(huc, local=TRUE) {
     url<-paste0(urlList[name],'?request=GetObservation&service=SOS&version=1.0.0&observedProperty=',
                 name,'&offering=',huc)
     # This is valid but not used now: ,'&eventTime=',startdate,'T00:00:00Z/', enddate,'T00:00:00Z'
-    dataOut[name]<-list(getSWECSVBlock(url))
+    ts<-getSWECSVBlock(url)
+    dataOut[name]<-list(ts)
     }
+  }
+  if(is.character(nwisSite)) {
+    dataOut['streamflow']<-list(readNWISdv(nwisSite,'00060'))
+    names(dataOut$streamflow)[4]<-'data_00060_00003'
+    names(dataOut$streamflow)[5]<-'cd_00060_00003'
   }
   return(dataOut)
 }
