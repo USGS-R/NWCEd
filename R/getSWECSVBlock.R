@@ -7,8 +7,7 @@
 #' @importFrom XML xmlTreeParse xpathApply xmlParse xmlValue
 #' @export
 #' @examples
-#' url <- "http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc?request=GetObservation&service=SOS&version=1.0.0&observedProperty=prcp&offering=031401020800"
-#' getSWECSVBlock(url)
+#' getSWECSVBlock(system.file('extdata','SWECSVBlock_daymet_example.xml',package='NWCEd'))
 getSWECSVBlock <- function(input) {
   mod_open <- file(input,open="r")
   content<-paste(readLines(mod_open,warn=FALSE))

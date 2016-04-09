@@ -7,6 +7,7 @@ Author: David Blodgett <dblodgett@usgs.gov>
 Maintainer: Jake Nelson <jake.nelson7@gmail.com>
 Description: Package for NWC educational vignette.
 Imports: XML, rjson, dataRetrieval
-License: CC0
+Suggests: testthat
+License: file LICENSE
 LazyData: TRUE
 RoxygenNote: 5.0.1

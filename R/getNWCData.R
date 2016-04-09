@@ -3,6 +3,7 @@
 #' This function builds a request and returns the the data in question.
 #'
 #' @param huc The watershed of interest.
+#' @param local TRUE/FALSE to request local watershed or total upstream watershed data.
 #' @return The data.
 #' @author David Blodgett \email{dblodgett@usgs.gov}
 #' @importFrom dataRetrieval readNWISdv

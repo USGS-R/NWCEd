@@ -8,6 +8,8 @@ getNWCData(huc, local = TRUE)
 }
 \arguments{
 \item{huc}{The watershed of interest.}
+
+\item{local}{TRUE/FALSE to request local watershed or total upstream watershed data.}
 }
 \value{
 The data.

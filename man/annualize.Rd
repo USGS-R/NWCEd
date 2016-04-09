@@ -19,8 +19,7 @@ An annual time series data frame with a year and data collumn.
 Basic function that takes a date/data data frome and returns an annualized time series.
 }
 \examples{
-url <- "http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc?request=GetObservation&service=SOS&version=1.0.0&observedProperty=prcp&offering=031401020800"
-data<-getSWECSVBlock(url)
+data<-getSWECSVBlock(system.file('extdata','SWECSVBlock_daymet_example.xml',package='NWCEd'))
 annual<-annualize(data)
 
 }
