@@ -16,7 +16,6 @@ data frame containing desired time series
 This function accepts a url and returns a data frame of data for that SOS request
 }
 \examples{
-url <- "http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc?request=GetObservation&service=SOS&version=1.0.0&observedProperty=prcp&offering=031401020800"
-getSWECSVBlock(url)
+getSWECSVBlock(system.file('extdata','SWECSVBlock_daymet_example.xml',package='NWCEd'))
 }
 

@@ -3,18 +3,13 @@ Get up and running:
 ```{r}
 library(devtools)
 install_github("USGS-R/NWCCompare")
-dataOut<-getNWCData(dataSource="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc",huc="031401020800")
-summary(dataOut)
+dataOut<-getNWCData(huc="121101110705",local=FALSE)
+summary(dataOut$et)
+summary(dataOut$prcp)
+summary(dataOut$streamflow)
 ```
 
-The following are URL addresses used to access water budget data:
-
-1. http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_eta.nc
-2. http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc
-3. http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_Q.nc
-
-
-Daily Streamflow data is obtained from http://waterservices.usgs.gov/rest/DV-Service.html
+[![Travis](https://travis-ci.org/dblodgett-usgs/NWCEd.svg?branch=master)](https://travis-ci.org/dblodgett-usgs/NWCEd)
 
 # Package Vignette 
 
