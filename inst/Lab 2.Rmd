@@ -1,0 +1,67 @@
+---
+title: "Lab 2: Using the StreamFlow Stats Tool from the NWC-DP."
+output: 
+  html_document:
+    toc: true # table of content true
+    depth: 2  # up to two depths of headings (specified by #, ##)
+    number_sections: true  ## if you want number sections at each table header
+    theme: cerulean  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+fig_caption=TRUE
+library(bootstrap)
+```
+
+
+## Introduction
+<div style="text-align:justify">
+The United States Geological Survey (USGS) has developed the **Streamflow Stats** tool within the National Water Census Data Portal (NWC-DP).  The Streamflow Stats tool allows users to easily perform statistical analyses on stream flow at a user-selected stream.  The Streamflow Stats tool uses 6 statistics packages: **`Seven Fundamental Daily Streamflow Statistics`**, **`Flow Magnitude`**, **`Flow Frequency`**, **`Flow Duration`**, **`Flow Timing`**, and **`Rate of Change`**.  This lab will walk through how to use these statistical packages. 
+</div>
+## Important Questions to Ask Yourself
+
+1. What is the purpose the NWC-DP?
+2. What type of data am I working with?
+3. How are the datasets compiled?
+
+## Useful Terms and Acronyms
+
+Term         | Defintion
+------------ | -------------
+NWC-DP       | National Water Census Data Portal
+HUC          | Hydrologic Unit Code which identifies a watershed
+Watershed    | An area or ridge of land that separates waters flowing to different rivers, basins, or seas
+ET           | Evapotransiration
+
+## Exercise 1
+
+<br>
+
+#### Step 1
+<div style="text-align:justify">
+The purpose of Exercise 1 is to walk through the process of selecting a desired stream gage and comparing the respective data plot with the data plot of a second stream gage.  For information regarding operating within the NWC-DP interface, please consult **_Lab 1_**.  For this exercise, go to the NWC-DP homepage at <http://cida.usgs.gov/nwc/> as shown in **Figure 1** below.  Click on the tab titled, "Streamflow Stats" in the Menu ribbon on the left of the page or anywhere in the large Streamflow Stats icon to access the tool.
+</div>
+<br>
+
+#### Step 2
+<div style="text-align:justify">
+After selecting the Streamflow Stats tool, a new page will open shown in **Figure 2** below. 
+
+<br>
+**Insert Image Here**
+<br>
+
+In the **`Stream Gage Filters:`** there are 4 layers which can be selected: "Gages for Evaluating Streamflow", "Gages Active in 2009", "Gages II Reference Gages", and "Gages Sorted by Period of Record".  From the dropdown box, select "Gages for Evaluating Streamflow".  Zoom in and select a gage of your choice by placing the cursor directly over the gage and clicking once.
+
+A new page will open displaying gage information and map in the upper left corner.  The rest of the screen appears to be blank.  Click the `**Streamflow Data Plot`** button in the center of the screen.  A time series plot of streamflow data will display above the **`Streamflow Data Plot`** button as shown in **Figure 3** below.
+</div>
+<br>
+**Insert Image Here**
+<br>
+
+Move your cursor over the plotted data.  You will notice that actual data points are displayed below the plot similarly to data plots in .
+
+

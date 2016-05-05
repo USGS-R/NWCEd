@@ -20,7 +20,7 @@ library(bootstrap)
 
 ## Introduction
 <div style="text-align:justify">
-The United States Geological Survey (USGS) has developed the National Water Census Data Portal (NWC-DP).  The NWC-DP provides users with access to unprecedented hydrologic data including precipitation, evapotranspiration (ET), and stream flow data.  Accompanying the available datasets are tools which can be used to plot and analyze desired datasets associated with delineated watersheds assigned a hydrologic unit code (HUC).  The tools which will be explored in the following exercises are the Water Budget and Streamflow Stats tools. 
+The United States Geological Survey (USGS) has developed the National Water Census Data Portal (NWC-DP).  The NWC-DP provides users with access to unprecedented hydrologic data including precipitation, evapotranspiration (ET), and stream flow data.  Accompanying the available datasets are tools which can be used to plot and analyze desired datasets associated with delineated watersheds assigned a hydrologic unit code (HUC).  The tool which will be explored in the following exercise is the Water Budget tool. 
 </div>
 ## Important Questions to Ask Yourself
 
@@ -47,7 +47,8 @@ The purpose of Exercise 1 is to walk through the functionality of the **`Water B
 </div>
 <br>
 
-![**Figure 1: The NWC-DP homepage.**](https://github.com/jnelson7/NWCEd/tree/master/R/NWC-DP%20Images/Figure1.jpg)                       
+imagepath <- system.file('Lab1 NWC-DP Images/Figure1.jpg',package='NWCEd')
+![**Figure 1: The NWC-DP homepage.**](imagepath)                       
 
 <br>
 
@@ -188,9 +189,8 @@ The processes used to navigate and select items in the map are the same as in **
 
 A new page will open displaying gage information and map in the upper left corner.  The rest of the screen appears to be blank.  Click the **`Streamflow Data Plot`** button in the center of the screen.  A time series plot of streamflow data will display above the **`Streamflow Data Plot`** button as shown in **Figure 13** below.
 
-<br>
 
-Test line...
+
 
 
 
