@@ -23,15 +23,15 @@ The United States Geological Survey (USGS) has developed the **Streamflow Stats*
 </div>
 ## Important Questions to Ask Yourself
 
-1. What is the purpose the NWC-DP?
-2. What type of data am I working with?
-3. How are the datasets compiled?
+1. Where can I find the metadata for the datasets associated with the Streamflow Stats tool?
+2. Where can I find the software used to perform the statistics?
+3. How do I download the results of the statistic analysis?
 
 ## Useful Terms and Acronyms
 
 Term         | Defintion
 ------------ | -------------
-NWC-DP       | National Water Census Data Portal
+Metadata     | A set of data that describes and gives information about other data
 HUC          | Hydrologic Unit Code which identifies a watershed
 Watershed    | An area or ridge of land that separates waters flowing to different rivers, basins, or seas
 ET           | Evapotransiration
@@ -42,26 +42,101 @@ ET           | Evapotransiration
 
 #### Step 1
 <div style="text-align:justify">
-The purpose of Exercise 1 is to walk through the process of selecting a desired stream gage and comparing the respective data plot with the data plot of a second stream gage.  For information regarding operating within the NWC-DP interface, please consult **_Lab 1_**.  For this exercise, go to the NWC-DP homepage at <http://cida.usgs.gov/nwc/> as shown in **Figure 1** below.  Click on the tab titled, "Streamflow Stats" in the Menu ribbon on the left of the page or anywhere in the large Streamflow Stats icon to access the tool.
+The purpose of Exercise 1 is to walk through the process of selecting a desired stream gage and comparing the respective data plot with the data plot of a second stream gage.  For information regarding operating within the NWC-DP interface, please consult **_Lab 1_**.  For this exercise, go to the NWC-DP homepage at <http://cida.usgs.gov/nwc/> as shown in **Figure 1** from **_Lab 1_**.  Click on the tab titled, "Streamflow Stats" in the Menu ribbon on the left of the page or anywhere in the large Streamflow Stats icon to access the tool.
 </div>
+
 <br>
 
 #### Step 2
 <div style="text-align:justify">
-After selecting the Streamflow Stats tool, a new page will open shown in **Figure 2** below. 
+After selecting the Streamflow Stats tool, a new page will open shown in **Figure 1** below. 
+</div>
 
 <br>
-**Insert Image Here**
+
+![**Figure 1: Streamflow Statistics Calculator homepage.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure1StreamflowStatsHomepage.JPG)
+
 <br>
 
-In the **`Stream Gage Filters:`** there are 4 layers which can be selected: "Gages for Evaluating Streamflow", "Gages Active in 2009", "Gages II Reference Gages", and "Gages Sorted by Period of Record".  From the dropdown box, select "Gages for Evaluating Streamflow".  Zoom in and select a gage of your choice by placing the cursor directly over the gage and clicking once.
+<div style="text-align:justify">
+In the **`Stream Gage Filters:`** there are 4 layers which can be selected: "Gages for Evaluating Streamflow", "Gages Active in 2009", "Gages II Reference Gages", and "Gages Sorted by Period of Record" as shown in **Figure 2** below.
+</div>
 
-A new page will open displaying gage information and map in the upper left corner.  The rest of the screen appears to be blank.  Click the `**Streamflow Data Plot`** button in the center of the screen.  A time series plot of streamflow data will display above the **`Streamflow Data Plot`** button as shown in **Figure 3** below.
+<br>
+
+![**Figure 2: Gage layer selections.** ](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure4StreamflowGageFilter.JPG)
+
+<br>
+
+<div style="text-align:justify">
+Before selecting a button, we must first understand where the streamflow data come from.  To obtain the metadata, right click on **Gages II dataset** and open a new tab.  A new page will open displaying an abstract for Gages II as shown in **Figure 3**.  Under the section titled "Links" there is a link to the metadata.  Click on the "Metadata" link.  The metadata page is shown in **Figure 4** below.
+</div>
+
+<br>
+
+<div style= "width: 425px; height= 300px; float: left">
+![**Figure 3: Gages-II abstract and metadata link.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure3MetaDataLink.JPG) 
+</div><div style= "width: 425px; height= 300px; float: right">
+![**Figure 4: Webpage displaying metadata.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure2MetaDataHomePage.JPG) 
+</div>
+
+<br>
+
+<div style="text-align:justify; clear: left">
+<br>
+
+Look under the _**`Description`**_ section. What information do you find related to the different gage layers in the Streamflow Stats tool?
+
+<br>
+
+#### Step 3
+<div style="text-align:justify">
+Go back to the "Streamflow Stats" tool homepage.  From the dropdown box, select **Gages for Evaluating Streamflow**.  In the search bar, type "La Pine".  Do not press the enter key.  Once the options have appeared, select the "La Pine OR Deschutes County" option.  The map zoom to La Pine, Oregon.  Click on the gage nearest La Pine as shown in **Figure 5** below.  A new page will open as shown in **Figure 6**.  Gage information and location are displayed in the upper left corner.  The rest of the screen appears blank.  Click the **`Streamflow Data Plot`** button in the center of the screen.  A time series plot of streamflow data will display above the **`Streamflow Data Plot`** button.
+</div>
+
+<br>
+<div style= "width: 400px; height= 300px; float: left">
+![**Figure 5: La Pine gage location. link.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure5LaPineArrow.JPG) 
+</div><div style= "width: 460px; height= 300px; float: right">
+![**Figure 6: Webpage displaying metadata.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure6LaPineGageComparisonBlank.JPG) 
+</div>
+
+<br>
+
+<div style="text-align:justify; clear: left">
+<br>
+
+<div style="text-align:justify">
+Move your cursor over the plotted data.  You will notice that actual data points are displayed below the plot similarly to data plots generated using the Water Budget tool.  There are two identical tables below the streamflow data plot, each with unchecked boxes and a list of statistic group names.  See **Figure 7** below.
 </div>
 <br>
-**Insert Image Here**
+
+![**Figure 7: Statistic group tables. link.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure7StatisticGroups.JPG)
+
+<br>
+<div style="text-align:justify">
+Notice that all the group names listed under the "Statistic Group Name" column have on the right side a small icon depicting a box with an arrow.  To obtain the desired metadata associated with the respective statistic group, click on the icon.  
+</div>
 <br>
 
-Move your cursor over the plotted data.  You will notice that actual data points are displayed below the plot similarly to data plots in .
+####Step 4
+<div style="text-align:justify">
+Lets use the Streamflow Stats tool to perform some statistical analyses for the streamflow data collected at the Little Deschutes River gage near La Pine, Oregon.  Check the box in the Statistic Group table on the left side of the screen.  Click the **`Calculate Statistics`** button above the table.  The calculations may take a few minutes.  The results are shown in **Figure 8** below.
+</div>
+<br>
+
+![**Figure 8: Seven Fundamental Daily Streamflow Statistics results. link.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure8StatsResults.JPG)
+
+<br>
+
+<div style="text-align:justify">
+Statistics including the mean of the daily streamflow, skewness, kurtosis, and other statistics have been calculated.  Click on the green **`Download These Statistics`** button to download the results.  Once the file has been downloaded, right click on the file and select "Show in Folder".  The file should be located in the "Downloads" folder.  Copy and paste the file in a preferred location, such as in a NWC-DP project folder.  You will notice that the file type is a .tsv (tab separated value ) file type.  We will use Microsoft Excel to open the file.
+</div>
+
+<br>
+
+#### Step 5
+<div style="text-align:justify">
+There are a few methods which can be used to view the statics results generated using the Streamflow Stats tool.  For this example, we will use Microsoft Excel.  Open Microsoft Excel.  Once Excel is open, click on the **Data** tab.  Under the **`From Text`** search for the .tsv file.  Excel does default to recognize .tsv files.  In the lower right corner of the window, change the file type to "All Files" as shown in **Figure 9**.
 
 
