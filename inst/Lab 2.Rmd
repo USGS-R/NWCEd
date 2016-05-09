@@ -138,5 +138,38 @@ Statistics including the mean of the daily streamflow, skewness, kurtosis, and o
 #### Step 5
 <div style="text-align:justify">
 There are a few methods which can be used to view the statics results generated using the Streamflow Stats tool.  For this example, we will use Microsoft Excel.  Open Microsoft Excel.  Once Excel is open, click on the **Data** tab.  Under the **`From Text`** search for the .tsv file.  Excel does default to recognize .tsv files.  In the lower right corner of the window, change the file type to "All Files" as shown in **Figure 9**.
+</div>
+
+<br>
+
+<div style="text-align:justify; clear: left">
+![**Figure 9: Changing file types in Excel to "All Files".**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure9ExcelImport.JPG)
+</div>
+<br>
+<div style="text-align:justify">
+Once the correct file has been selected, a **`Text Import Wizard`** box will appear as shown in **Figure 10** below.  This wizard allows the user to specify the attributes of the file sich as "Delimited" or "Fixed width".  In a box located at the bottom of the wizard, a preivew of the data is displayed.  The data downloaded from the NWC-DP is delimited.  Click **`Next`**.  A new set of options appears in the wizard as shown in **Figure 11** which allow the user to specify how the contents of the file should be separated.  In the bottom of the wizard is preview of the data.  Because the downloaded data was saved as a .tsv file, it can be assumed that the data has been separated by tabs.  To verify that assumption, under **Delimiters** select the various options and view the effects in the preview box below.  Make sure the **`Tab`** box is checked and **`Next`**.  The wizard updates to show options on editing column formats.  The data file we have downloaded has already been formatted. Click **`Finish`**.
+</div>
+<br>
+
+<div style= "width: 425px; height= 300px; float: left">
+![**Figure 10: Gages-II abstract and metadata link.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure10DelimitedTextWizard.JPG) 
+</div><div style= "width: 425px; height= 300px; float: right">
+![**Figure 11: Webpage displaying metadata.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure11DelimiterSetting.JPG) 
+</div>
+
+<br>
+
+<div style="text-align:justify; clear: left">
+<br>
+
+<div style="text-align:justify">
+The wizard disappears and another popup box appears allowing the user to select a cell to import the data into.  The default cell is "A1".  Click **`Import`**.  The results of the statistical analysis performed using the **Streamflow Stats** tool through the NWC-DP is displayed in **Figure 12** below.  
+</div>
+
+<br>
+
+![**Figure 12: Statistics results displayed in Excel.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab2%20NWC-DP%20Images/Figure12ImportedData.JPG)
+
+<br>
 
 
