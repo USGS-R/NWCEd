@@ -169,24 +169,6 @@ Click within the county boundary on the map.  A new page will open displaying wa
 
 Hovering the cursor over the plotted data activates a popup which displays information regarding the data.  The water-use dataset as well as all other datasets can be downloaded by clicking on their respective buttons throughout the pages which have been visited during this exercise.  
 
-## Exercise 2
-
-<br>
-
-#### Step 1
-
-<div style="text-align:justify">
-Running statistical analyses on hydrologic datasets is important in order to understand the quality of the data.  From the homepage as shown in **Figure 1**, click on the **`Streamflow Stats`** tool.  A new page opens up showing a map of the United States with a layers showing major streams and gages as shown in **Figure 12**.
-
-<br>
-
-![**Figure 12: Streamflow Statistics Calculator homepage.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure12StreamflowImage1.JPG)
-
-<br>
-<div style="text-align:justify">
-The processes used to navigate and select items in the map are the same as in **Exercise 1**.  In the **`Stream Gage Filters:`** there are 4 layers which can be selected: "Gages for Evaluating Streamflow", "Gages Active in 2009", "Gages 2 Reference Gages", and "Gages Sorted by Period of Record".  From the dropdown box, select "Gages for Evaluating Streamflow".  Zoom in and select a gage of your choice by placing the cursor directly over the gage and clicking once.
-
-A new page will open displaying gage information and map in the upper left corner.  The rest of the screen appears to be blank.  Click the **`Streamflow Data Plot`** button in the center of the screen.  A time series plot of streamflow data will display above the **`Streamflow Data Plot`** button as shown in **Figure 13** below.
 
 
 
