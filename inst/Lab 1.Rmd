@@ -1,15 +1,15 @@
 ---
 title: 'Lab 1: Becoming Familiar with the Water Budget and Streamflow Stats Tools
-  from the NWC-DP'  
-  
-output: 
+  from the NWC-DP'
+output:
   html_document:
-    toc: true # table of content true
-    depth: 2  # up to two depths of headings (specified by #, ##)
-    number_sections: true  ## if you want number sections at each table header
-    theme: cerulean  # many options for theme, this one is my favorite.
-    highlight: tango  # specifies the syntax highlighting style
-  
+    depth: 2
+    highlight: tango
+    number_sections: yes
+    theme: cerulean
+    toc: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -47,7 +47,7 @@ The purpose of Exercise 1 is to walk through the functionality of the **`Water B
 </div>
 <br>
 
-![**Figure 1: The NWC-DP homepage.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure1.jpg)                       
+![**Figure 1: The NWC-DP homepage.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure1.jpg", package = "NWCEd"))` )
 
 <br>
 
@@ -57,7 +57,7 @@ After selecting the Water Budget tool, a new page will open shown in **Figure 2*
 </div>
 <br>
 
-![**Figure 2: The Water Budget tool page.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure2.JPG)
+![**Figure 2: The Water Budget tool page.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure2.JPG", package = "NWCEd"))` )
 
 <br>
 <div style="text-align:justify">
@@ -68,9 +68,9 @@ The continental United States has been subdivided into 8-digit and 12-digit HUC 
 <br>
 
 <div style= "width: 450px; height= 300px; float: left">
-![**Figure 3: An 8 Digit HUC layer displayed over Madison, Wisconsin.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure3Madison8Digit.JPG) 
+![**Figure 3: An 8 Digit HUC layer displayed over Madison, Wisconsin.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure3Madison8Digit.JPG", package = "NWCEd"))` )
 </div><div style= "width: 450px; height= 300px; float: right">
-![**Figure 4: A 12 Digit HUC layer displayed over Madison, Wisconsin.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure4Madison12Digit.JPG) 
+![**Figure 4: A 12 Digit HUC layer displayed over Madison, Wisconsin.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure4Madison12Digit.JPG", package = "NWCEd"))` )
 </div>
 
 <br>
@@ -82,7 +82,7 @@ Given Figure 3 and Figure 4, what do you think is the difference between the 8 D
 
 <br>
 
-![**Figure 5: A 12 Digit HUC layer displayed over Madison, Wisconsin.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure5Nashville12Digit.JPG) 
+![**Figure 5: A 12 Digit HUC layer displayed over Madison, Wisconsin.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure5Nashville12Digit.JPG", package = "NWCEd"))` )
 
 <br>
 <div style="text-align:justify">
@@ -91,12 +91,12 @@ Make sure the **`Select`** button is selected first and click anywhere inside th
 
 <br>
 
-![**Figure 6-a: A monthly time series plot of precipitation and evapotranspiration.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure6NashvilleTimeSeriesa.JPG) 
+![**Figure 6-a: A monthly time series plot of precipitation and evapotranspiration.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure6NashvilleTimeSeriesa.JPG", package = "NWCEd"))` )
 
 <br>
 
 <div style= "width: 500px; height= 300px;PADDING-RIGHT: 5px; float: left">
-![**Figure 6-b: A monthly time series plot of precipitation and evapotranspiration.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure6NashvilleTimeSeriesb.JPG) 
+![**Figure 6-b: A monthly time series plot of precipitation and evapotranspiration.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure6NashvilleTimeSeriesb.JPG", package = "NWCEd"))` )
 </div>
 <div style="text-align:justify">
 The HUC number, watershed name, and HUC watershed drainage area are shown in the upper left corner of the screen.  In the middle of the screen is a map showing the selected HUC watershed.  Looking closely at the map shows a red-highlighted line in the upper left corner of the map.  Click on the map and while holding the click, drag the mouse to pan the map view.  Use the scroll wheel on the mouse to zoom in and out.  You will notice that the red highlighted area is of the accumulated watershed. 
@@ -114,11 +114,11 @@ Notice at the top left corner of the screen are the buttons **`Show Accumulated 
 
 <br>
 
-![**Figure 7-a: A monthly time series plot of precipitation,evapotranspiration, and streamflow datasets.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure6NashvilleWaterBudgetb.JPG)
+![**Figure 7-a: A monthly time series plot of precipitation,evapotranspiration, and streamflow datasets.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetb.JPG", package = "NWCEd"))` )
 
 <br>
 
-<div style= "width: 500px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 7-b: HUC information for water budget.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure6NashvilleWaterBudgetc.jpeg)
+<div style= "width: 500px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 7-b: HUC information for water budget.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetc.jpeg", package = "NWCEd"))` )
 </div> 
 <div style="text-align:justify"> The streamflow is measured using a NWIS gage and its location is represented on the map with a red diamond shape with a black dot in the center.  On the left of the screen is information about the selected HUC including HUC number, watershed name, and drainage area.  What is the gage name for this selected HUC?  What is the HUC watershed drainage area?  What is the gage watershed drainage area?  Are they the same?  If they are not the same, what would cause them to be different?
 
@@ -135,9 +135,9 @@ Click the **`Select Watershed to Compare`** button at the top of the page.  This
 <br>
 
 <div style= "width: 375px; height= 300px; float: left">
-![**Figure 8: A 12 Digit HUC layer displayed over Dallas, Texas.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure8DallasCompare1.JPG) 
+![**Figure 8: A 12 Digit HUC layer displayed over Dallas, Texas.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure8DallasCompare1.JPG", package = "NWCEd"))` )
 </div><div style= "width: 450px; height= 800px; float: right">
-![**Figure 9: Comparing Nashville and Dallas HUC watersheds.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure8DallasCompare2.JPG) 
+![**Figure 9: Comparing Nashville and Dallas HUC watersheds.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure8DallasCompare2.JPG", package = "NWCEd"))` )
 </div>
 
 <br>
@@ -153,7 +153,7 @@ Click back 3 times until you return to the page titled "Available Water Budget C
 
 <br>
 
-![**Figure 10: Plot County Water Use Data page.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure10NashvilleUsage1.JPG)
+![**Figure 10: Plot County Water Use Data page.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure10NashvilleUsage1.JPG", package = "NWCEd"))` )
 
 <br>
 
@@ -163,7 +163,7 @@ Click within the county boundary on the map.  A new page will open displaying wa
 
 <br>
 
-![**Figure 11: Davidson County water usage breakdown.**](https://raw.githubusercontent.com/jnelson7/NWCEd/master/inst/Lab1%20NWC-DP%20Images/Figure11NashvilleUsage2.JPG)
+![**Figure 11: Davidson County water usage breakdown.**]( `r I(system.file("Lab1_NWC-DP_Images/Figure11NashvilleUsage2.JPG", package = "NWCEd"))` )
 
 <br>
 
