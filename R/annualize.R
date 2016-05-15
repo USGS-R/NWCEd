@@ -15,7 +15,7 @@
 annualize<-function(inputData, method = mean) {
   splitDate<-strsplit(as.character(inputData$date), "-")
   years<-as.character(lapply(splitDate,first<-function(x) x[1]))
-  annual<-aggregate(inputData$data, list(year=years), method)
+  annual<-aggregate(inputData$data, list(year=years), method, na.rm=TRUE)
   names(annual)<-c("year","data")
   return(annual)
 }

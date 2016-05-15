@@ -9,14 +9,14 @@
 #' @importFrom dataRetrieval readNWISdv
 #' @export
 #' @examples
-#' data<-getNWCData(huc="031601030306")
+#' NWCdata<-getNWCData(huc="031601030306")
 #'
 getNWCData<-function(huc, local=TRUE) {
   urls<-list(huc12=list(et="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_eta.nc",
                         prcp="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet.nc"),
              huc12agg=list(et="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_eta_agg.nc",
                         prcp="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_daymet_agg.nc",
-                        streamflow="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_Q.nc"),
+                        MEAN_streamflow="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC12_data/HUC12_Q.nc"),
              huc08=list(et="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC08_data/HUC08_eta.nc",
                         prcp="http://cida.usgs.gov/nwc/thredds/sos/watersmart/HUC08_data/HUC08_daymet.nc"))
   nwisSite<-FALSE
@@ -39,7 +39,7 @@ getNWCData<-function(huc, local=TRUE) {
                 name,'&offering=',huc)
     # This is valid but not used now: ,'&eventTime=',startdate,'T00:00:00Z/', enddate,'T00:00:00Z'
     ts<-getSWECSVBlock(url)
-    dataOut[name]<-list(ts)
+    if (is.data.frame(ts)) {dataOut[name]<-list(ts)}
     }
   }
   if(is.character(nwisSite)) {
@@ -47,5 +47,7 @@ getNWCData<-function(huc, local=TRUE) {
     names(dataOut$streamflow)[4]<-'data_00060_00003'
     names(dataOut$streamflow)[5]<-'cd_00060_00003'
   }
+  dataOut$prcp$data[which(dataOut$prcp$data < 0)] <- NA
+  try(names(dataOut)[which(names(dataOut) %in% 'MEAN_streamflow')]<-'streamflow',silent = TRUE)
   return(dataOut)
 }
