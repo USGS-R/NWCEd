@@ -5,6 +5,7 @@
 #' @param input url for SOS service for desired site data
 #' @return data frame containing desired time series
 #' @importFrom XML xmlTreeParse xpathApply xmlParse xmlValue
+#' @importFrom utils read.delim
 #' @export
 #' @examples
 #' getSWECSVBlock(system.file('extdata','SWECSVBlock_daymet_example.xml',package='NWCEd'))

@@ -6,6 +6,7 @@
 #' "yyyy-mm-dd" 'date' and numerical 'data' collumn.
 #' @param method A function to use in grouping. Defaults to mean, can be sum or other statistic.
 #' @return An annual time series data frame with a year and data collumn.
+#' @importFrom stats aggregate
 #' @export
 #' @examples
 #' data<-getSWECSVBlock(system.file('extdata','SWECSVBlock_daymet_example.xml',package='NWCEd'))
