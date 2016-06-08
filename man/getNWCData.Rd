@@ -18,7 +18,7 @@ The data.
 This function builds a request and returns the the data in question.
 }
 \examples{
-data<-getNWCData(huc="031601030306")
+NWCdata<-getNWCData(huc="031601030306")
 
 }
 \author{
