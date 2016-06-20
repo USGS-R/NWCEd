@@ -11,24 +11,91 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+fig_caption=TRUE
+library(bootstrap)
+library(psych)
+library(ggplot2)
 ```
 
-## R Markdown
+## Introduction
+<div style="text-align:justify">
+The use of graphical representations of hydrologic datasets is a common and effective way in which to communicate important information to various stakeholders such as hydrologysts, engineers, and water managers.  One commonly used geographical representation is called a **Box Plot**, or sometimes referred to as a Box and Whisker plot.  The purpose of this lab is to learn about what information these graphics contain and how to effectively use them to improve the quality of dataset.
+</div>
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Important Questions to Ask Yourself
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+1. What information is contained in a box plot?
+2. How do I interpret the quality of a dataset using a box plot?
+3. Who is the intended audience I am trying to communicate information with?
 
-```{r cars}
-summary(cars)
+## Useful Terms and Acronyms
+
+Term         | Defintion
+------------ | -------------
+Box plot     | A graphical display of the distribution of data for a given dataset
+Outlier      | A data point that is distinctly separate from the rest of the data
+Quartile     | The median of either the upper or lower half of a dataset after the dataset has been ordered and and separated into two groups
+Stakeholder  | A person or group that has an interest or concern
+
+## Exercise 1 
+
+<br>
+
+#### Step 1
+<div style="text-align:justify">
+The purpose of Exercise 1 is to walk through the process of obtaining an HUC ID for a desired watershed.  The HUC ID is entered as an argument into the **getNWCData** function which brings in the hydrologic datasets associated with the specified watershed.  Once the datasets are downloaded, we can use a plotting function in the **ggplot2** library to create desired box plots for statistical analysis.  
+
+To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
+</div>
+<br>
+
+![**Figure 1: The NWC-DP homepage.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure1.jpg)
+
+<br>
+<div style="text-align:justify">
+Toggle **`Huc Layer:`** to **12 Digit**.  Note that both 12 Digit and 8 Digit HUC ID's can work.  For this exercise we will use a 12 Digit HUC ID.  In the search bar, type "Denver" and then select "Denver County CO Denver County".  Zoom out until you are able to clearly view the delineated watersheds.  Select the watershed which largly encompasses Denver, Colorado as shown in **Figure 2**.   
+</div>
+<br>
+
+![**Figure 2: Selecting an HUC which encompasses Denver, Colorado.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure2.jpg)
+
+<br>
+<div style= "width: 450px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 3: Viewing  HUC ID for Cherry Creek-South Platte River watershed.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure3.jpg)
+</div>
+<div style="text-align:justify">
+After clicking on the watershed, a new page opens as shown in **Figure 3** to the left.  The associated HUC ID is displayed both in the center of the screen as well as in the upper-left corner of the page.  For this watershed, the HUC ID is **101900030304**.  For more information about the features and functionality of this page or other NWC-DP pages, please see **Lab 1**.  With the HUC ID obtained, we are ready to proceed to the next step.
+</div>
+
+<br>
+<div style="text-align:justify; clear: left">
+ 
+#### Step 2
+<div style="text-align:justify">
+With the HUC ID obtained, we are ready to download the data and create our box plots.  For this lab, the box plots have already been produced using the datasets associated with HUC #101900030304.  For reproduction of results, please see the **Lab_3.Rmd** file under the **inst** folder in the **NWCEd** package for imbedded code.  Embedded code can be run in the RStudio console.
+
+
+```{r echo=FALSE}
+library(NWCEd)
+library(ggplot2)
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+ggplot(getetdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (inches per month)") + scale_x_discrete(breaks = NULL) + ggtitle("ET Boxplot for HUC 101900030304")
 ```
 
-## Including Plots
+<br>
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r echo=FALSE}
+library(NWCEd)
+library(ggplot2)
+getdata <- getNWCData(huc="101900030304")
+getprcpdata <- getdata[[2]]
+ggplot(getprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (inches per month)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation Boxplot for HUC 101900030304")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r echo=FALSE}
+library(NWCEd)
+library(ggplot2)
+getdata <- getNWCData(huc="101900030304")
+getprcpdata <- getdata[[2]]
+ggplot(getprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (inches per month)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation Boxplot for HUC 101900030304")
+```
