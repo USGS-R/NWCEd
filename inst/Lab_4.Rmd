@@ -1,0 +1,79 @@
+---
+title: "Lab 4: Analyzing Data with Time Series Plots."
+output: 
+  html_document:
+    toc: true # table of content true
+    depth: 2  # up to two depths of headings (specified by #, ##)
+    number_sections: false  ## if you want number sections at each table header
+    theme: cerulean  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r data input}
+# Enter the huc12 to be analyzed like this:
+huc12<-"031601030306"
+```
+
+### Here's a map of the watershed you chose
+```{r map watershed}
+library(NWCEd)
+library(leaflet)
+# Get watershed geometry and put it on a map.
+NWCwatershed<-getNWCWatershed(huc=huc12,local=FALSE)
+coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
+coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
+names(coords)<-c('lon','lat')
+leaflet() %>%
+  setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
+  addTiles() %>%
+  addWMSTiles(baseUrl = "http://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
+              layers = "nhdplus:nhdflowline_network",
+              options = WMSTileOptions(format = "image/png", transparent = TRUE, opacity = .8)) %>%
+  addGeoJSON(NWCwatershed, weight = 3, color = "#000000", fill = FALSE)
+```
+
+### Now lets get some waterbudget data for the watershed and prepare it to be plotted.
+```{r data setup}
+# Load required libraries.
+library(ggplot2)
+# Super basic plot of precip and et.
+NWCdata<-getNWCData(huc=huc12)
+# annualize et data.
+annual_dataet<-annualize(NWCdata$et, method=sum)
+# Add a group attribute to all et data.
+annual_dataet$group<-'et'
+# Annualize prcp data.
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+# Add a group attribute to all prcp data.
+annual_dataprcp$group<-'prcp'
+# Merge prcp and et together.
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+# Create a difference variable.
+annual_diff<-as.data.frame(annual_union$data.y - annual_union$data.x)
+# Give the difference data a name.
+names(annual_diff) = c('data')
+# Add the difference data to a group.
+annual_diff$group<-'diff'
+# Add the same year data to the difference data.
+annual_diff$year<-annual_union$year
+```
+
+### Here's a plot of the prepared data.
+
+```{r plot}
+plotData<-rbind(annual_dataet,annual_dataprcp,annual_diff)
+ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+  scale_x_discrete(name = "year") + ylab("mm") +
+  labs(title = "Basic Diff Plot", colour = "Explanation") +
+  theme(legend.position = c(0.1, 0.87)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
+```
