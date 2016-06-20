@@ -15,6 +15,7 @@ fig_caption=TRUE
 library(bootstrap)
 library(psych)
 library(ggplot2)
+library(NWCEd)
 ```
 
 ## Introduction
@@ -75,22 +76,32 @@ With the HUC ID obtained, we are ready to download the data and create our box p
 
 
 ```{r echo=FALSE}
-library(NWCEd)
-library(ggplot2)
 getdata <- getNWCData(huc="101900030304")
 getetdata <- getdata[[1]]
 ggplot(getetdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (inches per month)") + scale_x_discrete(breaks = NULL) + ggtitle("ET Boxplot for HUC 101900030304")
 ```
-
+<div style="text-align:justify">
+Below is a printed summary of the information displayed above in the box plot.  
+</div>
 <br>
-
 ```{r echo=FALSE}
-library(NWCEd)
-library(ggplot2)
+describe(getetdata[[2]])
+```
+<br>
+<div style="text-align:justify">
+Does the printed information match up with what is displayed in the box plot?  What does it say about the data if the box were to be shorter?  Taller?  Are there any outliers in the data?
+</div>
+<br>
+```{r echo=FALSE}
 getdata <- getNWCData(huc="101900030304")
 getprcpdata <- getdata[[2]]
 ggplot(getprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (inches per month)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation Boxplot for HUC 101900030304")
 ```
+
+```{r echo=FALSE}
+describe(getprcpdata[[2]])
+```
+
 
 ```{r echo=FALSE}
 library(NWCEd)
