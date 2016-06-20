@@ -15,6 +15,8 @@ fig_caption=TRUE
 library(bootstrap)
 library(psych)
 library(ggplot2)
+library(NWCEd)
+library(gridExtra)
 ```
 
 ## Introduction
@@ -30,12 +32,18 @@ The use of graphical representations of hydrologic datasets is a common and effe
 
 ## Useful Terms and Acronyms
 
-Term         | Defintion
------------- | -------------
-Box plot     | A graphical display of the distribution of data for a given dataset
-Outlier      | A data point that is distinctly separate from the rest of the data
-Quartile     | The median of either the upper or lower half of a dataset after the dataset has been ordered and and separated into two groups
-Stakeholder  | A person or group that has an interest or concern
+Term               | Defintion
+----------------   | ---------------------------------------------------
+Box plot           | A graphical display of the distribution of data for a given dataset
+Outlier            | A data point that is distinctly separate from the rest of the data
+Mean               | The mean or average used to derive the central tendency of the data in question
+Median             | The middle value in a list values sorted from smallest to largest
+Standard Deviation | Used as a measure of the variation in a distribution
+Spread             | Refers to how stretcehd or squeezed the distribution is
+Kurtosis           | A measure of the "taildness" of the probability distribution
+Skewness           | A measure of the asymmetry of the probability distribution
+Quartile           | The median of either the upper or lower half of a dataset after the dataset has been ordered and and separated into two groups
+Stakeholder        | A person or group that has an interest or concern
 
 ## Exercise 1 
 
@@ -71,31 +79,89 @@ After clicking on the watershed, a new page opens as shown in **Figure 3** to th
  
 #### Step 2
 <div style="text-align:justify">
-With the HUC ID obtained, we are ready to download the data and create our box plots.  For this lab, the box plots have already been produced using the datasets associated with HUC #101900030304.  For reproduction of results, please see the **Lab_3.Rmd** file under the **inst** folder in the **NWCEd** package for imbedded code.  Embedded code can be run in the RStudio console.
+With the HUC ID obtained, we are ready to download the data and create our box plots.  For this lab, the box plots have already been produced using the datasets associated with HUC #101900030304.  For reproduction of results, please see the **Lab_3.Rmd** file under the **inst** folder in the **NWCEd** package for embedded code.  Embedded code can be run in the RStudio console.  Below each plot is a printed summary of the associated analysis.
 
 
-```{r echo=FALSE}
-library(NWCEd)
-library(ggplot2)
+```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
 getdata <- getNWCData(huc="101900030304")
 getetdata <- getdata[[1]]
-ggplot(getetdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (inches per month)") + scale_x_discrete(breaks = NULL) + ggtitle("ET Boxplot for HUC 101900030304")
+annualgetetdata <- annualize(getetdata, method = "sum")
+ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
 ```
 
 <br>
 
-```{r echo=FALSE}
-library(NWCEd)
-library(ggplot2)
-getdata <- getNWCData(huc="101900030304")
-getprcpdata <- getdata[[2]]
-ggplot(getprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (inches per month)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation Boxplot for HUC 101900030304")
+```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
+describe(annualgetetdata[[2]])
 ```
 
-```{r echo=FALSE}
-library(NWCEd)
-library(ggplot2)
+<br>
+
+<div style="text-align:justify">
+The ET box plot above shows the center of the data, the **spread** or variation, the **skewness**, and any **outliers**.  Looking just at ET box plot, are there any outliers?  What is the value of the first quartile?  The third quartile?  There are no outliers.  The first quartile is 299.5. The third quartile is 318.5.  The values of approximately 75% of the data are 318.5mm and below.  Only 25% of the data analyzed was less than or equal to 299.5mm.  What is the skew of the plot?  This may be difficult to see.  Lets rotate the plot to better see the skew.
+
+<br>
+
+```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
+ggplot(annualgetetdata, aes("var", data)) + coord_flip() + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
+```
+
+<br>
+
+The rotation on the box plot makes it much easier to see that shape of the data is skewed left.  This means that the area under the left tail of the probability curve is less than the area under the right tail.  Below is a comparison between the ET box plot and the ET histogram.
+
+<br>
+
+<div style= "width: 450px; height= 300px; float: left">
+```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
+ggplot(annualgetetdata, aes("var", data)) + coord_flip() + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
+```
+</div><div style= "width: 450px; height= 300px; float: right">
+![](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure4.jpg)
+</div>
+
+<br>
+<div style="text-align:justify; clear: left">
+You can see in the histogram that just more than half of the data sits right of center.  According to the summary printout, the **mean** is 307.53.  The **standard deviation** is found to be 15.3 from the same printout.  ET values that fall within 1 standard deviation or +/- 15.3 are considered to be "normal".  According to the printout, how many many data points were included in the analysis?  _Hint: What is n?_  Do you think this value represents the sample size or the population size?
+</div>
+
+<br>
+
+Look at the precipitation box plot below.  How does it compare to the previous box plot?
+
+<br>
+```{r,fig.align='center',out.extra='angle=90',echo=FALSE}
 getdata <- getNWCData(huc="101900030304")
 getprcpdata <- getdata[[2]]
-ggplot(getprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (inches per month)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation Boxplot for HUC 101900030304")
+annualgetprcpdata <- annualize(getprcpdata, method = "sum")
+ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
 ```
+
+<br>
+
+```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
+describe(annualgetprcpdata[[2]])
+```
+
+<br>
+
+<div style="text-align:justify">
+Now lets compare these box plots side by side.
+
+<br>
+
+```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
+annualetgraph <- ggplot(annualgetetdata, aes("var", data)) + coord_flip() + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
+annualprcpgraph <- ggplot(annualgetprcpdata, aes("var", data)) + coord_flip() + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
+grid.arrange(annualetgraph, annualprcpgraph, ncol = 2)
+```
+
+<br>
+
+How 
