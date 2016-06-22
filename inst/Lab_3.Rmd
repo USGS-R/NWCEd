@@ -17,6 +17,7 @@ library(psych)
 library(ggplot2)
 library(NWCEd)
 library(gridExtra)
+
 ```
 
 ## Introduction
@@ -82,13 +83,24 @@ After clicking on the watershed, a new page opens as shown in **Figure 3** to th
 With the HUC ID obtained, we are ready to download the data and create our box plots.  For this lab, the box plots have already been produced using the datasets associated with HUC #101900030304.  For reproduction of results, please see the **Lab_3.Rmd** file under the **inst** folder in the **NWCEd** package for embedded code.  Embedded code can be run in the RStudio console.  Below each plot is a printed summary of the associated analysis.
 
 
+
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
 getdata <- getNWCData(huc="101900030304")
 getetdata <- getdata[[1]]
 annualgetetdata <- annualize(getetdata, method = "sum")
 ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
 ```
-
+<div style="text-align:justify">
+Below is a printed summary of the information displayed above in the box plot.  
+</div>
+<br>
+```{r echo=FALSE}
+describe(getetdata[[2]])
+```
+<br>
+<div style="text-align:justify">
+Does the printed information match up with what is displayed in the box plot?  What does it say about the data if the box were to be shorter?  Taller?  Are there any outliers in the data?
+</div>
 <br>
 
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
