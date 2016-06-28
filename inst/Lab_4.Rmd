@@ -13,19 +13,258 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Introduction
+<div style="text-align:justify">
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+</div>
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Important Questions to Ask Yourself
 
-```{r data input}
+1. What information is contained in a time series plot?
+2. How do I interpret the quality of a dataset using a box plot?
+3. Who is the intended audience I am trying to communicate information with?
+
+## Useful Terms and Acronyms
+
+Term               | Defintion
+----------------   | ---------------------------------------------------
+Time Series        | A series of values obtained at successive times
+NWIS               | National Water Information System
+Area Weighted Mean | The sum of area-weighted values divided by the total area
+Water Balance      | A method used to account for water flowing in and out of a system
+
+## Exercise 1 
+
+<br>
+
+#### Step 1
+<div style="text-align:justify">
+In this exercise we will learn how to obtain an HUC ID from the National Water Cenus Data-Portal (NWC-DP).  For this lab we will need to download runoff data in addition to the ET and precipitation data which requires slightly different steps from those shown in **Lab 3**.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
+</div>
+<br>
+
+![**Figure 1: The NWC-DP homepage.**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure1.jpg)
+
+<br>
+
+In order to put together an accurate water balance, we need to know the streamflow within the desired watershed to account for all the water entering and leaving the site.  The United States Geological Survey (USGS) has put together a network called National Water Information System (NWIS).  The **NWIS** collects, records, and stores streamflow data through the use of gages which are installed in several locations throughout the United States.  For more information about the NWIS, please visit <http://waterdata.usgs.gov/nwis/sw>.  To obtain a HUC ID that meets the desired requirements, first select the **12 Digit** Huc layer in the **`Huc Layer:`** dropdown box. Next, click on the **`Turn Gages On`** to turn on the NWIS gages.  Your screen should look similar to the image shown below in **Figure 2** below.
+
+<br>
+
+![**Figure 2: Selecting the Huc layer and gage. layer.**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure2.jpg)
+
+<br>
+
+The watershed we will analyze is the "Rock Canyon-Provo River" watershed located in Provo, Utah.  In the search bar, search for "Provo River" and select "Provo River UT Utah County".  Select Rock Canyon-Provo River watershed as shown in **Figure 3** below.  Note that there is a blue dot indicating the location of a NWIS gage within the boundary of the watershed.
+
+<br>
+
+![**Figure 3: Selecting the Huc layer and gage. layer.**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure3.jpg)
+
+<br>
+
+After selecting the desired watershed, a new page will load which shows the HUC ID, the watershed name, and and some other information.  Next, click on the **`Show Accumulated Water Budget`** button located at the top left of the page.  The precipitation, streamflow, and ET time series graph is displayed at the bottom of the page.  A map of the watershed including the location of the NWIS gage is displayed towards the center of the page.  These features are shown in **Figure 4** below.
+
+<br>
+
+![**Figure 4: NWIS gage location and time series. graph.**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure4.jpg)
+
+<br>
+
+We now know for sure that this location has availabe precipitation, streamflow, and ET data.  We know by looking at the upper left area of the page that the HUC ID is **160202030505**.  We can now download our desired datasets and begin our analysis.  The ET and precipitation datasets have been plotted below.
+</div>
+
+<br>
+
+#### Step 2
+<div style="text-align:justify">
+With the HUC ID obtained, we are ready to download the data and generate our water balance.  For this section, the data has already been downloaded and the plots generated.  The code which performed these tasks in RStudio has been included as a guide for practice later in the **Try It Yourself** section.
+
+<br>
+Below is an enlarged map of the watershed we selected and the surrounding area.  If you are viewing this lab in a web browser, you can place your cursor over the map and use the scroll wheel on the mouse to zoom in and out.  Clicking and dragging the mouse on the map allows you to pan to different locations on the map.  
+</div>
+<br>
+```{r data input, echo=FALSE}
 # Enter the huc12 to be analyzed like this:
-huc12<-"031601030306"
+huc12<-"160202030505"
+```
+
+```{r map watershed, echo=FALSE}
+library(NWCEd)
+library(leaflet)
+NWCwatershed<-getNWCWatershed(huc="160202030505",local=FALSE)
+coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
+coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
+names(coords)<-c('lon','lat')
+
+leaflet() %>%
+  setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
+  addTiles() %>%
+  addGeoJSON(NWCwatershed, weight = 2, color = "#444444", fill = FALSE)
+```
+<br>
+
+Zoom in closer to the watershed.  What percentage of the watershed is within the city limits compared to in the mountainous areas?  Do the people living within the watershed boundaries use all the water within the watershed?  No, they don't.  In fact, 70,000 acre-feet of water is diverted out of the Provo River to the Salt Lake Valley to the north via the 36 mile long Jordan Aqueduct (http://www.usbr.gov/projects/Project.jsp?proj_Name=Central+Utah+Project+-+Bonneville+Unit).  Knowing how much water is contained within a given watershed is critical for supporting the population within and without the boundaries of the watershed.
+
+<br>
+
+Lets plot the annual precipitation, ET, and difference.  The values of the precipitation and ET datasets from the NWC-DP are the area weighted mean precipitationa and ET values.   The difference line is the difference between the annual precipitation and the annual ET.  It tells us how much of the rainfall is left over after the effects of ET have taken place.
+
+```{r data setup, echo=FALSE}
+# Load required libraries.
+library(ggplot2)
+library(NWCEd)
+# Super basic plot of precip and et.
+NWCdata<-getNWCData(huc=huc12)
+# annualize et data.
+annual_dataet<-annualize(NWCdata$et, method=sum)
+# Add a group attribute to all et data.
+annual_dataet$group<-'ET'
+# Annualize prcp data.
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+# Add a group attribute to all prcp data.
+annual_dataprcp$group<-'P'
+# Merge prcp and et together.
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+# Create a difference variable.
+annual_diff<-as.data.frame(annual_union$data.y - annual_union$data.x)
+# Give the difference data a name.
+names(annual_diff) = c('data')
+# Add the difference data to a group.
+annual_diff$group<-'diff'
+# Add the same year data to the difference data.
+annual_diff$year<-annual_union$year
+```
+<br>
+```{r plot, echo=FALSE}
+library(scales)
+library(ggplot2)
+plotData<-rbind(annual_dataet,annual_dataprcp,annual_diff)
+ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+  scale_x_discrete(name = "year") + ylab("mm") + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Difference Between Precipitation and ET", colour = "Explanation") +
+  theme(legend.position = c(0.91, 0.83)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
+```
+<br>
+From the graph, we see the precipitation data in red, the ET data under the precipitation line in green, and the difference of the two datasets in maroon below the ET line.  As the graph shows, there is only ET data available from the year 2000 through 2014 in our dataset.  How does the precipitation line look in comparison to the ET line?  Which shows more variation from year to year?  Regarding precipitation, what years stick out to you?
+
+<br>
+
+<div style= "width: 400px; height= 300px;PADDING-RIGHT: 5px; float: left">
+![**Figure 5: Utah State Park during the 1983 flood (http://www.utahlake.gov/1983-flooding/).**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure5.jpg)
+</div>
+<div style="text-align:justify">
+During the years from from 1981 to 1983 this region experienced record amounts of precipitation.  Major streets were sand-bagged and transformed into temporary rivers.  **Figure 5** to the left shows flooding at the Utah State Park.  What about the year 1988?  From 1988 to 1992 the regrion experienced the second most severe drought recorded.  Utah Lake which receives the water from the Provo River is on average about 10.5 feet deep (http://www.wasatchwater.org/utah-lake-part-5-the-lakes-future/).  During the drought period from 1988-1992, the lake dropped 8 feet (http://www.slcdocs.com/utilities/NewsEvents/news2003/news12232003.htm).  In a short period of 10 years, this region experienced one of the worst floods as well as one of the worst droughts on record.  Effective management of water resources can dampen the effects felt from everchanging weather.  
+</div>
+
+<br>
+<br>
+
+![**Figure 6: Utah Lake surface elevations (http://www.utahlake.gov/1983-flooding/).**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure6.jpg)
+
+<br>
+
+Unfortunately, there are more variables that go into balancing a water budget than just precipitation and ET.  Water that percolates into the ground or is otherwise stored in lakes or reservoirs within the watershed must be accounted for as well.  In the next step, we will discuss how to account for this unaccounted water using runoff data.
+
+<br>
+
+#### Step 3
+<div style="text-align:justify">
+We have seen the effects of changing weather through the example of Utah Lake and the surrounding region.  It is the responsibility of water managers, hydrologysts, and engineers to provide water to the people that live within the respective area of influence as well as prepare for potential problems such as flooding and droughts.  To be able to fulfill these responsibilities, all the water within the watershed must be accounted for.  
+
+<br>
+
+A common method of accounting for the water within the watershed, or in this case a HUC, is by performing a **water balance**.  Water balances are used to account for all water flowing into and out of a system.  Water balances are based on the principle that in a closed system mass is neither created or destroyed.  Applying this to the water balance, all water flowing into the system must exit the system or be stored in the system.  Lets look at the closed system defined as the 12 Digit HUC ID **031601090601** within the Town Creek-Cane Creek watershed.  This HUC contains Jasper, Alabama within its boundaries.  From the NWC-DP, the precipitation, ET, and streamflow datasets have been downloaded and plotted below for this HUC.
+
+<br>
+
+```{r waterbalance plot, echo=FALSE }
+NWCdata<-getNWCData(huc="031501070601", local = FALSE)
+NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
+areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
+NWCdata$et$data<-NWCdata$et$data*0.0032808
+annual_dataet<-annualize(NWCdata$et, method=sum)
+annual_dataet$group<-'ET'
+NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+annual_dataprcp$group<-'P'
+NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
+annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
+annual_datastrf$group<-'Q'
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
+names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
+annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
+names(annual_diff) = c('data')
+annual_diff$group<-'diff'
+annual_diff$year<-annual_union$year
+plotData<-rbind(annual_dataet,annual_dataprcp,annual_datastrf,annual_diff)
+
+ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+  scale_x_discrete(name = "year") + ylab("ft") +
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Basic Diff Plot", colour = "Explanation") +
+  scale_color_manual(values=c("#990066", "#339966", "#FF0000", "#3300FF"))
+```
+
+<br>
+
+Precipitation, ET, streamflow, and the difference are marked in red, green, blue, and maroon, respectively.  The diff line represents the leftover preciptiation after ET and streamflow have been subtracted from the original precipitation.  The diff line includes water stored in the ground through percolation and in lakes and reservoirs within the system boundaries.  Look at the diff line on the plot above.  What years experienced positive storage?  What years experienced negative storage?  If we are assuming that the law of conservation of mass applies to water balances, how can we have negative storage?  We must remember that we are analyzing the system over a long period of time.  We can see that during the times of negative storage there is still positive streamflow. Using the same methods as in **Step 2** zoom in and look for possible storage places within the system.
+
+<br>
+
+```{r jasperhuc data input, echo=FALSE}
+# Enter the huc12 to be analyzed like this:
+huc12<-"031601090601"
+```
+
+<br>
+
+```{r jasperhuc map watershed, echo=FALSE}
+library(NWCEd)
+library(leaflet)
+# Get watershed geometry and put it on a map.
+NWCwatershed<-getNWCWatershed(huc=huc12,local=FALSE)
+coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
+coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
+names(coords)<-c('lon','lat')
+leaflet() %>%
+  setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
+  addTiles() %>%
+  addWMSTiles(baseUrl = "http://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
+              layers = "nhdplus:nhdflowline_network",
+              options = WMSTileOptions(format = "image/png", transparent = TRUE, opacity = .8)) %>%
+  addGeoJSON(NWCwatershed, weight = 3, color = "#000000", fill = FALSE)
+```
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+#### Try It Yourself
+
+<br>
+
+```{r tiy data input}
+# Enter the huc12 to be analyzed like this:
+huc12<-"031601090601"
 ```
 
 ### Here's a map of the watershed you chose
-```{r map watershed}
+```{r tiy map watershed}
 library(NWCEd)
 library(leaflet)
 # Get watershed geometry and put it on a map.
@@ -42,8 +281,9 @@ leaflet() %>%
   addGeoJSON(NWCwatershed, weight = 3, color = "#000000", fill = FALSE)
 ```
 
+<br>
 ### Now lets get some waterbudget data for the watershed and prepare it to be plotted.
-```{r data setup}
+```{r tiy data setup}
 # Load required libraries.
 library(ggplot2)
 # Super basic plot of precip and et.
@@ -70,7 +310,7 @@ annual_diff$year<-annual_union$year
 
 ### Here's a plot of the prepared data.
 
-```{r plot}
+```{r tiy plot}
 plotData<-rbind(annual_dataet,annual_dataprcp,annual_diff)
 ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
   scale_x_discrete(name = "year") + ylab("mm") +
