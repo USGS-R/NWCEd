@@ -99,7 +99,7 @@ names(coords)<-c('lon','lat')
 
 leaflet() %>%
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
-  addTiles() %>%
+  addTiles() %>% 
   addGeoJSON(NWCwatershed, weight = 2, color = "#444444", fill = FALSE)
 ```
 <br>
@@ -210,7 +210,7 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 
 <br>
 
-Precipitation, ET, streamflow, and the difference are marked in red, green, blue, and maroon, respectively.  The diff line represents the leftover preciptiation after ET and streamflow have been subtracted from the original precipitation.  The diff line includes water stored in the ground through percolation and in lakes and reservoirs within the system boundaries.  Look at the diff line on the plot above.  What years experienced positive storage?  What years experienced negative storage?  If we are assuming that the law of conservation of mass applies to water balances, how can we have negative storage?  We must remember that we are analyzing the system over a long period of time.  We can see that during the times of negative storage there is still positive streamflow. Using the same methods as in **Step 2** zoom in and look for possible storage places within the system.
+Precipitation, ET, streamflow, and the difference are marked in red, green, blue, and maroon, respectively.  The diff line represents the leftover preciptiation after ET and streamflow have been subtracted from the original precipitation.  The diff line includes water stored in the ground through percolation and in lakes and reservoirs within the system boundaries.  Look at the diff line on the plot above.  What years experienced positive storage?  What years experienced negative storage?  If we are assuming that the law of conservation of mass applies to water balances, how can we have negative storage?  We must remember that negative storage for our time series simply means that there is no water being stored.  In our case, there is water being pulled out of storage.  Where are possible locations for water to be stored within this HUC?  Using the same methods as described in **Step 2** zoom in and look for possible storage places within the system.
 
 <br>
 
@@ -224,22 +224,25 @@ huc12<-"031601090601"
 ```{r jasperhuc map watershed, echo=FALSE}
 library(NWCEd)
 library(leaflet)
+
+
 # Get watershed geometry and put it on a map.
 NWCwatershed<-getNWCWatershed(huc=huc12,local=FALSE)
 coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
 coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
 names(coords)<-c('lon','lat')
-leaflet() %>%
+leaflet() %>% 
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
-  addTiles() %>%
+  addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}") %>%
   addWMSTiles(baseUrl = "http://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
-              layers = "nhdplus:nhdflowline_network",
-              options = WMSTileOptions(format = "image/png", transparent = TRUE, opacity = .8)) %>%
-  addGeoJSON(NWCwatershed, weight = 3, color = "#000000", fill = FALSE)
+              options = WMSTileOptions(format = "image/png", transparent = TRUE, opacity = 1),                attribution = "Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012") %>% 
+  addGeoJSON(NWCwatershed, weight = 5, color = "#ff7800", fill = FALSE)
 ```
 <br>
 
+Storage is mainly comprised of ground water, although additional storage areas can include lakes and rivers.
 
+<br>
 
 
 
@@ -317,3 +320,5 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
   labs(title = "Basic Diff Plot", colour = "Explanation") +
   theme(legend.position = c(0.1, 0.87)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
 ```
+
+
