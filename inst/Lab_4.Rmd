@@ -244,12 +244,52 @@ Storage is mainly comprised of ground water, although additional storage areas c
 
 <br>
 
+#### Step 4
+<br>
+
+How do we know if our precipitation data is good to use?  In the field, there is possibility that stream gages are moved or are damaged over a period of time.  Problems that occur in the field must be taken into consideration and the data 
 
 
 
 
+```{r double mass plot, echo=FALSE}
+
+NWCdata<-getNWCData(huc="031501070601", local = FALSE)
+NWCdataprcp<-NWCdata$prcp
+NWCdataprcp1<-NWCdata$prcp
+# Converting daily precipitation to annual preciptitation for Site 1
+NWCdataprcpsumannual1<-annualize(NWCdataprcp1, method = sum)
+# Cumulatizing the annual precipitation for Site 1
+NWcdataprcpsumannualcum1<-cumsum(NWCdataprcpsumannual1$data)
+
+NWCdata<-getNWCData(huc="031601090405", local = FALSE)
+NWCdataprcp<-NWCdata$prcp
+NWCdataprcp2<-NWCdata$prcp
+NWCdataprcpsumannual2<-annualize(NWCdataprcp2, method = sum)
+NWcdataprcpsumannualcum2<-cumsum(NWCdataprcpsumannual2$data)
+
+NWCdata<-getNWCData(huc="031601090403", local = FALSE)
+NWCdataprcp<-NWCdata$prcp
+NWCdataprcp3<-NWCdata$prcp
+NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
+NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
+
+NWCdata<-getNWCData(huc="031601090308", local = FALSE)
+NWCdataprcp<-NWCdata$prcp
+NWCdataprcp4<-NWCdata$prcp
+NWCdataprcpsumannual4<-annualize(NWCdataprcp4, method = sum)
+NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
+
+annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
+
+annualaveragecum<-cumsum(annualaverage)
 
 
+plot(NWcdataprcpsumannualcum1, annualaveragecum)
+plot(NWcdataprcpsumannualcum2, annualaveragecum)
+plot(NWcdataprcpsumannualcum3, annualaveragecum)
+plot(NWcdataprcpsumannualcum4, annualaveragecum)
+```
 
 
 
@@ -260,11 +300,12 @@ Storage is mainly comprised of ground water, although additional storage areas c
 #### Try It Yourself
 
 <br>
-
-```{r tiy data input}
+```{r double mass plot, echo=FALSE}
 # Enter the huc12 to be analyzed like this:
 huc12<-"031601090601"
+
 ```
+
 
 ### Here's a map of the watershed you chose
 ```{r tiy map watershed}
