@@ -32,6 +32,7 @@ Time Series        | A series of values obtained at successive times
 NWIS               | National Water Information System
 Area Weighted Mean | The sum of area-weighted values divided by the total area
 Water Balance      | A method used to account for water flowing in and out of a system
+Double-Mass Curve  | A graphical method used to study consistency and trends in data
 
 ## Exercise 1 
 
@@ -247,51 +248,112 @@ Storage is mainly comprised of ground water, although additional storage areas c
 #### Step 4
 <br>
 
-How do we know if our precipitation data is good to use?  In the field, there is possibility that stream gages are moved or are damaged over a period of time.  Problems that occur in the field must be taken into consideration and the data 
+How do we know if our precipitation data is good to use?  In the field, there is the possibility that rain gages are moved or are damaged for a period of time.  Problems that occur in the field must be taken into consideration and the data fixed to reflect the conditions of the site being analyzed.  One method used to identify inconsistencies in a precipitation dataset is a **Double-Mass Curve**.  For analyzing precipitation data at a site, the annual precipitation data of nearby rain gages are collected and cumulated.  The mean cumulative annual data is then plotted against the mean annual cumulative precipitation for the surrounding sites including the site being analyzed.  For more information on double-mass curves, please visit <http://pubs.usgs.gov/wsp/1541b/report.pdf>.  
 
+<br>
 
+Lets check the consistency and long-term trends of the precipitation data for HUC# 031601090601.  For this exercise it is important to note that the precipitation data used is actually the area weighted mean precipitation based on data obtained rain gages.  The surrounding sites are the nearest surrounding 12 Digit HUCs.  For the purposes of the exercise, these differences are negligible. Below is the code used to collect, cumulate, find the cumulative mean for 4 sites, and plot the results.
 
+```{r double-mass plot, echo=T}
 
-```{r double mass plot, echo=FALSE}
-
-NWCdata<-getNWCData(huc="031501070601", local = FALSE)
-NWCdataprcp<-NWCdata$prcp
+# Download data from NWC-DP for HUC# 031601090601
+NWCdata<-getNWCData(huc="031601090601", local = FALSE)
+# Assign NWCdataprcp variable the precipitation dataset 
 NWCdataprcp1<-NWCdata$prcp
-# Converting daily precipitation to annual preciptitation for Site 1
+# Convert units from mm to inches
+NWCdataprcp1$data<-NWCdataprcp1$data*.0393701
+# Convert data from daily to annual precipitation
 NWCdataprcpsumannual1<-annualize(NWCdataprcp1, method = sum)
-# Cumulatizing the annual precipitation for Site 1
+# Cumulates annual precipitation data for the site
 NWcdataprcpsumannualcum1<-cumsum(NWCdataprcpsumannual1$data)
 
+# Repeat previous steps for next three HUC#
+
 NWCdata<-getNWCData(huc="031601090405", local = FALSE)
-NWCdataprcp<-NWCdata$prcp
 NWCdataprcp2<-NWCdata$prcp
+NWCdataprcp2$data<-NWCdataprcp2$data*.0393701
 NWCdataprcpsumannual2<-annualize(NWCdataprcp2, method = sum)
 NWcdataprcpsumannualcum2<-cumsum(NWCdataprcpsumannual2$data)
 
 NWCdata<-getNWCData(huc="031601090403", local = FALSE)
-NWCdataprcp<-NWCdata$prcp
 NWCdataprcp3<-NWCdata$prcp
+NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
 
 NWCdata<-getNWCData(huc="031601090308", local = FALSE)
-NWCdataprcp<-NWCdata$prcp
 NWCdataprcp4<-NWCdata$prcp
+NWCdataprcp4$data<-NWCdataprcp4$data*.0393701
 NWCdataprcpsumannual4<-annualize(NWCdataprcp4, method = sum)
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 
+# Averaging the annual precipitation for the 4 sites
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
 
+# Cumulates the averaged annual precipitation for the 4 sites
 annualaveragecum<-cumsum(annualaverage)
 
+# Creates a dataframe with mean cumulative annual precipitation and the cumulative annual precipitation for the first HUC
+plot1<-data.frame(x = annualaveragecum, y = NWcdataprcpsumannualcum1)
 
-plot(NWcdataprcpsumannualcum1, annualaveragecum)
-plot(NWcdataprcpsumannualcum2, annualaveragecum)
-plot(NWcdataprcpsumannualcum3, annualaveragecum)
-plot(NWcdataprcpsumannualcum4, annualaveragecum)
+# Plots the newly created dataframe
+ggplot(plot1, aes(x=x, y=y)) + geom_point() + geom_smooth(color="blue") + xlab("Mean Cumulative Precipitation (inches) ") + ylab("Cumulative Precipitation for HUC# 031601090601 (inches)") + ggtitle("Double Mass Analysis for HUC# 031601090601 Precip Data") + theme(panel.background = element_rect(fill = "grey75"))
+
 ```
 
+<br>
+As we can see, the data points for the most part fall into a straight line.  This indicates there is strong correlation among the data points and the measurements are consistent throughout the dataset.  Lets take a look at a case where eroneous data is plotted on a double-mass curve.
 
+```{r double-mass plot 2, echo=FALSE}
+# Download data from NWC-DP for HUC# 150601060306
+NWCdata<-getNWCData(huc="150601060306", local = FALSE)
+# Assign NWCdataprcp variable the precipitation dataset 
+NWCdataprcp1<-NWCdata$prcp
+# Convert units from mm to inches
+NWCdataprcp1$data<-NWCdataprcp1$data*.0393701
+# Convert data from daily to annual precipitation
+NWCdataprcpsumannual1<-annualize(NWCdataprcp1, method = sum)
+# Cumulates annual precipitation data for the site
+NWcdataprcpsumannualcum1<-cumsum(NWCdataprcpsumannual1$data)
+
+# Repeat previous steps for next three HUC#
+
+NWCdata<-getNWCData(huc="150701020908", local = FALSE)
+NWCdataprcp2<-NWCdata$prcp
+NWCdataprcp2$data<-NWCdataprcp2$data*.0393701
+NWCdataprcpsumannual2<-annualize(NWCdataprcp2, method = sum)
+NWcdataprcpsumannualcum2<-cumsum(NWCdataprcpsumannual2$data)
+
+NWCdata<-getNWCData(huc="150601060305", local = FALSE)
+NWCdataprcp3<-NWCdata$prcp
+NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
+NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
+NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
+
+NWCdata<-getNWCData(huc="150601060204", local = FALSE)
+NWCdataprcp4<-NWCdata$prcp
+NWCdataprcp4$data<-NWCdataprcp4$data*.0393701
+NWCdataprcpsumannual4<-annualize(NWCdataprcp4, method = sum)
+NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
+
+# Averaging the annual precipitation for the 4 sites
+annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
+
+# Cumulates the averaged annual precipitation for the 4 sites
+annualaveragecum<-cumsum(annualaverage)
+
+# Creates a dataframe with mean cumulative annual precipitation and the cumulative annual precipitation for the first HUC
+plot1<-data.frame(x = annualaveragecum, y = NWcdataprcpsumannualcum1)
+
+plot4<-data.frame(x = annualaveragecum, y = NWcdataprcpsumannualcum4)
+
+
+# Plots the newly created dataframe
+ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="blue") + xlab("Mean Cumulative Precipitation (inches) ") + ylab("Cumulative Precipitation for HUC# 031601090601 (inches)") + ggtitle("Double Mass Analysis for HUC# 031601090601 Precip Data") + theme(panel.background = element_rect(fill = "grey75"))
+
+
+
+```
 
 
 
@@ -300,7 +362,7 @@ plot(NWcdataprcpsumannualcum4, annualaveragecum)
 #### Try It Yourself
 
 <br>
-```{r double mass plot, echo=FALSE}
+```{r something, echo=FALSE}
 # Enter the huc12 to be analyzed like this:
 huc12<-"031601090601"
 
