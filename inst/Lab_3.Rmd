@@ -85,7 +85,7 @@ Toggle **`Huc Layer:`** to **12 Digit**.  Note that both 12 Digit and 8 Digit HU
 ![**Figure 2: Selecting an HUC which encompasses Denver, Colorado.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure2.jpg)
 
 <br>
-<div style= "width: 450px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 3: Viewing  HUC ID for Cherry Creek-South Platte River watershed.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure3.jpg)
+<div style= "width: 450px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 3: Viewing  HUC ID.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure3.jpg)
 </div>
 <div style="text-align:justify">
 After clicking on the watershed, a new page opens as shown in **Figure 3** to the left.  The associated HUC ID is displayed both in the center of the screen as well as in the upper-left corner of the page.  For this watershed, the HUC ID is **101900030304**.  For more information about the features and functionality of this page or other NWC-DP pages, please see **Lab 1**.  With the HUC ID obtained, we are ready to proceed to the next step.
