@@ -195,7 +195,6 @@ Hovering the cursor over the plotted data activates a popup which displays infor
 
 #### Problem 1
 
-<br>
 
 <div style="text-align:justify; clear: left">
 What is a HUC? (_Hint: visit water.usgs.gov/GIS/huc.html_)
@@ -211,7 +210,7 @@ What is a HUC? (_Hint: visit water.usgs.gov/GIS/huc.html_)
 
 #### Problem 2
 
-<br>
+
 Using the NWC-DP, find the 12 Digit HUC ID for the HUC that contains Silver City, New Mexico.
 <div style="text-align:left">
   <a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Answer</a>
@@ -237,7 +236,7 @@ Maudes Canyon-San Vicente Draw
 
 #### Problem 3
 
-<br>
+
 What are the units of ET in the raw data associated with the HUC ID from **Problem 2**? (_Hint: Download the ET data and open the dataset in Excel._)
 <div style="text-align:left">
   <a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Answer</a>
