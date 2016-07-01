@@ -123,10 +123,10 @@ $(document).ready(function () {
     var e2=document.getElementById(senderid);
     if(e.style.display == 'block') {
       e.style.display = 'none';
-      e2.innerHTML='Show Code';
+      e2.innerHTML='Show Answer';
     } else {
       e.style.display = 'block';
-      e2.innerHTML='Hide Code';
+      e2.innerHTML='Hide Answer';
     }
   }
 
@@ -331,9 +331,7 @@ What is a HUC? (<em>Hint: visit water.usgs.gov/GIS/huc.html</em>)
 <p><code id="graphcode1"> “The United States is divided and sub-divided into successively smaller hydrologic units which are classified into four levels: regions, sub-regions, accounting units, and cataloging units. The hydrologic units are arranged or nested within each other, from the largest geographic area (regions) to the smallest geographic area (cataloging units). Each hydrologic unit is identified by a unique hydrologic unit code (HUC) consisting of two to eight digits based on the four levels of classification in the hydrologic unit system.” (water.usgs.gov/GIS/huc.html) </code></p>
 </div>
 <p><br></p>
-</div>
-<div id="problem-2" class="section level4">
-<h4>Problem 2</h4>
+<h4 id="problem-2">Problem 2</h4>
 <br> Using the NWC-DP, find the 12 Digit HUC ID for the HUC that contains Silver City, New Mexico.
 <div style="text-align:left">
 <p><a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Answer</a></p>
@@ -350,31 +348,23 @@ What is the name of the watershed?
 <p><code id="graphcode3"> Maudes Canyon-San Vicente Draw </code></p>
 </div>
 <p><br></p>
-</div>
-<div id="problem-3" class="section level4">
-<h4>Problem 3</h4>
+<h4 id="problem-3">Problem 3</h4>
 <br> What are the units of ET in the raw data associated with the HUC ID from <strong>Problem 2</strong>? (<em>Hint: Download the ET data and open the dataset in Excel.</em>)
 <div style="text-align:left">
 <p><a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Answer</a></p>
 </div>
 <div style="text-align:justify; clear: left">
-<p><code id="graphcode4"> 130302020203 </code></p>
+<p><code id="graphcode4"> mm/month </code></p>
 </div>
-<p><br></p>
-What is the name of the watershed?
-<div style="text-align:left">
-<p><a id="codetoggle5" onclick="togglecode('graphcode5','codetoggle5');">Show Answer</a></p>
+<p></code></p>
 </div>
-<div style="text-align:justify; clear: left">
-<p><code id="graphcode5"> mm </code></p>
-</div>
+<p><br> <br></p>
 <script>
   //run this at start up
   hidecode('graphcode1');
   hidecode('graphcode2');
   hidecode('graphcode3');
   hidecode('graphcode4');
-  hidecode('graphcode5');
 </script>
 </div>
 </div>

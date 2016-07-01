@@ -27,10 +27,10 @@ library(bootstrap)
     var e2=document.getElementById(senderid);
     if(e.style.display == 'block') {
       e.style.display = 'none';
-      e2.innerHTML='Show Code';
+      e2.innerHTML='Show Answer';
     } else {
       e.style.display = 'block';
-      e2.innerHTML='Hide Code';
+      e2.innerHTML='Hide Answer';
     }
   }
 
@@ -244,21 +244,15 @@ What are the units of ET in the raw data associated with the HUC ID from **Probl
 </div>
 <div style="text-align:justify; clear: left">
 <code id="graphcode4">
-130302020203
+mm/month
+</code>
+</div>
+
 </code>
 </div>
 
 <br>
-
-What is the name of the watershed?
-<div style="text-align:left">
-  <a id="codetoggle5" onclick="togglecode('graphcode5','codetoggle5');">Show Answer</a>
-</div>
-<div style="text-align:justify; clear: left">
-<code id="graphcode5">
-mm
-</code>
-</div>
+<br>
 
 <script>
   //run this at start up
@@ -266,7 +260,6 @@ mm
   hidecode('graphcode2');
   hidecode('graphcode3');
   hidecode('graphcode4');
-  hidecode('graphcode5');
 </script>
 
 
