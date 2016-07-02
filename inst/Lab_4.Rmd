@@ -464,7 +464,7 @@ datadiff<-datadiff[,c(2,1,3)]
 plotData<-rbind(datadiff,correcteddata,uncorrecteddata)
 
 ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
-  scale_x_discrete(name = "year") + ylab("mm") + 
+  scale_x_discrete(name = "year") + ylab("inches") + 
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Difference Between Precipitation and ET", colour = "Explanation") +
   theme(legend.position = c(0.10, 0.83)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
@@ -473,80 +473,8 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 As you can clearly see, not correcting the data would result in values that are substantially higher than expected.  What water management problems can you think of if you used the uncorrected data in your planning?
 
 
+## Try It Yourself
 
 
-
-
-
-
-
-
-
-
-
-#### Try It Yourself
-
-<br>
-```{r something, echo=FALSE}
-# Enter the huc12 to be analyzed like this:
-huc12<-"031601090601"
-
-```
-
-
-### Here's a map of the watershed you chose
-```{r tiy map watershed}
-library(NWCEd)
-library(leaflet)
-# Get watershed geometry and put it on a map.
-NWCwatershed<-getNWCWatershed(huc=huc12,local=FALSE)
-coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
-coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
-names(coords)<-c('lon','lat')
-leaflet() %>%
-  setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
-  addTiles() %>%
-  addWMSTiles(baseUrl = "http://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
-              layers = "nhdplus:nhdflowline_network",
-              options = WMSTileOptions(format = "image/png", transparent = TRUE, opacity = .8)) %>%
-  addGeoJSON(NWCwatershed, weight = 3, color = "#000000", fill = FALSE)
-```
-
-<br>
-### Now lets get some waterbudget data for the watershed and prepare it to be plotted.
-```{r tiy data setup}
-# Load required libraries.
-library(ggplot2)
-# Super basic plot of precip and et.
-NWCdata<-getNWCData(huc=huc12)
-# annualize et data.
-annual_dataet<-annualize(NWCdata$et, method=sum)
-# Add a group attribute to all et data.
-annual_dataet$group<-'et'
-# Annualize prcp data.
-annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
-# Add a group attribute to all prcp data.
-annual_dataprcp$group<-'prcp'
-# Merge prcp and et together.
-annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
-# Create a difference variable.
-annual_diff<-as.data.frame(annual_union$data.y - annual_union$data.x)
-# Give the difference data a name.
-names(annual_diff) = c('data')
-# Add the difference data to a group.
-annual_diff$group<-'diff'
-# Add the same year data to the difference data.
-annual_diff$year<-annual_union$year
-```
-
-### Here's a plot of the prepared data.
-
-```{r tiy plot}
-plotData<-rbind(annual_dataet,annual_dataprcp,annual_diff)
-ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
-  scale_x_discrete(name = "year") + ylab("mm") +
-  labs(title = "Basic Diff Plot", colour = "Explanation") +
-  theme(legend.position = c(0.1, 0.87)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
-```
 
 
