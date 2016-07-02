@@ -155,7 +155,7 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 
 <br>
 
-From the graph, we see the precipitation data in red, the ET data under the precipitation line in green, and the difference of the two datasets in maroon below the ET line.  As the graph shows, there is only ET data available from the year 2000 through 2014 in our dataset.  How does the precipitation line look in comparison to the ET line?  Which shows more variation from year to year?  Regarding precipitation, what years stick out to you?
+From the graph, we see the precipitation data in red, the ET data under the precipitation line in green, and the difference of the two datasets in maroon below the ET line.  As the graph shows, there is only ET data available from the year 2000 through 2014 in our dataset.  How does the precipitation line look in comparison to the ET line?  Which shows more variation from year to year?  Regarding precipitation, what years stick out to you?  Does there appear to be any patterns?  Could global climate variability be evidenced in the precipitation dataset?
 
 <br>
 
