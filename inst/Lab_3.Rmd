@@ -336,6 +336,19 @@ getprcpdata <- getdata[[2]]
 # Converts daily precipitation data to annual precipitation and stores in "annualgetprcpdata" variable
 annualgetprcpdata <- annualize(getprcpdata, method = "sum")
 ```
+* Plot a box plot of the precipitation data by copying the code below into the RStudio console.  Remember to change the HUC ID.  Estimate the 1st, 2nd, and 3rd quartiles?  Does the plot appear to have skew?  If so, describe the skew.
+```{r Problem1 box plot, eval=FALSE, echo=T}
+ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
+```
+<a id="codetoggle1" onclick="togglecode('answer2','codetoggle1');">Answer</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="answer2">
+  0%   25%   50%   75%  100% 
+<br>
+157.0 254.5 315.0 359.5 443.0 
+</code>
+</div>
 * Find the 50th, 90th, and 99th **percentile** for the annual precipitation data by copying and pasting the following code into the RStudio console.  _Hint: The "quantile" function used in the code is made available through the "stats" package and is normally installed by default.  If the "stats" library is not installed, copy and paste the following code in the RStudio console: install.packages("stats")_
 ```{r find percentiles code, eval=FALSE, echo=T}
 quantile(annualgetprcpdata$data, prob = c(0.5,0.9,0.99))
@@ -344,9 +357,9 @@ quantile(annualgetprcpdata$data, prob = c(0.5,0.9,0.99))
 </div>
 <div style="text-align:justify; clear: left">
 <code id="hint2">
-50%    90%    99%
+ 50%    90%    99%
 <br>
-378.00 466.80 499.96 
+315.00 407.20 434.84 
 </code>
 </div>
 
@@ -378,4 +391,5 @@ ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), 
   hidecode('graphcode9');
   hidecode('hint1');
   hidecode('hint2');
+  hidecode('answer2');
 </script>
