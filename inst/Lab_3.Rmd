@@ -1,5 +1,5 @@
 ---
-title: "Lab 3: Graphing Water Data Distributions."
+title: "Lab 3: Graphing Water Data Distributions"
 output: 
   html_document:
     toc: true # table of content true
@@ -40,14 +40,15 @@ library(datasets)
 
 ## Introduction
 <div style="text-align:justify">
-The use of graphical representations of hydrologic datasets is a common and effective way in which to communicate important information to various stakeholders such as hydrologysts, engineers, and water managers.  Commonly used geographical representations are **Box Plots**, **Density Plots**, and **Histograms**.  The United States Geological Survey (USGS) has provided open access to precipitation, runoff, and evapotranspiration (ET) datasets.  These datasets have been compiled and catalogued according to their respective delineated watershed.  Each watershed has been assigned a number called a hydrologic unit code (HUC).  By obtaining the desired HUC Id, the user can download all the water data available for the given watershed.  The purpose of this lab is to learn how to obtain a desired HUC Id and interpret the associated datasets using box plots, density plots, and histograms.  By learning these methods of analysis, you will be able to better understand the data you are working with as well as be able to communicate the analysis results more effectively to **stakeholders**.   
+The use of graphical representations of hydrologic datasets is a common and effective way in which to communicate important information to various stakeholders such as hydrologysts, engineers, and water managers.  Commonly used geographical representations are **Box Plots**, **Density Plots**, and **Histograms**.  The United States Geological Survey (USGS) has provided open access to precipitation, runoff, and evapotranspiration (ET) datasets.  These datasets have been compiled and catalogued according to their respective delineated watershed.  Each watershed has been assigned a number called a hydrologic unit code (HUC).  By obtaining the desired HUC ID, the user can download all the water data available for the given watershed.  The purpose of this lab is to learn how to obtain a desired HUC ID and interpret the associated datasets using box plots, density plots, and histograms.  By learning these methods of analysis, you will be able to better understand the data you are working with as well as be able to communicate the analysis results more effectively to **stakeholders**.   
 </div>
 
 ## Important Questions to Ask Yourself
 
 1. What information is contained in a box plot?
 2. How do I interpret the quality of a dataset using a box plot?
-3. Who is the intended audience I am trying to communicate information with?
+3. How dependable are histograms when working with ET and precipitation data?
+4. Who is the intended audience I am trying to communicate information with?
 
 ## Useful Terms and Acronyms
 
@@ -311,6 +312,58 @@ The 50th, 90th, and 99th percentiles for this dataset are 378.00, 466.80, and 49
 
 ## Do It Yourself
 
+<br>
+
+#### Problem 1
+
+<div style="text-align:justify; clear: left">
+* Find the HUC ID for HUC that encompasses Billings, Montana.
+<br>
+<a id="codetoggle1" onclick="togglecode('hint1','codetoggle1');">Hint</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="hint1">
+![**Figure 1: The NWC-DP homepage.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure4.jpg)
+</code>
+</div>
+
+* Download the annual precipitation data for this HUC by copying and pasting the following code into the RStudio console.  Remember to change the HUC ID. 
+```{r problem1 code, echo=T}
+# Download and store both the ET and precipitation associated with the HUC ID in "getdata" variable
+getdata <- getNWCData(huc="101900030304")
+# Separates precipitation dataset from ET and stores in "getprcpdata" variable
+getprcpdata <- getdata[[2]]
+# Converts daily precipitation data to annual precipitation and stores in "annualgetprcpdata" variable
+annualgetprcpdata <- annualize(getprcpdata, method = "sum")
+```
+* Find the 50th, 90th, and 99th **percentile** for the annual precipitation data by copying and pasting the following code into the RStudio console.  _Hint: The "quantile" function used in the code is made available through the "stats" package and is normally installed by default.  If the "stats" library is not installed, copy and paste the following code in the RStudio console: install.packages("stats")_
+```{r find percentiles code, eval=FALSE, echo=T}
+quantile(annualgetprcpdata$data, prob = c(0.5,0.9,0.99))
+```
+<a id="codetoggle1" onclick="togglecode('hint2','codetoggle1');">Answer</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="hint2">
+50%    90%    99%
+<br>
+378.00 466.80 499.96 
+</code>
+</div>
+
+<br>
+
+#### Problem 2
+
+<div style="text-align:justify; clear: left">
+* Plot a histogram with a density curve for the annual precipitation data downloaded in Problem 1 by copying and pasting the following code into the RStudio console.  Make sure and change the "xintercept" values in the **`geom_vline()`** function to reflect the percentiles you found in Problem 1.  Adjust the labels for the percentiles by updating the x and y coordinates in the **`annotate()`** function.
+```{r Problem2 histogram and density plot, eval=FALSE, echo=T}
+ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 12, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 378), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 466.80), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 499.96), color="purple", linetype = "solid", size = 2) + annotate("text", x=390.5, y=-.0005, label = "50%") + annotate("text", x=479.5, y=-.0005, label = "90%") + annotate("text", x=512, y=-.0005, label = "99%") + xlab("mm ET") + ylab("Density")
+```
+* Under the **Plot** tab showing your rendered gragh, click the **`Export`** button to export your plot.  Save your graph as a .jpeg.
+* One of your stakeholders is wanting to plant a new crop which requires a certain amount of annual rainfall.  Write a paragraph to the stakeholder which includes helpful information such as the 50%, 10%, and 1% chance of annual precipitation that you found in Problem 1.  Include a copy of your graph.  If the new crop requires an annual precipitation in the range of 300mm to 400mm, would you recommend planting the crop?
+
+<br>
+<br>
 
 <script>
   //run this at start up
@@ -323,4 +376,6 @@ The 50th, 90th, and 99th percentiles for this dataset are 378.00, 466.80, and 49
   hidecode('graphcode7');
   hidecode('graphcode8');
   hidecode('graphcode9');
+  hidecode('hint1');
+  hidecode('hint2');
 </script>
