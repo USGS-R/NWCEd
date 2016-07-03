@@ -15,6 +15,8 @@ library(xlsx)
 library(NWCEd)
 library(leaflet)
 library(ggplot2)
+library(dplyr)
+options(warn = -1)
 ```
 
 ## Introduction
@@ -218,7 +220,41 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 
 <br>
 
-Precipitation, ET, streamflow, and the difference are marked in red, green, blue, and maroon, respectively.  The diff line represents the leftover preciptiation after ET and streamflow have been subtracted from the original precipitation.  The diff line includes water stored in the ground through percolation and in lakes and reservoirs within the system boundaries.  Look at the diff line on the plot above.  What years experienced positive storage?  What years experienced negative storage?  If we are assuming that the law of conservation of mass applies to water balances, how can we have negative storage?  We must remember that negative storage for our time series simply means that there is no water being stored.  In our case, there is water being pulled out of storage.  Where are possible locations for water to be stored within this HUC?  Using the same methods as described in **Step 2** zoom in and look for possible storage places within the system.
+Precipitation, ET, streamflow, and the difference are marked in red, green, blue, and maroon, respectively.  The diff line represents the leftover preciptiation after ET and streamflow have been subtracted from the original precipitation.  The diff line includes water stored in the ground through percolation and in lakes and reservoirs within the system boundaries.  Look at the diff line on the plot above.  What years experienced positive storage?  What years experienced negative storage?  This may be a little bit difficult to read.  Lets take a look at a different plot which shows the storage for for the same location.
+
+<br>
+
+```{r storage barplot, echo=FALSE}
+library(dplyr)
+NWCdata<-getNWCData(huc="031501070601", local = FALSE)
+NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
+areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
+NWCdata$et$data<-NWCdata$et$data*0.0032808
+annual_dataet<-annualize(NWCdata$et, method=sum)
+annual_dataet$group<-'ET'
+NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+annual_dataprcp$group<-'P'
+NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
+annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
+annual_datastrf$group<-'Q'
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
+names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
+annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
+names(annual_diff) = c('data')
+annual_diff$group<-'diff'
+annual_diff$year<-annual_union$year
+
+annual_diff = annual_diff%>%
+  mutate(pos = data >= 0)
+
+ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2010") 
+```
+
+<br>
+
+This bar graph makes it very easy to see which years had positive storage and which years had negative storage.  If we are assuming that the law of conservation of mass applies to water balances, how can we have negative storage?  We must remember that negative storage for our time series simply means that there is no water being stored.  In our case, there is water being pulled out of storage.  Where are possible locations for water to be stored within this HUC?  Using the same methods as described in **Step 2** zoom in and look for possible storage places within the system.
 
 <br>
 
@@ -474,6 +510,18 @@ As you can clearly see, not correcting the data would result in values that are 
 
 
 ## Try It Yourself
+
+<br>
+
+#### Problem 1
+
+
+<div style="text-align:justify; clear: left">
+Describe what a bar graph, time series graph, and double-mass curve are and explain what type of information each one communicates.
+
+<br>
+
+
 
 
 
