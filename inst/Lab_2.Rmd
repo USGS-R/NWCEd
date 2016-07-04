@@ -64,7 +64,7 @@ In the **`Stream Gage Filters:`** there are 4 layers which can be selected: "Gag
 
 <br>
 
-![**Figure 2: Gage layer selections.** ](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure2MetaDataHomePage.JPG)
+![**Figure 2: Gage layer selections.** ](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure4StreamflowGageFilter.JPG)
 
 <br>
 
@@ -77,7 +77,7 @@ Before selecting a button, we must first understand where the streamflow data co
 <div style= "width: 425px; height= 300px; float: left">
 ![**Figure 3: Gages-II abstract and metadata link.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure3MetaDataLink.JPG) 
 </div><div style= "width: 425px; height= 300px; float: right">
-![**Figure 4: Webpage displaying metadata.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure4StreamflowGageFilter.JPG) 
+![**Figure 4: Webpage displaying metadata.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure2MetaDataHomePage.JPG) 
 </div>
 
 <br>
@@ -170,6 +170,23 @@ The wizard disappears and another popup box appears allowing the user to select 
 
 ![**Figure 12: Statistics results displayed in Excel.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure12ImportedData.JPG)
 
+<br>
+
+## Try It Yourself
+
+<br>
+
+#### Problem 1
+
+
+<div style="text-align:justify; clear: left">
+Using the steps outlined previously for the **Streamflow Statistics Tool**,
+
+* Select a NWIS gage near where you live.
+* Run the Seven Fundamental Daily Streamflow Statistics for your selected gage.
+* Using the steps outlined above, use Microsoft Excel to view the results of the Seven Fundamental Daily Streamflow Statistics for your selected gage.
+
+<br>
 <br>
 
 

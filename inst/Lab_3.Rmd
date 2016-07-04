@@ -1,5 +1,5 @@
 ---
-title: "Lab 3: Graphing Water Data Distributions."
+title: "Lab 3: Graphing Water Data Distributions"
 output: 
   html_document:
     toc: true # table of content true
@@ -19,17 +19,36 @@ library(NWCEd)
 library(gridExtra)
 library(datasets)
 ```
+<script>
+  function hidecode(id) {
+    document.getElementById(id).style.display = "none";
+  }
+  
+  function togglecode(id,senderid) {
+    var e=document.getElementById(id);
+    var e2=document.getElementById(senderid);
+    if(e.style.display == 'block') {
+      e.style.display = 'none';
+      e2.innerHTML='Show Code';
+    } else {
+      e.style.display = 'block';
+      e2.innerHTML='Hide Code';
+    }
+  }
+
+</script>
 
 ## Introduction
 <div style="text-align:justify">
-The use of graphical representations of hydrologic datasets is a common and effective way in which to communicate important information to various stakeholders such as hydrologysts, engineers, and water managers.  Commonly used geographical representations are **Box Plots**, **Density Plots**, and **Histograms**.  The United States Geological Survey (USGS) has provided open access to precipitation, runoff, and evapotranspiration (ET) datasets.  These datasets have been compiled and catalogued according to their respective delineated watershed.  Each watershed has been assigned a number called a hydrologic unit code (HUC).  By obtaining the desired HUC Id, the user can download all the water data available for the given watershed.  The purpose of this lab is to learn how to obtain a desired HUC Id and interpret the associated datasets using box plots, density plots, and histograms.  By learning these methods of analysis, you will be able to better understand the data you are working with as well as be able to communicate the analysis results more effectively to **stakeholders**.   
+The use of graphical representations of hydrologic datasets is a common and effective way in which to communicate important information to various stakeholders such as hydrologysts, engineers, and water managers.  Commonly used geographical representations are **Box Plots**, **Density Plots**, and **Histograms**.  The United States Geological Survey (USGS) has provided open access to precipitation, runoff, and evapotranspiration (ET) datasets.  These datasets have been compiled and catalogued according to their respective delineated watershed.  Each watershed has been assigned a number called a hydrologic unit code (HUC).  By obtaining the desired HUC ID, the user can download all the water data available for the given watershed.  The purpose of this lab is to learn how to obtain a desired HUC ID and interpret the associated datasets using box plots, density plots, and histograms.  By learning these methods of analysis, you will be able to better understand the data you are working with as well as be able to communicate the analysis results more effectively to **stakeholders**.   
 </div>
 
 ## Important Questions to Ask Yourself
 
 1. What information is contained in a box plot?
 2. How do I interpret the quality of a dataset using a box plot?
-3. Who is the intended audience I am trying to communicate information with?
+3. How dependable are histograms when working with ET and precipitation data?
+4. Who is the intended audience I am trying to communicate information with?
 
 ## Useful Terms and Acronyms
 
@@ -67,7 +86,7 @@ Toggle **`Huc Layer:`** to **12 Digit**.  Note that both 12 Digit and 8 Digit HU
 ![**Figure 2: Selecting an HUC which encompasses Denver, Colorado.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure2.jpg)
 
 <br>
-<div style= "width: 450px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 3: Viewing  HUC ID for Cherry Creek-South Platte River watershed.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure3.jpg)
+<div style= "width: 450px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 3: Viewing  HUC ID.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure3.jpg)
 </div>
 <div style="text-align:justify">
 After clicking on the watershed, a new page opens as shown in **Figure 3** to the left.  The associated HUC ID is displayed both in the center of the screen as well as in the upper-left corner of the page.  For this watershed, the HUC ID is **101900030304**.  For more information about the features and functionality of this page or other NWC-DP pages, please see **Lab 1**.  With the HUC ID obtained, we are ready to proceed to the next step.
@@ -84,6 +103,14 @@ With the HUC ID obtained, we are ready to download the data and create our box p
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
 ggplot(cars, aes("var", speed)) + geom_boxplot(fill = "#E69F00", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("Units") + scale_x_discrete(breaks = NULL) + ggtitle("Example") + annotate("text", x=.8, y=20, label = "3rd Quartile") + annotate("text", x=.8, y=16, label = "Median") + annotate("text", x=.8, y=13, label = "1st Quartile") + annotate("text", x=1.15, y=25, label = "Largest non-outlier value") + annotate("text", x=1.15, y=4.3, label = "Smallest non-outlier value") + annotate("point", x = 1, y = 27, colour = "blue", size = 3) + annotate("point", x = 1, y = 2, colour = "blue", size = 3) + annotate("text", x=1.057, y=27, label = "Outlier") + annotate("text", x=1.057, y=2, label = "Outlier") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 ```
+<div style="text-align:center">
+  <a id="codetoggle1" onclick="togglecode('graphcode1','codetoggle1');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode1">
+ggplot(cars, aes("var", speed)) + geom_boxplot(fill = "#E69F00", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("Units") + scale_x_discrete(breaks = NULL) + ggtitle("Example") + annotate("text", x=.8, y=20, label = "3rd Quartile") + annotate("text", x=.8, y=16, label = "Median") + annotate("text", x=.8, y=13, label = "1st Quartile") + annotate("text", x=1.15, y=25, label = "Largest non-outlier value") + annotate("text", x=1.15, y=4.3, label = "Smallest non-outlier value") + annotate("point", x = 1, y = 27, colour = "blue", size = 3) + annotate("point", x = 1, y = 2, colour = "blue", size = 3) + annotate("text", x=1.057, y=27, label = "Outlier") + annotate("text", x=1.057, y=2, label = "Outlier") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+</code>
+</div>
 
 <br>
 
@@ -101,7 +128,17 @@ getetdata <- getdata[[1]]
 annualgetetdata <- annualize(getetdata, method = "sum")
 ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
 ```
-
+<div style="text-align:center">
+  <a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode2">
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
+ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
+</code>
+</div>
 <br>
 ```{r echo=FALSE}
 describe(getetdata[[2]])
@@ -117,7 +154,17 @@ getprcpdata <- getdata[[2]]
 annualgetprcpdata <- annualize(getprcpdata, method = "sum")
 ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
 ```
-
+<div style="text-align:center">
+  <a id="codetoggle3" onclick="togglecode('graphcode3','codetoggle3');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode3">
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
+ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
+</code>
+</div>
 <br>
 
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
@@ -133,6 +180,17 @@ annualetgraph <- ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill =
 annualprcpgraph <- ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
 grid.arrange(annualetgraph, annualprcpgraph, ncol = 2)
 ```
+<div style="text-align:center">
+  <a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode4">
+annualetgraph <- ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
+annualprcpgraph <- ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
+grid.arrange(annualetgraph, annualprcpgraph, ncol = 2)
+</code>
+</div>
+
 <br>
 
 Are the median lines centered between the lowest non-outlier to the highest non-outlier in either of the plots?  This may be difficult to see.  Whenever there is not a perfect balance of data above and below the median line, it is said that the data are **skewed**.  Lets look at a normal distribution curve as shown below.  
@@ -147,6 +205,18 @@ plot(x, hx, type="l", lty=2, xlab="x value",
   ylab="Density", main="Normal Distribution")
 
 ```
+<div style="text-align:center">
+  <a id="codetoggle5" onclick="togglecode('graphcode5','codetoggle5');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode5">
+x <- seq(-4, 4, length=100)
+hx <- dnorm(x)
+plot(x, hx, type="l", lty=2, xlab="x value",
+  ylab="Density", main="Normal Distribution")
+</code>
+</div>
+
 <br>
 <div style="text-align:justify">
 This is a density plot showing normal distribution.  It is completely symmetrical about median.  When the curve is skewed, the hump of the curve will shift either to the right side or the left side of the median.  Often the temptation arises to use histograms to observe data distribution. Lets take a look at the histogram for the annual ET data we have been working with.
@@ -156,6 +226,16 @@ This is a density plot showing normal distribution.  It is completely symmetrica
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
 ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "black", fill = "forestgreen") + ggtitle("Annual ET Histogram") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
 ```
+<div style="text-align:center">
+  <a id="codetoggle6" onclick="togglecode('graphcode6','codetoggle6');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode6">
+ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "black", fill = "forestgreen") + ggtitle("Annual ET Histogram") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
+</code>
+</div>
+
+<br>
 
 <div style="text-align:justify">
 Briefly glancing at this histogram, it may be temptimg to say that the graph indeed indicates a negative skew, or skewed left, meaning the tail of the curve is on the left side.  The data in this histogram have been divided into groups of 3 mm.  However, what if we changed the bin width, or the size of the group we are dividing the data into.  Below are several histogram plots of the same dataset with different bin widths.
@@ -164,20 +244,35 @@ Briefly glancing at this histogram, it may be temptimg to say that the graph ind
 <br>
  <!-- This code was used to produce comparative histograms -->
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
+# Plot of annualethist1 with binwidth = 0.5
 annualethist1 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 0.5, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 0.5") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+# Plot of annualethist2 with binwidth = 1
 annualethist2 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 1, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 1") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+# Plot of annualethist3 with binwidth = 3
 annualethist3 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 3") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+# Plot of annualethist4 with binwidth = 6
 annualethist4 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 6, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 6") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+# Plot of annualethist5 with binwidth = 10
 annualethist5 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 10, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 10") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+# Plot of annualethist6 with binwidth = 15
 annualethist6 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 15, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 15") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 grid.arrange(annualethist1, annualethist2, annualethist3, annualethist4, annualethist5, annualethist6, ncol = 2)
 
 ```
+<div style="text-align:center">
+  <a id="codetoggle7" onclick="togglecode('graphcode7','codetoggle7');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode7">
+annualethist1 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 0.5, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 0.5") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+annualethist2 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 1, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 1") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+annualethist3 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 3") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+annualethist4 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 6, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 6") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+annualethist5 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 10, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 10") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+annualethist6 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 15, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 15") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+grid.arrange(annualethist1, annualethist2, annualethist3, annualethist4, annualethist5, annualethist6, ncol = 2)
+</code>
+</div>
 <br>
 
 As you can see, changing the band width can drastically change the appearance of the plot.  It can become very subjective as to which band width should be used.  Therefore, we need a different solution.  Below is a plot of a density curve over a histogram.
@@ -185,23 +280,116 @@ As you can see, changing the band width can drastically change the appearance of
 <br>
 
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
-
 ggplot(annualgetetdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 3, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 310.00), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 320.20), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 330.46), color="purple", linetype = "solid", size = 2) + annotate("text", x=312.3, y=-.003, label = "50%") + annotate("text", x=322.5, y=-.003, label = "90%") + annotate("text", x=332.8, y=-.003, label = "99%") + xlab("mm ET") + ylab("Density")
 ```
-
+<div style="text-align:center">
+  <a id="codetoggle8" onclick="togglecode('graphcode8','codetoggle8');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode8">
+ggplot(annualgetetdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 3, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 310.00), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 320.20), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 330.46), color="purple", linetype = "solid", size = 2) + annotate("text", x=312.3, y=-.003, label = "50%") + annotate("text", x=322.5, y=-.003, label = "90%") + annotate("text", x=332.8, y=-.003, label = "99%") + xlab("mm ET") + ylab("Density")
+</code>
+</div>
 <br>
 This plot shows a density curve plotted on top of the histogram of the annual ET data.  A vertical red dashed line indicates the median.  As you can see, the hump of the curve is shifted to the right with the tail on the left.  This much more clearly describes the distribution of the data.  The 90th and 99th percentiles have been plotted with vertical orange and purple lines, respectively.  The 90th percentile and 99th percentiles were found to be 320.20 and 330.34 mm ET, respectively.  This means that in a given year for our designated watershed, there is a 10% chance of losing more than 320.2 mm of water to ET and a 1% chance of losing more than 330.46 mm water to ET.  Lets take a look at the density plot for the annual precipitation dataset.
 
 <br>
 
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
-
 ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 12, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 378), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 466.80), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 499.96), color="purple", linetype = "solid", size = 2) + annotate("text", x=390.5, y=-.0005, label = "50%") + annotate("text", x=479.5, y=-.0005, label = "90%") + annotate("text", x=512, y=-.0005, label = "99%") + xlab("mm ET") + ylab("Density")
 ```
- <br>
- 
+<div style="text-align:center">
+  <a id="codetoggle9" onclick="togglecode('graphcode9','codetoggle9');">Show Code</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="graphcode9">
+ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 12, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 378), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 466.80), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 499.96), color="purple", linetype = "solid", size = 2) + annotate("text", x=390.5, y=-.0005, label = "50%") + annotate("text", x=479.5, y=-.0005, label = "90%") + annotate("text", x=512, y=-.0005, label = "99%") + xlab("mm ET") + ylab("Density")
+</code>
+</div>
+<br>
+
 The 50th, 90th, and 99th percentiles for this dataset are 378.00, 466.80, and 499.96 mm of annual precipitation, respectively.  This means that in a given year for this particular watershed, there is a 10% chance that there will be more than 378 mm of rain.  There is a 1% chance of more than 499.96 mm of rain falling.  It is important to note that the density curve for this plot was produced using an averaging of the data.  This method works very well for large datasets.  For small datasets, there are alternative methods which will be discussed in **Lab 5**.
 
 ## Do It Yourself
 
+<br>
 
+#### Problem 1
+
+<div style="text-align:justify; clear: left">
+* Find the HUC ID for HUC that encompasses Billings, Montana.
+<br>
+<a id="codetoggle1" onclick="togglecode('hint1','codetoggle1');">Hint</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="hint1">
+![**Figure 1: The NWC-DP homepage.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure4.jpg)
+</code>
+</div>
+
+* Download the annual precipitation data for this HUC by copying and pasting the following code into the RStudio console.  Remember to change the HUC ID. 
+```{r problem1 code, echo=T}
+# Download and store both the ET and precipitation associated with the HUC ID in "getdata" variable
+getdata <- getNWCData(huc="101900030304")
+# Separates precipitation dataset from ET and stores in "getprcpdata" variable
+getprcpdata <- getdata[[2]]
+# Converts daily precipitation data to annual precipitation and stores in "annualgetprcpdata" variable
+annualgetprcpdata <- annualize(getprcpdata, method = "sum")
+```
+* Plot a box plot of the precipitation data by copying the code below into the RStudio console.  Remember to change the HUC ID.  Estimate the 1st, 2nd, and 3rd quartiles?  Does the plot appear to have skew?  If so, describe the skew.
+```{r Problem1 box plot, eval=FALSE, echo=T}
+ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
+```
+<a id="codetoggle1" onclick="togglecode('answer2','codetoggle1');">Answer</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="answer2">
+  0%   25%   50%   75%  100% 
+<br>
+157.0 254.5 315.0 359.5 443.0 
+</code>
+</div>
+* Find the 50th, 90th, and 99th **percentile** for the annual precipitation data by copying and pasting the following code into the RStudio console.  _Hint: The "quantile" function used in the code is made available through the "stats" package and is normally installed by default.  If the "stats" library is not installed, copy and paste the following code in the RStudio console: install.packages("stats")_
+```{r find percentiles code, eval=FALSE, echo=T}
+quantile(annualgetprcpdata$data, prob = c(0.5,0.9,0.99))
+```
+<a id="codetoggle1" onclick="togglecode('hint2','codetoggle1');">Answer</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="hint2">
+ 50%    90%    99%
+<br>
+315.00 407.20 434.84 
+</code>
+</div>
+
+<br>
+
+#### Problem 2
+
+<div style="text-align:justify; clear: left">
+* Plot a histogram with a density curve for the annual precipitation data downloaded in Problem 1 by copying and pasting the following code into the RStudio console.  Make sure and change the "xintercept" values in the **`geom_vline()`** function to reflect the percentiles you found in Problem 1.  Adjust the labels for the percentiles by updating the x and y coordinates in the **`annotate()`** function.
+```{r Problem2 histogram and density plot, eval=FALSE, echo=T}
+ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 12, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 378), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 466.80), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 499.96), color="purple", linetype = "solid", size = 2) + annotate("text", x=390.5, y=-.0005, label = "50%") + annotate("text", x=479.5, y=-.0005, label = "90%") + annotate("text", x=512, y=-.0005, label = "99%") + xlab("mm ET") + ylab("Density")
+```
+* Under the **Plot** tab showing your rendered gragh, click the **`Export`** button to export your plot.  Save your graph as a .jpeg.
+* One of your stakeholders is wanting to plant a new crop which requires a certain amount of annual rainfall.  Write a paragraph to the stakeholder which includes helpful information such as the 50%, 10%, and 1% chance of annual precipitation that you found in Problem 1.  Include a copy of your graph.  If the new crop requires an annual precipitation in the range of 300mm to 400mm, would you recommend planting the crop?
+
+<br>
+<br>
+
+<script>
+  //run this at start up
+  hidecode('graphcode1');
+  hidecode('graphcode2');
+  hidecode('graphcode3');
+  hidecode('graphcode4');
+  hidecode('graphcode5');
+  hidecode('graphcode6');
+  hidecode('graphcode7');
+  hidecode('graphcode8');
+  hidecode('graphcode9');
+  hidecode('hint1');
+  hidecode('hint2');
+  hidecode('answer2');
+</script>
