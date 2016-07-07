@@ -286,7 +286,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle1" onclick="togglecode('graphcode1','codetoggle1');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left; word-wrap: break-word">
 <p><code id="graphcode1"> ggplot(cars, aes(“var”, speed)) + geom_boxplot(fill = “#E69F00”, color = “black”, outlier.colour = “red”, outlier.shape = 16, outlier.size = 2) + xlab(“”) + ylab(“Units”) + scale_x_discrete(breaks = NULL) + ggtitle(“Example”) + annotate(“text”, x=.8, y=20, label = “3rd Quartile”) + annotate(“text”, x=.8, y=16, label = “Median”) + annotate(“text”, x=.8, y=13, label = “1st Quartile”) + annotate(“text”, x=1.15, y=25, label = “Largest non-outlier value”) + annotate(“text”, x=1.15, y=4.3, label = “Smallest non-outlier value”) + annotate(“point”, x = 1, y = 27, colour = “blue”, size = 3) + annotate(“point”, x = 1, y = 2, colour = “blue”, size = 3) + annotate(“text”, x=1.057, y=27, label = “Outlier”) + annotate(“text”, x=1.057, y=2, label = “Outlier”) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) </code></p>
 </div>
 <p><br></p>
@@ -298,7 +298,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left;word-wrap: break-word">
 <p><code id="graphcode2"> getdata &lt;- getNWCData(huc=“101900030304”) getetdata &lt;- getdata[[1]] annualgetetdata &lt;- annualize(getetdata, method = “sum”) ggplot(annualgetetdata, aes(“var”, data)) + geom_boxplot(fill = “#009E73”, color = “black”, outlier.colour = “red”, outlier.shape = 16, outlier.size = 2) + xlab(“”) + ylab(“ET (mm per year)”) + scale_x_discrete(breaks = NULL) + ggtitle(“ET for HUC 101900030304”) </code></p>
 </div>
 <p><br></p>
@@ -313,7 +313,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle3" onclick="togglecode('graphcode3','codetoggle3');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left;word-wrap: break-word">
 <p><code id="graphcode3"> getdata &lt;- getNWCData(huc=“101900030304”) getetdata &lt;- getdata[[1]] annualgetetdata &lt;- annualize(getetdata, method = “sum”) ggplot(annualgetetdata, aes(“var”, data)) + geom_boxplot(fill = “#009E73”, color = “black”, outlier.colour = “red”, outlier.shape = 16, outlier.size = 2) + xlab(“”) + ylab(“ET (mm per year)”) + scale_x_discrete(breaks = NULL) + ggtitle(“ET for HUC 101900030304”) </code></p>
 </div>
 <p><br></p>
@@ -327,7 +327,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left; word-wrap: break-word">
 <p><code id="graphcode4"> annualetgraph &lt;- ggplot(annualgetetdata, aes(“var”, data)) + geom_boxplot(fill = “#009E73”, color = “black”, outlier.colour = “red”, outlier.shape = 16, outlier.size = 2) + xlab(“”) + ylab(“ET (mm per year)”) + scale_x_discrete(breaks = NULL) + ggtitle(“ET for HUC 101900030304”) annualprcpgraph &lt;- ggplot(annualgetprcpdata, aes(“var”, data)) + geom_boxplot(fill = “#56B4E9”, color = “black”, outlier.colour = “red”, outlier.shape = 19, outlier.size = 2) + xlab(“”) + ylab(“Precipitation (mm per year)”) + scale_x_discrete(breaks = NULL) + ggtitle(“Precipitation for HUC 101900030304”) grid.arrange(annualetgraph, annualprcpgraph, ncol = 2) </code></p>
 </div>
 <p><br></p>
@@ -338,7 +338,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle5" onclick="togglecode('graphcode5','codetoggle5');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left; word-wrap: break-word">
 <p><code id="graphcode5"> x &lt;- seq(-4, 4, length=100) hx &lt;- dnorm(x) plot(x, hx, type=“l”, lty=2, xlab=“x value”, ylab=“Density”, main=“Normal Distribution”) </code></p>
 </div>
 <br>
@@ -349,7 +349,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle6" onclick="togglecode('graphcode6','codetoggle6');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left; word-wrap: break-word">
 <p><code id="graphcode6"> ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = “black”, fill = “forestgreen”) + ggtitle(“Annual ET Histogram”) + xlab(“mm ET”) + ylab(“Frequency”) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) </code></p>
 </div>
 <p><br></p>
@@ -360,7 +360,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle7" onclick="togglecode('graphcode7','codetoggle7');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left; word-wrap: break-word">
 <p><code id="graphcode7"> annualethist1 &lt;- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 0.5, colour = “black”, fill = “forestgreen”) + ggtitle(“Band Width = 0.5”) + xlab(“mm ET”) + ylab(“Frequency”) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) annualethist2 &lt;- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 1, colour = “black”, fill = “forestgreen”) + ggtitle(“Band Width = 1”) + xlab(“mm ET”) + ylab(“Frequency”) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) annualethist3 &lt;- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = “black”, fill = “forestgreen”) + ggtitle(“Band Width = 3”) + xlab(“mm ET”) + ylab(“Frequency”) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) annualethist4 &lt;- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 6, colour = “black”, fill = “forestgreen”) + ggtitle(“Band Width = 6”) + xlab(“mm ET”) + ylab(“Frequency”) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) annualethist5 &lt;- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 10, colour = “black”, fill = “forestgreen”) + ggtitle(“Band Width = 10”) + xlab(“mm ET”) + ylab(“Frequency”) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) annualethist6 &lt;- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 15, colour = “black”, fill = “forestgreen”) + ggtitle(“Band Width = 15”) + xlab(“mm ET”) + ylab(“Frequency”) + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) grid.arrange(annualethist1, annualethist2, annualethist3, annualethist4, annualethist5, annualethist6, ncol = 2) </code></p>
 </div>
 <p><br></p>
@@ -370,7 +370,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle8" onclick="togglecode('graphcode8','codetoggle8');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left; word-wrap: break-word">
 <p><code id="graphcode8"> ggplot(annualgetetdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 3, colour = “black”, fill = “white”) + geom_density(alpha=.5, fill=“#009E73”) + geom_vline(aes(xintercept = 310.00), color=“red”, linetype = “dashed”, size = 2) + ggtitle(“Density vs Histogram Plot”) + geom_vline(aes(xintercept = 320.20), color=“orange”, linetype = “solid”, size = 2) + geom_vline(aes(xintercept = 330.46), color=“purple”, linetype = “solid”, size = 2) + annotate(“text”, x=312.3, y=-.003, label = “50%”) + annotate(“text”, x=322.5, y=-.003, label = “90%”) + annotate(“text”, x=332.8, y=-.003, label = “99%”) + xlab(“mm ET”) + ylab(“Density”) </code></p>
 </div>
 <p><br> This plot shows a density curve plotted on top of the histogram of the annual ET data. A vertical red dashed line indicates the median. As you can see, the hump of the curve is shifted to the right with the tail on the left. This much more clearly describes the distribution of the data. The 90th and 99th percentiles have been plotted with vertical orange and purple lines, respectively. The 90th percentile and 99th percentiles were found to be 320.20 and 330.34 mm ET, respectively. This means that in a given year for our designated watershed, there is a 10% chance of losing more than 320.2 mm of water to ET and a 1% chance of losing more than 330.46 mm water to ET. Lets take a look at the density plot for the annual precipitation dataset.</p>
@@ -379,7 +379,7 @@ $(document).ready(function () {
 <div style="text-align:center">
 <p><a id="codetoggle9" onclick="togglecode('graphcode9','codetoggle9');">Show Code</a></p>
 </div>
-<div style="text-align:justify; clear: left">
+<div style="text-align:justify; clear: left; word-wrap: break-word">
 <p><code id="graphcode9"> ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 12, colour = “black”, fill = “white”) + geom_density(alpha=.5, fill=“#009E73”) + geom_vline(aes(xintercept = 378), color=“red”, linetype = “dashed”, size = 2) + ggtitle(“Density vs Histogram Plot”) + geom_vline(aes(xintercept = 466.80), color=“orange”, linetype = “solid”, size = 2) + geom_vline(aes(xintercept = 499.96), color=“purple”, linetype = “solid”, size = 2) + annotate(“text”, x=390.5, y=-.0005, label = “50%”) + annotate(“text”, x=479.5, y=-.0005, label = “90%”) + annotate(“text”, x=512, y=-.0005, label = “99%”) + xlab(“mm ET”) + ylab(“Density”) </code></p>
 </div>
 <p><br></p>
