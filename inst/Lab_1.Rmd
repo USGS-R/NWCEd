@@ -1,6 +1,5 @@
 ---
-title: 'Lab 1: Becoming Familiar with the Water Budget Tool
-  from the NWC-DP'
+title: 'Lab 1: The Water Budget Tool from the NWC-DP'
 output:
   html_document:
     depth: 2
