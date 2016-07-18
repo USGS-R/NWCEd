@@ -40,7 +40,7 @@ library(datasets)
 
 ## Introduction
 <div style="text-align:justify">
-The use of graphical representations of hydrologic datasets is a common and effective way in which to communicate important information to various stakeholders such as hydrologysts, engineers, and water managers.  Commonly used geographical representations are **Box Plots**, **Density Plots**, and **Histograms**.  The United States Geological Survey (USGS) has provided open access to precipitation, runoff, and evapotranspiration (ET) datasets.  These datasets have been compiled and catalogued according to their respective delineated watershed.  Each watershed has been assigned a number called a hydrologic unit code (HUC).  By obtaining the desired HUC ID, the user can download all the water data available for the given watershed.  The purpose of this lab is to learn how to obtain a desired HUC ID and interpret the associated datasets using box plots, density plots, and histograms.  By learning these methods of analysis, you will be able to better understand the data you are working with as well as be able to communicate the analysis results more effectively to **stakeholders**.   
+Graphical representations of hydrologic datasets is a common and effective way to communicate important information to various stakeholders such as hydrologysts, engineers, and water managers.  Commonly used geographical representations are **Box Plots**, **Density Plots**, and **Histograms**.  The United States Geological Survey (USGS) has provided open access to precipitation, runoff, and evapotranspiration (ET) datasets.  These datasets have been compiled and catalogued according to their respective delineated watershed.  Each watershed has been assigned a number called a hydrologic unit code (HUC).  For more information regarding HUC's, see **Lab 1** and <http://water.usgs.gov/GIS/huc.html>.  By obtaining the desired HUC ID, the user can download all the water data available for the given watershed.  The purpose of this lab is to learn how to obtain a desired HUC ID and interpret the associated datasets using box plots, density plots, and histograms.  By learning these methods of analysis, you will be able to better understand the data you are working with as well as be able to communicate the analysis results more effectively to **stakeholders**.   
 </div>
 
 ## Important Questions to Ask Yourself
@@ -71,7 +71,7 @@ Stakeholder        | A person or group that has an interest or concern
 
 #### Step 1
 <div style="text-align:justify">
-In this exercise we will learn how to obtain an HUC ID from the National Water Census Data-Portal (NWC-DP).  The HUC Id will be inserted as an argument in a function in the **NWCEd** package to call down the data from the portal.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
+In this exercise we will learn how to obtain a HUC ID from the National Water Census Data-Portal (NWC-DP).  The HUC ID will be inserted as an argument in a function in the **NWCEd** package to call down the data from the Portal.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the button titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
 </div>
 <br>
 
@@ -79,7 +79,7 @@ In this exercise we will learn how to obtain an HUC ID from the National Water C
 
 <br>
 <div style="text-align:justify">
-Toggle **`Huc Layer:`** to **12 Digit**.  Note that both 12 Digit and 8 Digit HUC ID's can work.  For this exercise we will use a 12 Digit HUC ID.  In the search bar, type "Denver" and then select "Denver County CO Denver County".  Zoom out until you are able to clearly view the delineated watersheds.  Select the watershed which largly encompasses Denver, Colorado as shown in **Figure 2**.   
+Toggle **`Huc Layer:`** to **12 Digit**.  Note that both 12-Digit and 8-Digit HUC ID's can work.  For this exercise we will use a 12-Digit HUC ID.  In the search bar, type "Denver" and then select "Denver County CO Denver County".  Zoom out until you are able to clearly view the delineated watersheds.  Select the watershed which largly encompasses Denver, Colorado as shown in **Figure 2**.   
 </div>
 <br>
 
@@ -89,14 +89,15 @@ Toggle **`Huc Layer:`** to **12 Digit**.  Note that both 12 Digit and 8 Digit HU
 <div style= "width: 450px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 3: Viewing  HUC ID.**](/Research/RStudioProject/NWCEd/inst/Lab3_NWC-DP_Images/Figure3.jpg)
 </div>
 <div style="text-align:justify">
-After clicking on the watershed, a new page opens as shown in **Figure 3** to the left.  The associated HUC ID is displayed both in the center of the screen as well as in the upper-left corner of the page.  For this watershed, the HUC ID is **101900030304**.  For more information about the features and functionality of this page or other NWC-DP pages, please see **Lab 1**.  With the HUC ID obtained, we are ready to proceed to the next step.
+After clicking on the watershed, a new page opens as shown in **Figure 3** to the left.  The associated HUC ID is displayed both in the center of the screen as well as in the upper left corner of the page.  For this watershed, the HUC ID is **101900030304**.  For more information about the features and functionality of this page or other NWC-DP pages, please see **Lab 1**.  With the HUC ID obtained, we are ready to proceed to the next step.
 </div>
 
 <br>
 <div style="text-align:justify; clear: left">
- 
+<br>
+
 #### Step 2
-With the HUC ID obtained, we are ready to download the data and create our box plots.  For this lab, the box plots have already been produced using the datasets associated with HUC #101900030304.  For reproduction of results, please see the **Lab_3.Rmd** file under the **inst** folder in the **NWCEd** package for embedded code.  Embedded code can be run in the RStudio console.  Before we jump into our analysis of ET and precipitation datasets, lets review how to interpret box plots.  Below is an example of a box plot.
+With the HUC ID obtained, we are ready to download the data and create our box plots.  For this lab, the box plots have already been produced using the datasets associated with HUC #101900030304.  For reproduction of graphs, please click on the **`Show Code`** button below each graph.  Embedded code can be run in the RStudio console.  Information on the functions used can be found at <https://github.com/dblodgett-usgs/NWCEd/tree/master/R>.  Before we jump into our analysis of ET and precipitation datasets, lets review how to interpret box plots.  Below is an example of a box plot.
 
 <br>
 
@@ -114,11 +115,11 @@ ggplot(cars, aes("var", speed)) + geom_boxplot(fill = "#E69F00", color = "black"
 
 <br>
 
-This box plot has been generated using the dataset called **cars** which is found in the preloaded library in RStudio called **datasets**.  The box plot is broken into 4 sections or **quartiles**.  The first quartile range is between the **"Smallest non-outlier value"** and the bottom line in of the box labeled **"1st Quartile"**.  Each quartile contains 1/4 of the data from the dataset.  The second quartile range is between the **1st Quartile** and the **Median**.  The third quartile range is between the **Median** and **"3rd Quartile"**.  And the 4th quartile range is between the **3rd Quartile** and **"Largest non-outlier value"**.  The **Outliers** which are indicated by blue circles have been added to the plot artificially and the respective values do not belong to the original dataset.  Identifying outliers can help improve the quality of a given dataset.  Now we are ready to look at the box plots for ET and precipitation for the HUC Id 101900030304.
+This box plot has been generated using the dataset called **cars** which is found in the preloaded library in RStudio called **datasets**.  The box plot is broken into 4 sections or **quartiles**.  The first quartile range is between the **"Smallest non-outlier value"** and the bottom line in of the box labeled **"1st Quartile"**.  Each quartile contains 1/4 of the data from the dataset.  The second quartile range is between the **1st Quartile** and the **Median**.  The third quartile range is between the **Median** and **"3rd Quartile"**.  And the 4th quartile range is between the **3rd Quartile** and **"Largest non-outlier value"**.  The **Outliers** which are indicated by blue circles have been added to the plot artificially and the respective values do not belong to the original dataset.  Identifying outliers can help improve the quality of a given dataset.  Now we are ready to look at the box plots for ET and precipitation for the HUC ID 101900030304.
 
 <br>
 
-The HUC ID is entered as an argument into the **getNWCData** function which brings in the hydrologic datasets associated with the specified watershed.  Once the datasets are downloaded, we can use a plotting function in the **ggplot2** library to create desired box plots for statistical analysis.  The box plots of annual ET and annual precipitation for HUC Id 101900030304 are shown below with a printed summary of statistics performed for the respective plots.
+The HUC ID is entered as an argument into the **getNWCData** function from the **NWCEd** package which brings in the hydrologic datasets associated with the specified watershed from the NWC-DP.  The **annualize** function from the NWCEd package is then used to convert the dataset from daily to annual values.  We can now use a plotting function in the **ggplot2** library to create desired box plots for statistical analysis.  The box plots of annual ET and annual precipitation for HUC ID 101900030304 are shown below with a printed summary of statistics performed for the respective plots.
 
 <br>
 
@@ -238,7 +239,7 @@ ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "
 <br>
 
 <div style="text-align:justify">
-Briefly glancing at this histogram, it may be temptimg to say that the graph indeed indicates a negative skew, or skewed left, meaning the tail of the curve is on the left side.  The data in this histogram have been divided into groups of 3 mm.  However, what if we changed the bin width, or the size of the group we are dividing the data into.  Below are several histogram plots of the same dataset with different bin widths.
+Briefly glancing at this histogram, it may be temptimg to say that the graph indeed indicates a negative skew, or skewed left, meaning the tail of the distribution curve is on the left side.  The data in this histogram have been divided into groups of 3 mm.  What if we changed the bin width, or the size of the group we are dividing the data into?  Below are several histogram plots of the same dataset with different bin widths.
 </div>
 
 <br>
