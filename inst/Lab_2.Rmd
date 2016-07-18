@@ -1,5 +1,5 @@
 ---
-title: "Lab 2: Using the StreamFlow Stats Tool from the NWC-DP."
+title: "Lab 2: The StreamFlow Stats Tool from the NWC-DP."
 output: 
   html_document:
     toc: true # table of content true
@@ -19,7 +19,7 @@ library(bootstrap)
 
 ## Introduction
 <div style="text-align:justify">
-The United States Geological Survey (USGS) has developed the **Streamflow Stats** tool within the National Water Census Data Portal (NWC-DP).  The Streamflow Stats tool allows users to easily perform statistical analyses on stream flow at a user-selected stream.  The Streamflow Stats tool uses 6 statistics packages: **`Seven Fundamental Daily Streamflow Statistics`**, **`Flow Magnitude`**, **`Flow Frequency`**, **`Flow Duration`**, **`Flow Timing`**, and **`Rate of Change`**.  This lab will walk through how to use these statistical packages. 
+The United States Geological Survey (USGS) has developed the **Streamflow Stats** tool within the National Water Census Data Portal (NWC-DP).  The Streamflow Stats tool allows users to easily perform statistical analyses on stream flow at a user-selected stream gage.  The Streamflow Stats tool uses 6 statistics packages: **`Seven Fundamental Daily Streamflow Statistics`**, **`Flow Magnitude`**, **`Flow Frequency`**, **`Flow Duration`**, **`Flow Timing`**, and **`Rate of Change`**.  This lab will walk through how to use these statistical packages. 
 </div>
 ## Important Questions to Ask Yourself
 
@@ -30,11 +30,11 @@ The United States Geological Survey (USGS) has developed the **Streamflow Stats*
 ## Useful Terms and Acronyms
 
 Term         | Defintion
------------- | -------------
+------------ | ---------------------------------------------------
 Metadata     | A set of data that describes and gives information about other data
 HUC          | Hydrologic Unit Code which identifies a watershed
 Watershed    | An area or ridge of land that separates waters flowing to different rivers, basins, or seas
-ET           | Evapotransiration
+ET           | Evapotransiration - water transferred to the atmosphere through evaporation from soil and transpiration from plants
 
 ## Exercise 1
 
@@ -91,7 +91,7 @@ Look under the _**`Description`**_ section. What information do you find related
 
 #### Step 3
 <div style="text-align:justify">
-Go back to the "Streamflow Stats" tool homepage.  From the dropdown box, select **Gages for Evaluating Streamflow**.  In the search bar, type "La Pine".  Do not press the enter key.  Once the options have appeared, select the "La Pine OR Deschutes County" option.  The map zoom to La Pine, Oregon.  Click on the gage nearest La Pine as shown in **Figure 5** below.  A new page will open as shown in **Figure 6**.  Gage information and location are displayed in the upper left corner.  The rest of the screen appears blank.  Click the **`Streamflow Data Plot`** button in the center of the screen.  A time series plot of streamflow data will display above the **`Streamflow Data Plot`** button.
+Go back to the "Streamflow Stats" tool homepage.  From the dropdown box, select **Gages for Evaluating Streamflow**.  In the search bar, type "La Pine".  Do not press the enter key.  Once the options have appeared, select the "La Pine OR Deschutes County" option.  The map zooms to La Pine, Oregon.  Click on the gage nearest La Pine as shown in **Figure 5** below.  A new page will open as shown in **Figure 6**.  Gage information and location are displayed in the upper left corner.  The rest of the screen appears blank.  Click the **`Streamflow Data Plot`** button in the center of the screen.  A time series plot of streamflow data will display above the **`Streamflow Data Plot`** button.
 </div>
 
 <br>
@@ -137,7 +137,7 @@ Statistics including the mean of the daily streamflow, skewness, kurtosis, and o
 
 #### Step 5
 <div style="text-align:justify">
-There are a few methods which can be used to view the statics results generated using the Streamflow Stats tool.  For this example, we will use Microsoft Excel.  Open Microsoft Excel.  Once Excel is open, click on the **Data** tab.  Under the **`From Text`** search for the .tsv file.  Excel does default to recognize .tsv files.  In the lower right corner of the window, change the file type to "All Files" as shown in **Figure 9**.
+There are a few methods which can be used to view the statistics results generated using the Streamflow Stats tool.  For this example, we will use Microsoft Excel.  Open Microsoft Excel.  Once Excel is open, click on the **Data** tab.  Under the **`From Text`** search for the .tsv file.  Excel does default to recognize .tsv files.  In the lower right corner of the window, change the file type to "All Files" as shown in **Figure 9**.
 </div>
 
 <br>
@@ -147,7 +147,7 @@ There are a few methods which can be used to view the statics results generated 
 </div>
 <br>
 <div style="text-align:justify">
-Once the correct file has been selected, a **`Text Import Wizard`** box will appear as shown in **Figure 10** below.  This wizard allows the user to specify the attributes of the file sich as "Delimited" or "Fixed width".  In a box located at the bottom of the wizard, a preivew of the data is displayed.  The data downloaded from the NWC-DP is delimited.  Click **`Next`**.  A new set of options appears in the wizard as shown in **Figure 11** which allow the user to specify how the contents of the file should be separated.  In the bottom of the wizard is preview of the data.  Because the downloaded data was saved as a .tsv file, it can be assumed that the data has been separated by tabs.  To verify that assumption, under **Delimiters** select the various options and view the effects in the preview box below.  Make sure the **`Tab`** box is checked and **`Next`**.  The wizard updates to show options on editing column formats.  The data file we have downloaded has already been formatted. Click **`Finish`**.
+Once the correct file has been selected, a **`Text Import Wizard`** box will appear as shown in **Figure 10** below.  This wizard allows the user to specify the attributes of the file such as "Delimited" or "Fixed width".  In a box located at the bottom of the wizard, a preview of the data is displayed.  The data downloaded from the NWC-DP is delimited.  Click **`Next`**.  A new set of options appears in the wizard as shown in **Figure 11** which allows the user to specify how the contents of the file should be separated.  In the bottom of the wizard is a preview of the data.  Because the downloaded data was saved as a .tsv file, it can be assumed that the data has been separated by tabs.  To verify that assumption, under **Delimiters** select the various options and view the effects in the preview box below.  Make sure the **`Tab`** box is checked and then click **`Next`**.  The wizard updates to show options for editing column formats.  The data file we have downloaded has already been formatted. Click **`Finish`**.
 </div>
 <br>
 

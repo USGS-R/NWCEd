@@ -36,7 +36,7 @@ library(bootstrap)
 </script>
 ## Introduction
 <div style="text-align:justify">
-The United States Geological Survey (USGS) has developed a website called the National Water Census Data Portal (NWC-DP).  This website allows users to access unprecedented amounts of hydrologic data including precipitation, evapotranspiration (ET), and stream flow datasets.  Accompanying the available datasets are tools in the portal which can be used to plot and analyze desired datasets associated with delineated watersheds. The tool which will be explored in the following exercise is the Water Budget tool. 
+The United States Geological Survey (USGS) has developed a website called the National Water Census Data Portal (NWC-DP).  This website allows users to access unprecedented amounts of hydrologic data including precipitation, evapotranspiration (**ET**), and stream flow datasets.  Accompanying the available datasets are tools in the portal which can be used to plot and analyze desired datasets associated with delineated watersheds. The tool which will be explored in the following exercise is the Water Budget tool. 
 </div>
 ## Important Questions to Ask Yourself
 
@@ -47,11 +47,11 @@ The United States Geological Survey (USGS) has developed a website called the Na
 ## Useful Terms and Acronyms
 
 Term         | Defintion
------------- | -------------
+------------ | ---------------------------------------------------
 NWC-DP       | National Water Census Data Portal
 HUC          | Hydrologic Unit Code which identifies a watershed
 Watershed    | An area or ridge of land that separates waters flowing to different rivers, basins, or seas
-ET           | Evapotransiration
+ET           | Evapotransiration - water transferred to the atmosphere through evaporation from soil and transpiration from plants
 
 ## Exercise 1
 
