@@ -749,11 +749,148 @@ Describe what a bar graph, time series graph, and double-mass curve are and expl
 
 #### Problem 2
 
-
-Describe what a bar graph, time series graph, and double-mass curve are and explain what type of information each one communicates.
-
+<div style="text-align:justify; clear: left">
+* Find the 12-Digit HUC ID for HUC that encompasses Gunnison National Forest in Colorado.
+<br>
+<a id="codetoggle1" onclick="togglecode('hint1','codetoggle1');">Hint</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="hint1">
+Search for "Callow Creek CO" and select "Callow Creek CO Mesa County"
+![](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure7.jpg)
+</code>
+</div>
+* Verify the selected 12-Digit HUC contains streamflow data.
+<br>
+<a id="codetoggle1" onclick="togglecode('hint2','codetoggle1');">Hint</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="hint2">
+![](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure8.jpg)
+</code>
+</div>
+* Plot an annual time series graph for the selected HUC which shows ET, precipitation, and runoff datasets in R using the code block below.  _Hint: make sure and change the HUC ID in the second and third lines of code.  Update the title of the plot at the bottom of the code block._  Look at the ET line.  How do you explain the two major low points?  Research the site including weather events dating back to 1980.  Can you find any information that could help support the graph you have produced?
+```{r Problem 2 plot, echo=TRUE, eval=FALSE }
+library(ggplot2)
+# Download datasets for selected HUC ID
+NWCdata<-getNWCData(huc="150601060306", local = FALSE)
+# Download HUC geometry information for selected HUC ID
+NWCwatershed<-getNWCWatershed(huc="150601060306",local=FALSE)
+# Convert HUC area to square feet
+areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
+# Separate ET data and convert to feet
+NWCdata$et$data<-NWCdata$et$data*0.0032808
+# Annualize ET dataset and assign 'ET' group name
+annual_dataet<-annualize(NWCdata$et, method=sum)
+annual_dataet$group<-'ET'
+# Separate precipitation data and convert to feet
+NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
+# Annualize precipitation dataset and assign 'P' group name
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+annual_dataprcp$group<-'P'
+# Separate streamflow dataset, normalize, and convert to feet
+NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
+# Removes unnecessary columns
+datastrf<-subset(NWCdata$streamflow, select = -c(agency_cd,site_no,data_00060_00003,cd_00060_00003))
+# Updates the "date" column name
+colnames(datastrf)[1]<-"date"
+# Annualizes the streamflow dataset and assigns it 'Q' group name
+annual_datastrf<-annualize(datastrf,method=sum)
+annual_datastrf$group<-'Q'
+# Extracts subset of streamflow data to reduce size
+annual_datastrf<-annual_datastrf[c(75:111),]
+# Combines datasets into 1 data frame
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
+# Assigns column headers
+names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
+# Create diff dataset by subtracting ET and streamflow from precipitation dataset
+annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
+# Assign column name to diff dataset
+names(annual_diff) = c('data')
+# Assign 'diff' gropu name to diff dataset
+annual_diff$group<-'diff'
+# Assigns the same range of years to diff dataset as is being used by other datasets
+annual_diff$year<-annual_union$year
+# combines ET, precipitation, and streamflow datasets into 1 dataset
+plotData<-rbind(annual_dataet,annual_dataprcp,annual_datastrf,annual_diff)
+# Plots annual time series
+ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+  scale_x_discrete(name = "year") + ylab("ft") +
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Annual Time Series Plot for HUC # 140200050803", colour = "Explanation") +
+  scale_color_manual(values=c("#990066", "#339966", "#FF0000", "#3300FF"))
+```
+<div style="text-align:center">
+<a id="codetoggle9" onclick="togglecode('answer1','codetoggle9');">Answer</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="answer1">
+![](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure9.jpeg)
+</code>
+</div>
 <br>
 
+#### Problem 3
+
+Using the same HUC from **Problem 2** plot a bar graph of the storage (diff) by copying and pasting the code block into your R console as shown below.  _Hint: Change the HUC ID in the third and fourth lines of code.  Be sure to change the plot title to accurately reflect the dateset dates_.  Assuming 100% of the storage is available to distribute to a population living within the HUC boundary, write a paragraph to the water manager with a recommendation for the population size that the storage could support from 2000 to 2014.  Include the plot you created.
+```{r Problem 3, echo=TRUE, eval=FALSE}
+library(dplyr)
+library(ggplot2)
+# Download datasets for selected HUC ID
+NWCdata<-getNWCData(huc="150601060306", local = FALSE)
+# Download HUC geometry information for selected HUC ID
+NWCwatershed<-getNWCWatershed(huc="150601060306",local=FALSE)
+# Convert HUC area to square feet
+areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
+# Separate ET data and convert to feet
+NWCdata$et$data<-NWCdata$et$data*0.0032808
+# Annualize ET dataset and assign 'ET' group name
+annual_dataet<-annualize(NWCdata$et, method=sum)
+annual_dataet$group<-'ET'
+# Separate precipitation data and convert to feet
+NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
+# Annualize precipitation dataset and assign 'P' group name
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+annual_dataprcp$group<-'P'
+# Separate streamflow dataset, normalize, and convert to feet
+NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
+# Removes unnecessary columns
+datastrf<-subset(NWCdata$streamflow, select = -c(agency_cd,site_no,data_00060_00003,cd_00060_00003))
+# Updates the "date" column name
+colnames(datastrf)[1]<-"date"
+# Annualizes the streamflow dataset and assigns it 'Q' group name
+annual_datastrf<-annualize(datastrf,method=sum)
+annual_datastrf$group<-'Q'
+# Extracts subset of streamflow data to reduce size
+annual_datastrf<-annual_datastrf[c(75:111),]
+# Combines datasets into 1 data frame
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
+# Assigns column headers
+names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
+# Create diff dataset by subtracting ET and streamflow from precipitation dataset
+annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
+# Assign column name to diff dataset
+names(annual_diff) = c('data')
+# Assign 'diff' gropu name to diff dataset
+annual_diff$group<-'diff'
+# Assigns the same range of years to diff dataset as is being used by other datasets
+annual_diff$year<-annual_union$year
+# Adds a column of True and False values associated with respective positive and negative values in the original dataset
+annual_diff = annual_diff%>%
+  mutate(pos = data >= 0)
+# Plots the data
+ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2014") 
+```
+<div style="text-align:center">
+<a id="codetoggle1" onclick="togglecode('answer2','codetoggle1');">Answer</a>
+</div>
+<div style="text-align:justify; clear: left">
+<code id="answer2">
+![](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure10.jpeg)
+</code>
+</div>
 
 <br>
 <br>
@@ -768,5 +905,9 @@ Describe what a bar graph, time series graph, and double-mass curve are and expl
   hidecode('graphcode6');
   hidecode('graphcode7');
   hidecode('graphcode8');
+  hidecode('hint1');
+  hidecode('hint2');
+  hidecode('answer1');
+  hidecode('answer2');
 </script>
 

@@ -318,7 +318,7 @@ The 50th, 90th, and 99th percentiles for this dataset are 378.00, 466.80, and 49
 #### Problem 1
 
 <div style="text-align:justify; clear: left">
-* Find the HUC ID for HUC that encompasses Billings, Montana.
+* Find the 12-Digit HUC ID for HUC that encompasses Billings, Montana.
 <br>
 <a id="codetoggle1" onclick="togglecode('hint1','codetoggle1');">Hint</a>
 </div>
