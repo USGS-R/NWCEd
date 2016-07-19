@@ -250,7 +250,7 @@ We have seen the effects of changing weather through the example of Utah Lake an
 
 <br>
 
-A common method of accounting for the water within the watershed, or in this case the HUC, is by performing a **water balance**.  Water balances are used to account for all water flowing into and out of a system.  Water balances are based on the principle that in a closed system mass is neither created or destroyed.  Applying this to the water balance, all water flowing into the system must exit the system or be stored in the system.  Lets look at the closed system defined as the 12 Digit HUC ID **031601090601** within the Town Creek-Cane Creek watershed.  This HUC contains Jasper, Alabama within its boundaries.  From the NWC-DP, the precipitation, ET, and streamflow datasets have been downloaded and plotted below for this HUC.
+A common method of accounting for the water within the watershed, or in this case the HUC, is by performing a **water balance**.  Water balances are used to account for all water flowing into and out of a system.  Water balances are based on the principle that in a closed system mass is neither created or destroyed.  Applying this to the water balance, all water flowing into the system must exit the system or be stored in the system.  Lets look at the closed system defined by the 12-Digit HUC ID **031601090601** within the Town Creek-Cane Creek watershed.  This HUC contains Jasper, Alabama within its boundaries.  From the NWC-DP, the precipitation, ET, and streamflow datasets have been downloaded and plotted below for this HUC.
 
 <br>
 
@@ -316,7 +316,7 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 </div>
 <br>
 
-Precipitation, ET, streamflow, and the difference are marked in red, green, blue, and maroon, respectively.  The diff line represents the leftover preciptiation after ET and streamflow have been subtracted from the original precipitation.  The diff line includes water stored in the ground through percolation and in lakes and reservoirs within the system boundaries.  Look at the diff line on the plot above.  What years experienced positive storage?  What years experienced negative storage?  This may be a little bit difficult to read.  Lets take a look at a different plot which shows the storage for for the same location.
+Precipitation, ET, streamflow, and the difference are marked in red, green, blue, and maroon, respectively.  The diff line represents the leftover preciptiation after ET and streamflow have been subtracted from the original precipitation.  The diff line includes water stored in the ground through percolation and in lakes and reservoirs within the system boundaries.  Look at the diff line on the plot above.  What years experienced positive storage?  What years experienced negative storage?  This may be a little bit difficult to read.  Lets take a look at a different plot which shows the storage for the same location.
 
 <br>
 
@@ -438,11 +438,11 @@ Storage is mainly comprised of ground water, although additional storage areas c
 #### Step 4
 <br>
 
-How do we know if our precipitation data is good to use?  In the field, there is the possibility that rain gages are moved or are damaged for a period of time.  Problems that occur in the field must be taken into consideration and the data fixed to reflect the conditions of the site being analyzed.  One method used to identify inconsistencies in a precipitation dataset is a **Double-Mass Curve**.  For analyzing precipitation data at a site, the annual precipitation data of nearby rain gages are collected and cumulated.  The mean cumulative annual data is then plotted against the mean annual cumulative precipitation for the surrounding sites including the site being analyzed.  For more information on double-mass curves, please visit <http://pubs.usgs.gov/wsp/1541b/report.pdf>.  
+How do we know if our precipitation data is good to use?  In the field, there is the possibility that rain gages are moved or are damaged for a period of time.  Problems that occur in the field must be taken into consideration and the data adjusted to reflect the conditions of the site being analyzed.  One method used to identify inconsistencies in a precipitation dataset is a **Double-Mass Curve**.  For analyzing precipitation data at a site, the annual precipitation data of nearby rain gages are collected and cumulated.  The mean cumulative annual data is then plotted against the mean annual cumulative precipitation for the surrounding sites including the site being analyzed.  For more information on double-mass curves, please visit <http://pubs.usgs.gov/wsp/1541b/report.pdf>.  
 
 <br>
 
-Lets check the consistency and long-term trends of the precipitation data for HUC# 031601090601.  For this exercise it is important to note that the precipitation data used is actually the area weighted mean precipitation based on data obtained rain gages.  The surrounding sites are the nearest surrounding 12 Digit HUCs.  For the purposes of the exercise, these differences are negligible. Below is the code used to collect, cumulate, find the cumulative mean for 4 sites, and plot the results.
+Lets check the consistency and long-term trends of the precipitation data for HUC# 031601090601.  For this exercise it is important to note that the precipitation data used is actually the area weighted mean precipitation based on data obtained through rain gages.  The surrounding sites are the nearest surrounding 12-Digit HUCs.  For the purposes of the exercise, these differences are negligible. Below is the code used to collect, cumulate, find the cumulative mean for 4 sites, and plot the results.
 
 ```{r double-mass plot, echo=T}
 
@@ -488,7 +488,7 @@ ggplot(plot1, aes(x=x, y=y)) + geom_point() + geom_smooth(color="blue") + xlab("
 ```
 
 <br>
-As we can see, the data points for the most part fall into a straight line.  This indicates there is strong correlation among the data points and the measurements are consistent throughout the dataset.  Lets take a look at a case where eroneous data is plotted on a double-mass curve.
+As we can see, the data points for the most part fall into a straight line.  This indicates there is strong correlation among the data points and the measurements are consistent throughout the dataset.  Lets take a look at a case where eroneous data are plotted on a double-mass curve.
 
 ```{r double-mass plot 2, echo=FALSE}
 
@@ -566,7 +566,7 @@ ggplot(plot4, aes(x=x, y=y)) + geom_smooth(data = plotsegment, color = "blue") +
 </div>
 <br>
 
-We would expect the data points to plot in a linear fashion.  However, when we look at this double-mass curve, we can clearly see a break in the curve.  If we were to do some research on this hypothetical rain gage, we would find that development occured in close proximity to the gage.  A sprinkler system was installed and the gage was collecting additional readings when the sprinklers were running.  We are needing to adjust our data to resemble what we would expect.  To do this, we can multiply the "bad" data by the ratio of the slope of the "good" data.  We can use the following equation to help us adjust our data:
+We would expect the data points to plot in a linear fashion.  However, when we look at this double-mass curve, we can clearly see a break in the curve.  If we were to do some research on this hypothetical rain gage, we would find that development occured in close proximity to the gage.  A sprinkler system was installed and the gage was collecting additional readings when the sprinklers were running.  We are needing to adjust our data to reflect the natural conditions without the sprinklers.  To do this, we can multiply the "bad" data by the ratio of the slope of the "good" data.  We can use the following equation to help us adjust our data:
 </div>
 
 
@@ -582,7 +582,7 @@ $b_a$ = slope of graph of adjusted values
 $b_0$ = slope of graph at the time $P_0$ was observed
 
 <br>
-The slopes of the red line and yellow line are 0.69 and 1.55, respectively.  The slope ratio is then calculated to be 0.44.  We will now multiply the slope ratio to data from the break in the curve to the end of the dataset to correct for the error introduced by the sprinklers.  The plot below shows the change in precipitation after the data has been corrected.
+The slopes of the blue line and yellow line are 0.69 and 1.55, respectively.  The slope ratio is then calculated to be 0.44.  We will now multiply the slope ratio to data from the break in the curve to the end of the dataset to correct for the error introduced by the sprinklers.  The plot below shows the change in precipitation after the data has been corrected.
 
 <br>
 
@@ -731,7 +731,7 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 </div>
 
 <br>
-As you can clearly see, not correcting the data would result in values that are substantially higher than expected.  What water management problems can you think of if you used the uncorrected data in your planning?
+As you can clearly see, not correcting the data would result in values that are substantially higher than expected.  What water management problems might occur if the uncorrected data was used in planning?
 <br>
 
 
