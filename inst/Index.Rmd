@@ -1,0 +1,49 @@
+---
+title: "Index"
+output: 
+  html_document:
+    toc: false # table of content true
+    depth: 2  # up to two depths of headings (specified by #, ##)
+    number_sections: false  ## if you want number sections at each table header
+    theme: cerulean  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Materials Description
+<div style="text-align:left">
+
+
++---------------+---------------------------------------+--------------------+
+| Lab #         | Material Description                  |        Links       |
++===============+=======================================+====================+
+| Lab 1         | - Accessing and navigating the NWC-DP | [Lab 1](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_1.html)       |
+|               | - NWC-DP Water Budget tool            |                    |
+|               | - Introduction to HUC's               |                    |  
++---------------+---------------------------------------+--------------------+
+| Lab 2         | - Accessing the NWC-DP                | [Lab 2](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_2.html)       |
+|               | - NWC-DP Streamflow Stats tool        |                    |
+|               | - How to download stats results       |                    |
++---------------+---------------------------------------+--------------------+
+| Lab 3         | - Accessing ET/precipitation data     | [Lab 3](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_3.html)       |   
+|               |   from NWC-DP                         |                    |
+|               | - Analysing and plotting box plots,   |                    |
+|               |   histograms, and density curve plots |                    |
+|               |   in R                                |                    |
+|               | - Writing exercises                   |                    |
++---------------+---------------------------------------+--------------------+
+| Lab 4         | - Analyzing time series and bar plots | [Lab 4](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_4.html)       |   
+|               |   in R using NWC-DP data              |                    |
+|               | - Water balances                      |                    |
+|               | - Double-mass balance curve analysis  |                    |
++---------------+---------------------------------------+--------------------+
+| Lab 5         | - Analyzing time series and bar plots | [Lab 5](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_4.html)       |   
+|               |   in R using NWC-DP data              |                    |
+|               | - Water balances                      |                    |
+|               | - Double-mass balance curve analysis  |                    |
++---------------+---------------------------------------+--------------------+
+
+
