@@ -92,7 +92,7 @@ After selecting the desired watershed, a new page will load which shows the HUC 
 
 <br>
 
-![**Figure 4: NWIS gage location and time series. graph.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure4.jpg)
+![**Figure 4: NWIS gage location and time series. graph.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure4.JPG)
 
 <br>
 
@@ -516,8 +516,10 @@ NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
 
-# Read in manually altered dataset 
-NWCdataprcpsumannual4<-read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet1")
+# Read in manually altered dataset
+xl_data<-download.file("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/extdata/doublemassplot2.xlsx", quiet = TRUE, destfile = './doublemassplot2.xlsx')
+NWCdataprcpsumannual4<-read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet1")
+
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 # Averaging the annual precipitation for the 4 sites
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
@@ -553,7 +555,7 @@ NWCdataprcp3<-NWCdata$prcp
 NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
-NWCdataprcpsumannual4<-read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet1")
+NWCdataprcpsumannual4<-read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet1")
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
 annualaveragecum<-cumsum(annualaverage)
@@ -614,7 +616,7 @@ NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
 
 # Read in manually altered dataset 
 
-NWCdataprcpsumannual4<-read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet2")
+NWCdataprcpsumannual4<-read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet2")
 
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 
@@ -651,7 +653,8 @@ NWCdataprcp3<-NWCdata$prcp
 NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
-NWCdataprcpsumannual4<-read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet2")
+NWCdataprcpsumannual4<-read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet2")
+file.remove('./doublemassplot2.xlsx')
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
 annualaveragecum<-cumsum(annualaverage)
@@ -666,10 +669,11 @@ ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="green") + xlab(
 library(scales)
 library(ggplot2)
 
-correcteddata<- read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet2")
+correcteddata<- read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet2")
 
-uncorrecteddata<- read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet1")
+uncorrecteddata<- read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet1")
 
+file.remove('./doublemassplot2.xlsx')
 
 correcteddata$group<-'Corrected'
 drops<-c("NA.")
@@ -705,8 +709,8 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 <code id="graphcode8">
 library(scales)
 library(ggplot2)
-correcteddata<- read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet2")
-uncorrecteddata<- read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet1")
+correcteddata<- read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet2")
+uncorrecteddata<- read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet1")
 correcteddata$group<-'Corrected'
 drops<-c("NA.")
 correcteddata<- correcteddata[,!(names(correcteddata) %in% drops)]
@@ -757,7 +761,7 @@ Describe what a bar graph, time series graph, and double-mass curve are and expl
 <div style="text-align:justify; clear: left">
 <code id="hint1">
 Search for "Callow Creek CO" and select "Callow Creek CO Mesa County"
-![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure7.jpg)
+![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure7.JPG)
 </code>
 </div>
 * Verify the selected 12-Digit HUC contains streamflow data.
@@ -766,7 +770,7 @@ Search for "Callow Creek CO" and select "Callow Creek CO Mesa County"
 </div>
 <div style="text-align:justify; clear: left">
 <code id="hint2">
-![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure8.jpg)
+![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure8.JPG)
 </code>
 </div>
 * Plot an annual time series graph for the selected HUC which shows ET, precipitation, and runoff datasets in R using the code block below.  _Hint: make sure and change the HUC ID in the second and third lines of code.  Update the title of the plot at the bottom of the code block._  Look at the ET line.  How do you explain the two major low points?  Research the site including weather events dating back to 1980.  Can you find any information that could help support the graph you have produced?
