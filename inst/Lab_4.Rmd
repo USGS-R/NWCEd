@@ -68,7 +68,7 @@ In this exercise we will learn how to obtain an HUC ID from the National Water C
 </div>
 <br>
 
-![**Figure 1: The NWC-DP homepage.**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure1.jpg)
+![**Figure 1: The NWC-DP homepage.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure1.jpg)
 
 <br>
 
@@ -76,7 +76,7 @@ In order to put together an accurate water balance, we need to know the streamfl
 
 <br>
 
-![**Figure 2: Selecting the Huc layer and gage. layer.**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure2.jpg)
+![**Figure 2: Selecting the Huc layer and gage. layer.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure2.jpg)
 
 <br>
 
@@ -84,7 +84,7 @@ The watershed we will analyze is the "Rock Canyon-Provo River" watershed located
 
 <br>
 
-![**Figure 3: Selecting the Huc layer and gage. layer.**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure3.jpg)
+![**Figure 3: Selecting the Huc layer and gage. layer.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure3.jpg)
 
 <br>
 
@@ -92,7 +92,7 @@ After selecting the desired watershed, a new page will load which shows the HUC 
 
 <br>
 
-![**Figure 4: NWIS gage location and time series. graph.**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure4.jpg)
+![**Figure 4: NWIS gage location and time series. graph.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure4.jpg)
 
 <br>
 
@@ -227,7 +227,7 @@ From the graph, we see the precipitation data in red, the ET data under the prec
 <br>
 
 <div style= "width: 400px; height= 300px;PADDING-RIGHT: 5px; float: left">
-![**Figure 5: Utah State Park during the 1983 flood (http://www.utahlake.gov/1983-flooding/).**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure5.jpg)
+![**Figure 5: Utah State Park during the 1983 flood (http://www.utahlake.gov/1983-flooding/).**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure5.jpg)
 </div>
 <div style="text-align:justify">
 During the years from from 1981 to 1983 this region experienced record amounts of precipitation.  Major streets were sand-bagged and transformed into temporary rivers.  **Figure 5** to the left shows flooding at the Utah State Park.  What about the year 1988?  From 1988 to 1992 the regrion experienced the second most severe drought recorded.  Utah Lake which receives the water from the Provo River is on average about 10.5 feet deep (http://www.wasatchwater.org/utah-lake-part-5-the-lakes-future/).  During the drought period from 1988-1992, the lake dropped 8 feet (http://www.slcdocs.com/utilities/NewsEvents/news2003/news12232003.htm).  In a short period of 10 years, this region experienced one of the worst floods as well as one of the worst droughts on record.  Effective management of water resources can dampen the effects felt from everchanging weather.
@@ -236,7 +236,7 @@ During the years from from 1981 to 1983 this region experienced record amounts o
 <br>
 <br>
 
-![**Figure 6: Utah Lake surface elevations (http://www.utahlake.gov/1983-flooding/).**](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure6.jpg)
+![**Figure 6: Utah Lake surface elevations (http://www.utahlake.gov/1983-flooding/).**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure6.jpg)
 
 <br>
 
@@ -517,7 +517,7 @@ NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
 
 # Read in manually altered dataset 
-NWCdataprcpsumannual4<-read.xlsx("/Research/RStudioProject/NWCEd/doublemassplot2.xlsx", sheetName = "Sheet1")
+NWCdataprcpsumannual4<-read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet1")
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 # Averaging the annual precipitation for the 4 sites
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
@@ -553,7 +553,7 @@ NWCdataprcp3<-NWCdata$prcp
 NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
-NWCdataprcpsumannual4<-read.xlsx("/Research/RStudioProject/NWCEd/doublemassplot2.xlsx", sheetName = "Sheet1")
+NWCdataprcpsumannual4<-read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet1")
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
 annualaveragecum<-cumsum(annualaverage)
@@ -614,7 +614,7 @@ NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
 
 # Read in manually altered dataset 
 
-NWCdataprcpsumannual4<-read.xlsx("/Research/RStudioProject/NWCEd/doublemassplot2.xlsx", sheetName = "Sheet2")
+NWCdataprcpsumannual4<-read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet2")
 
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 
@@ -651,7 +651,7 @@ NWCdataprcp3<-NWCdata$prcp
 NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
-NWCdataprcpsumannual4<-read.xlsx("/Research/RStudioProject/NWCEd/doublemassplot2.xlsx", sheetName = "Sheet2")
+NWCdataprcpsumannual4<-read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet2")
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
 annualaveragecum<-cumsum(annualaverage)
@@ -666,9 +666,9 @@ ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="green") + xlab(
 library(scales)
 library(ggplot2)
 
-correcteddata<- read.xlsx("/Research/RStudioProject/NWCEd/doublemassplot2.xlsx", sheetName = "Sheet2")
+correcteddata<- read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet2")
 
-uncorrecteddata<- read.xlsx("/Research/RStudioProject/NWCEd/doublemassplot2.xlsx", sheetName = "Sheet1")
+uncorrecteddata<- read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet1")
 
 
 correcteddata$group<-'Corrected'
@@ -705,8 +705,8 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 <code id="graphcode8">
 library(scales)
 library(ggplot2)
-correcteddata<- read.xlsx("/Research/RStudioProject/NWCEd/doublemassplot2.xlsx", sheetName = "Sheet2")
-uncorrecteddata<- read.xlsx("/Research/RStudioProject/NWCEd/doublemassplot2.xlsx", sheetName = "Sheet1")
+correcteddata<- read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet2")
+uncorrecteddata<- read.xlsx("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/doublemassplot2.xlsx", sheetName = "Sheet1")
 correcteddata$group<-'Corrected'
 drops<-c("NA.")
 correcteddata<- correcteddata[,!(names(correcteddata) %in% drops)]
@@ -757,7 +757,7 @@ Describe what a bar graph, time series graph, and double-mass curve are and expl
 <div style="text-align:justify; clear: left">
 <code id="hint1">
 Search for "Callow Creek CO" and select "Callow Creek CO Mesa County"
-![](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure7.jpg)
+![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure7.jpg)
 </code>
 </div>
 * Verify the selected 12-Digit HUC contains streamflow data.
@@ -766,7 +766,7 @@ Search for "Callow Creek CO" and select "Callow Creek CO Mesa County"
 </div>
 <div style="text-align:justify; clear: left">
 <code id="hint2">
-![](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure8.jpg)
+![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure8.jpg)
 </code>
 </div>
 * Plot an annual time series graph for the selected HUC which shows ET, precipitation, and runoff datasets in R using the code block below.  _Hint: make sure and change the HUC ID in the second and third lines of code.  Update the title of the plot at the bottom of the code block._  Look at the ET line.  How do you explain the two major low points?  Research the site including weather events dating back to 1980.  Can you find any information that could help support the graph you have produced?
@@ -826,7 +826,7 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 </div>
 <div style="text-align:justify; clear: left">
 <code id="answer1">
-![](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure9.jpeg)
+![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure9.jpeg)
 </code>
 </div>
 <br>
@@ -888,7 +888,7 @@ ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', p
 </div>
 <div style="text-align:justify; clear: left">
 <code id="answer2">
-![](/Research/RStudioProject/NWCEd/inst/Lab4_NWC-DP_Images/Figure10.jpeg)
+![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure10.jpeg)
 </code>
 </div>
 
