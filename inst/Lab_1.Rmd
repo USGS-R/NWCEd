@@ -1,6 +1,5 @@
 ---
-title: 'Lab 1: Becoming Familiar with the Water Budget and Streamflow Stats Tools
-  from the NWC-DP'
+title: 'Lab 1: The Water Budget Tool from the NWC-DP'
 output:
   html_document:
     depth: 2
@@ -37,7 +36,7 @@ library(bootstrap)
 </script>
 ## Introduction
 <div style="text-align:justify">
-The United States Geological Survey (USGS) has developed the National Water Census Data Portal (NWC-DP).  The NWC-DP provides users with access to unprecedented hydrologic data including precipitation, evapotranspiration (ET), and stream flow data.  Accompanying the available datasets are tools which can be used to plot and analyze desired datasets associated with delineated watersheds assigned a hydrologic unit code (HUC).  The tool which will be explored in the following exercise is the Water Budget tool. 
+The United States Geological Survey (USGS) has developed a website called the National Water Census Data Portal (NWC-DP).  This website allows users to access unprecedented amounts of hydrologic data including precipitation, evapotranspiration (**ET**), and stream flow datasets.  Accompanying the available datasets are tools in the portal which can be used to plot and analyze desired datasets associated with delineated watersheds. The tool which will be explored in the following exercise is the Water Budget tool. 
 </div>
 ## Important Questions to Ask Yourself
 
@@ -48,11 +47,11 @@ The United States Geological Survey (USGS) has developed the National Water Cens
 ## Useful Terms and Acronyms
 
 Term         | Defintion
------------- | -------------
+------------ | ---------------------------------------------------
 NWC-DP       | National Water Census Data Portal
 HUC          | Hydrologic Unit Code which identifies a watershed
 Watershed    | An area or ridge of land that separates waters flowing to different rivers, basins, or seas
-ET           | Evapotransiration
+ET           | Evapotransiration - water transferred to the atmosphere through evaporation from soil and transpiration from plants
 
 ## Exercise 1
 
@@ -71,7 +70,7 @@ The purpose of Exercise 1 is to walk through the functionality of the **`Water B
 
 #### Step 2
 <div style="text-align:justify">
-After selecting the Water Budget tool, a new page will open shown in **Figure 2** below.  A stream gage layer is displayed in blue on the map.  Streams highlighed in a bold blue color are streams for which hydrologic data is available.  Use the scroll wheel on the mouse to zoom in to the map to reveal more highlighed streams.  You can also click on the **`Zoom`** button and click on desired locations on the map to zoom in.  To pan the map view, click the **`Select`** button, then click in the map area and while holding the mouse click and drag the mouse.  You can also select the **`Pan`** button, click on the map, and drag the cursor while holding the mouse click.
+After selecting the Water Budget tool, a new page will open as shown in **Figure 2** below.  A stream gage layer is displayed in blue on the map.  Streams highlighed in a bold blue color are streams for which hydrologic data is available.  Use the scroll wheel on the mouse to zoom in to the map to reveal more highlighed streams.  You can also click on the **`Zoom`** button and then click on desired locations on the map to zoom in.  To pan the map view, click the **`Select`** button.  Then click in the map area and while holding the mouse click and drag the mouse.  You can also select the **`Pan`** button, click on the map, and drag the cursor while holding the mouse click.
 </div>
 <br>
 
@@ -81,7 +80,7 @@ After selecting the Water Budget tool, a new page will open shown in **Figure 2*
 <div style="text-align:justify">
 The **`Turn Gages On`** button toggles available stream gages on and off.  The stream gage sites are locations where flow is measured for the respective stream or river.  Streamflow is necessary for determining and managing storage.  For more information on how streamflow is measured, please visit <http://water.usgs.gov/edu/measureflow.html>.  
 
-The continental United States has been subdivided into 8-digit and 12-digit HUC watersheds.  Zoom to your hometown or search for it in the search bar below the **`Turn Gages On`** button.  Click in the **`Huc Layer:`** dropdown box and select **`8 Digit`** for the watershed layer.  You may need to zoom out to see the black-outlined 8-digit HUC watersheds.  Observe the different watersheds displayed.  Now select **`12 Digit`** in the **`Huc Layer:`** dropdown box. </div> 
+The continental United States has been subdivided into 8-digit and 12-digit HUC watersheds.  A **HUC** is a hydrologic unit code.  Each delineated **watershed** is assigned a HUC ID.  Zoom to your hometown or search for it in the search bar below the **`Turn Gages On`** button.  Click in the **`Huc Layer:`** dropdown box and select **`8 Digit`** for the watershed layer.  You may need to zoom out to see the black-outlined 8-digit HUC watersheds.  Observe the different watersheds displayed.  Now select **`12 Digit`** in the **`Huc Layer:`** dropdown box. </div> 
 
 <br>
 
@@ -117,7 +116,7 @@ Make sure the **`Select`** button is selected first and click anywhere inside th
 ![**Figure 6-b: A monthly time series plot of precipitation and evapotranspiration.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleTimeSeriesb.JPG)
 </div>
 <div style="text-align:justify">
-The HUC number, watershed name, and HUC watershed drainage area are shown in the upper left corner of the screen.  In the middle of the screen is a map showing the selected HUC watershed.  Looking closely at the map shows a red-highlighted line in the upper left corner of the map.  Click on the map and while holding the click, drag the mouse to pan the map view.  Use the scroll wheel on the mouse to zoom in and out.  You will notice that the red highlighted area is of the accumulated watershed. 
+The HUC number, watershed name, and HUC watershed drainage area are shown in the upper left corner of the screen.  In the middle of the screen is a map showing the selected HUC watershed.  Looking closely at the map shows a red-highlighted line in the upper left corner of the map.  Click on the map and while holding the click, drag the mouse to pan the map view.  Use the scroll wheel on the mouse to zoom in and out.  You will notice that the red highlighted area is of the accumulated watershed area. 
 </div>
 
 <br>
@@ -138,9 +137,9 @@ Notice at the top left corner of the screen are the buttons **`Show Accumulated 
 
 <div style= "width: 500px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 7-b: HUC information for water budget.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetc.jpeg)
 </div> 
-<div style="text-align:justify"> The streamflow is measured using a NWIS gage and its location is represented on the map with a red diamond shape with a black dot in the center.  On the left of the screen is information about the selected HUC including HUC number, watershed name, and drainage area.  What is the gage name for this selected HUC?  What is the HUC watershed drainage area?  What is the gage watershed drainage area?  Are they the same?  If they are not the same, what would cause them to be different?
+<div style="text-align:justify"> The streamflow is measured using a NWIS gage.  The gage location is represented on the map with a red diamond with a black dot in the center.  On the left of the screen, information about the selected HUC including HUC number, watershed name, and drainage area is displayed.  What is the gage name for this selected HUC?  What is the HUC watershed drainage area?  What is the gage watershed drainage area?  Are they the same?  If they are not the same, what would cause them to be different?
 
-Notice at the lower-left corner of the screen the **`Annual`**, **`Monthly`**, and **`Daily`** buttons.  Clicking on any of these buttons automatically adjusts the plots to the respective time series type.
+Notice the **`Annual`**, **`Monthly`**, and **`Daily`** buttons toward the lower-left corner of the screen .  Clicking on any of these buttons automatically adjusts the plots to the respective time series type.
 
 Click on the **`Daily`** button.  How would you describe the difference between the appearance of the Daily and Monthly time series plots?  Which do you prefer?  Why?  Move your cursor over the plot.  Actual data points from each of the respective datasets are displayed under the plot.
 </div>
@@ -148,7 +147,7 @@ Click on the **`Daily`** button.  How would you describe the difference between 
 <br>
 <div style="text-align:justify; clear: left">
 #### Step 4
-Click the **`Select Watershed to Compare`** button at the top of the page.  This function allows users to compare their selected HUC watershed with other HUC watersheds of the same digit.  Using the search bar, search for "Dallas County TX."
+Click the **`Select Watershed to Compare`** button at the top of the page.  This function allows users to compare their selected HUC watershed with other HUC watersheds of the same digit type.  Using the search bar, search for "Dallas County TX."
 
 <br>
 
@@ -177,7 +176,7 @@ Click back 3 times until you return to the page titled "Available Water Budget C
 
 In the upper map, the boundary with green fill is the 12 Digit HUC we selected.  The boundary with orange fill represents the local county.  As shown below the upper map, the entire 12 Digit HUC is found within the county boundary.  It makes up 9% of the county area.
 
-Click within the county boundary on the map.  A new page will open displaying water usage in Davidson County and is shown in **Figure 11**.
+Click within the county boundary on the map.  A new page will open displaying water usage in Davidson County.  This page is shown as **Figure 11** below.
 
 <br>
 
