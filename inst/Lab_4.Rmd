@@ -129,14 +129,16 @@ leaflet() %>%
 <div style="text-align:center">
   <a id="codetoggle1" onclick="togglecode('graphcode1','codetoggle1');">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode1">
+<div style="text-align:justify; clear: left">
+<code id="graphcode1" style="white-space: normal;text-align:left;">
 library(NWCEd)
-library(leaflet)
-huc12<-"160202030505"
-NWCwatershed<-getNWCWatershed(huc="160202030505",local=FALSE)
-coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
+<br>library(leaflet)
+<br>huc12<-"160202030505"
+<br>NWCwatershed<-getNWCWatershed(huc="160202030505",local=FALSE)
+<br>coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]  
+<!-- Break -->
 coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
+<!-- Break -->
 names(coords)<-c('lon','lat')
 leaflet() %>%
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
@@ -194,25 +196,26 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 <div style="text-align:center">
   <a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode2">
-library(ggplot2)
-library(NWCEd)
-NWCdata<-getNWCData(huc=huc12)
-annual_dataet<-annualize(NWCdata$et, method=sum)
-annual_dataet$group<-'ET'
-annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
-annual_dataprcp$group<-'P'
-annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
-annual_diff<-as.data.frame(annual_union$data.y - annual_union$data.x)
-names(annual_diff) = c('data')
-annual_diff$group<-'diff'
-annual_diff$year<-annual_union$year
-library(scales)
-library(ggplot2)
-require(stats)
-plotData<-rbind(annual_dataet,annual_dataprcp,annual_diff)
-ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+<div style="text-align:justify; clear: left;">
+<code id="graphcode2" style="white-space: normal;text-align:left;">
+<br>library(ggplot2)
+<br>library(NWCEd)
+<br>huc12<-"160202030505"
+<br>NWCdata<-getNWCData(huc=huc12)
+<br>annual_dataet<-annualize(NWCdata$et, method=sum)
+<br>annual_dataet$group<-'ET'
+<br>annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+<br>annual_dataprcp$group<-'P'
+<br>annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+<br>annual_diff<-as.data.frame(annual_union$data.y - annual_union$data.x)
+<br>names(annual_diff) = c('data')
+<br>annual_diff$group<-'diff'
+<br>annual_diff$year<-annual_union$year
+<br>library(scales)
+<br>library(ggplot2)
+<br>require(stats)
+<br>plotData<-rbind(annual_dataet,annual_dataprcp,annual_diff)
+<br>ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
   scale_x_discrete(name = "year") + ylab("mm") + 
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Difference Between Precipitation and ET", colour = "Explanation") +
@@ -285,29 +288,31 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 <div style="text-align:center">
   <a id="codetoggle3" onclick="togglecode('graphcode3','codetoggle3');">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode3">
-NWCdata<-getNWCData(huc="031501070601", local = FALSE)
-NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
-areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
-NWCdata$et$data<-NWCdata$et$data*0.0032808
-annual_dataet<-annualize(NWCdata$et, method=sum)
-annual_dataet$group<-'ET'
-NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
-annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
-annual_dataprcp$group<-'P'
-NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
-annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
-annual_datastrf$group<-'Q'
-annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
-annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
-names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
-annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
-names(annual_diff) = c('data')
-annual_diff$group<-'diff'
-annual_diff$year<-annual_union$year
-plotData<-rbind(annual_dataet,annual_dataprcp,annual_datastrf,annual_diff)
-ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+<div style="text-align:justify; clear: left;">
+<code id="graphcode3" style="white-space: normal;">
+<br>library(NWCEd)
+<br>library(ggplot2)
+<br>NWCdata<-getNWCData(huc="031501070601", local = FALSE)
+<br>NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
+<br>areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
+<br>NWCdata$et$data<-NWCdata$et$data*0.0032808
+<br>annual_dataet<-annualize(NWCdata$et, method=sum)
+<br>annual_dataet$group<-'ET'
+<br>NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
+<br>annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+<br>annual_dataprcp$group<-'P'
+<br>NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
+<br>annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
+<br>annual_datastrf$group<-'Q'
+<br>annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+<br>annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
+<br>names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
+<br>annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
+<br>names(annual_diff) = c('data')
+<br>annual_diff$group<-'diff'
+<br>annual_diff$year<-annual_union$year
+<br>plotData<-rbind(annual_dataet,annual_dataprcp,annual_datastrf,annual_diff)
+<br>ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
   scale_x_discrete(name = "year") + ylab("ft") +
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Basic Diff Plot", colour = "Explanation") +
@@ -351,31 +356,31 @@ ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', p
 <div style="text-align:center">
   <a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode4">
-library(dplyr)
-NWCdata<-getNWCData(huc="031501070601", local = FALSE)
-NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
-areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
-NWCdata$et$data<-NWCdata$et$data*0.0032808
-annual_dataet<-annualize(NWCdata$et, method=sum)
-annual_dataet$group<-'ET'
-NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
-annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
-annual_dataprcp$group<-'P'
-NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
-annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
-annual_datastrf$group<-'Q'
-annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
-annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
-names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
-annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
-names(annual_diff) = c('data')
-annual_diff$group<-'diff'
-annual_diff$year<-annual_union$year
-annual_diff = annual_diff%>%
-  mutate(pos = data >= 0)
-ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2010") 
+<div style="text-align:justify; clear: left;">
+<code id="graphcode4" style="white-space: normal;">
+<br>library(dplyr)
+<br>NWCdata<-getNWCData(huc="031501070601", local = FALSE)
+<br>NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
+<br>areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
+<br>NWCdata$et$data<-NWCdata$et$data*0.0032808
+<br>annual_dataet<-annualize(NWCdata$et, method=sum)
+<br>annual_dataet$group<-'ET'
+<br>NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
+<br>annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+<br>annual_dataprcp$group<-'P'
+<br>NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
+<br>annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
+<br>annual_datastrf$group<-'Q'
+<br>annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+<br>annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
+<br>names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
+<br>annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
+<br>names(annual_diff) = c('data')
+<br>annual_diff$group<-'diff'
+<br>annual_diff$year<-annual_union$year
+<br>annual_diff = annual_diff%>%
+  <br>mutate(pos = data >= 0)
+<br>ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2010") 
 </code>
 </div>
 <br>
@@ -412,16 +417,16 @@ leaflet() %>%
 <div style="text-align:center">
   <a id="codetoggle5" onclick="togglecode('graphcode5','codetoggle5');">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode5">
-huc12<-"031601090601"
-library(NWCEd)
-library(leaflet)
-NWCwatershed<-getNWCWatershed(huc=huc12,local=FALSE)
-coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
-coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
-names(coords)<-c('lon','lat')
-leaflet() %>% 
+<div style="text-align:justify; clear: left;">
+<code id="graphcode5" style="white-space: normal;">
+<br>huc12<-"031601090601"
+<br>library(NWCEd)
+<br>library(leaflet)
+<br>NWCwatershed<-getNWCWatershed(huc=huc12,local=FALSE)
+<br>coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
+<br>coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
+<br>names(coords)<-c('lon','lat')
+<br>leaflet() %>% 
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
   addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}") %>%
   addWMSTiles(baseUrl = "http://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
@@ -517,8 +522,10 @@ NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
 
 # Read in manually altered dataset
-xl_data<-download.file("https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/extdata/doublemassplot2.xlsx", quiet = TRUE, destfile = './doublemassplot2.xlsx')
-NWCdataprcpsumannual4<-read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet1")
+csv_data<-download.file("https://rawgit.com/jnelson7/NWCEd/43da87970865520fa698640f726e8762b348e95c/inst/extdata/doublemassplot2sheet1.csv", quiet = TRUE, destfile = './doublemassplot2sheet1.csv')
+NWCdataprcpsumannual4<-read.csv('./doublemassplot2sheet1.csv')
+
+csv_data2<-download.file("https://rawgit.com/jnelson7/NWCEd/43da87970865520fa698640f726e8762b348e95c/inst/extdata/doublemassplot2sheet2.csv", quiet = TRUE, destfile = './doublemassplot2sheet2.csv')
 
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 # Averaging the annual precipitation for the 4 sites
@@ -538,8 +545,8 @@ ggplot(plot4, aes(x=x, y=y)) + geom_smooth(data = plotsegment, color = "blue") +
 <div style="text-align:center">
   <a id="codetoggle6" onclick="togglecode('graphcode6','codetoggle6');">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode6">
+<div style="text-align:justify; clear: left;">
+<code id="graphcode6" style="white-space: normal;">
 NWCdata<-getNWCData(huc="150601060306", local = FALSE)
 NWCdataprcp1<-NWCdata$prcp
 NWCdataprcp1$data<-NWCdataprcp1$data*.0393701
@@ -555,7 +562,9 @@ NWCdataprcp3<-NWCdata$prcp
 NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
-NWCdataprcpsumannual4<-read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet1")
+csv_data<-download.file("https://rawgit.com/jnelson7/NWCEd/43da87970865520fa698640f726e8762b348e95c/inst/extdata/doublemassplot2sheet1.csv", quiet = TRUE, destfile = './doublemassplot2sheet1.csv')
+NWCdataprcpsumannual4<-read.csv('./doublemassplot2sheet1.csv')
+csv_data2<-download.file("https://rawgit.com/jnelson7/NWCEd/43da87970865520fa698640f726e8762b348e95c/inst/extdata/doublemassplot2sheet2.csv", quiet = TRUE, destfile = './doublemassplot2sheet2.csv')
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
 annualaveragecum<-cumsum(annualaverage)
@@ -616,7 +625,7 @@ NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
 
 # Read in manually altered dataset 
 
-NWCdataprcpsumannual4<-read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet2")
+NWCdataprcpsumannual4<-read.csv('./doublemassplot2sheet2.csv')
 
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 
@@ -636,8 +645,8 @@ ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="green") + xlab(
 <div style="text-align:center">
   <a id="codetoggle7" onclick="togglecode('graphcode7','codetoggle7');">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode7">
+<div style="text-align:justify; clear: left;">
+<code id="graphcode7" style="white-space: normal;">
 NWCdata<-getNWCData(huc="150601060306", local = FALSE)
 NWCdataprcp1<-NWCdata$prcp
 NWCdataprcp1$data<-NWCdataprcp1$data*.0393701
@@ -653,8 +662,7 @@ NWCdataprcp3<-NWCdata$prcp
 NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
-NWCdataprcpsumannual4<-read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet2")
-file.remove('./doublemassplot2.xlsx')
+NWCdataprcpsumannual4<-read.csv('./doublemassplot2sheet2.csv')
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
 annualaveragecum<-cumsum(annualaverage)
@@ -669,19 +677,23 @@ ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="green") + xlab(
 library(scales)
 library(ggplot2)
 
-correcteddata<- read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet2")
+correcteddata<- read.csv('./doublemassplot2sheet2.csv')
 
-uncorrecteddata<- read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet1")
+uncorrecteddata<- read.csv('./doublemassplot2sheet1.csv')
 
-file.remove('./doublemassplot2.xlsx')
+file.remove('./doublemassplot2sheet1.csv')
+file.remove('./doublemassplot2sheet2.csv')
 
 correcteddata$group<-'Corrected'
 drops<-c("NA.")
 correcteddata<- correcteddata[,!(names(correcteddata) %in% drops)]
+correcteddata<-subset(correcteddata, select = -c(X))
 
 uncorrecteddata$group<-'Uncorrected'
 drops<-c("NA.")
 uncorrecteddata<- uncorrecteddata[,!(names(uncorrecteddata) %in% drops)]
+uncorrecteddata<-subset(uncorrecteddata, select = -c(X))
+
 
 datamerge<-merge(correcteddata,uncorrecteddata,by.x = "year",by.y = "year")
 datadiff<-as.data.frame(datamerge$data.y-datamerge$data.x)
@@ -694,9 +706,10 @@ datadiff$group<-'Difference'
 colnames(datadiff)<-c("data","year","group")
 datadiff<-datadiff[,c(2,1,3)]
 
-plotData<-rbind(datadiff,correcteddata,uncorrecteddata)
 
-ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+bounddata<-rbind(datadiff,correcteddata,uncorrecteddata)
+
+ggplot(bounddata, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
   scale_x_discrete(name = "year") + ylab("inches") + 
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Difference Between Precipitation and ET", colour = "Explanation") +
@@ -705,18 +718,22 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 <div style="text-align:center">
   <a id="codetoggle8" onclick="togglecode('graphcode8','codetoggle8');">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode8">
+<div style="text-align:justify; clear: left;">
+<code id="graphcode8" style="white-space: normal;">
 library(scales)
 library(ggplot2)
-correcteddata<- read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet2")
-uncorrecteddata<- read.xlsx('./doublemassplot2.xlsx', sheetName = "Sheet1")
+correcteddata<- read.csv('./doublemassplot2sheet2.csv')
+uncorrecteddata<- read.csv('./doublemassplot2sheet1.csv')
+file.remove('./doublemassplot2sheet1.csv')
+file.remove('./doublemassplot2sheet2.csv')
 correcteddata$group<-'Corrected'
 drops<-c("NA.")
 correcteddata<- correcteddata[,!(names(correcteddata) %in% drops)]
+correcteddata<-subset(correcteddata, select = -c(X))
 uncorrecteddata$group<-'Uncorrected'
 drops<-c("NA.")
 uncorrecteddata<- uncorrecteddata[,!(names(uncorrecteddata) %in% drops)]
+uncorrecteddata<-subset(uncorrecteddata, select = -c(X))
 datamerge<-merge(correcteddata,uncorrecteddata,by.x = "year",by.y = "year")
 datadiff<-as.data.frame(datamerge$data.y-datamerge$data.x)
 datadiff$year<-datamerge$year
@@ -725,8 +742,8 @@ names(datadiff[[2]]) = c('year')
 datadiff$group<-'Difference'
 colnames(datadiff)<-c("data","year","group")
 datadiff<-datadiff[,c(2,1,3)]
-plotData<-rbind(datadiff,correcteddata,uncorrecteddata)
-ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+bounddata<-rbind(datadiff,correcteddata,uncorrecteddata)
+ggplot(bounddata, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
   scale_x_discrete(name = "year") + ylab("inches") + 
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Difference Between Precipitation and ET", colour = "Explanation") +

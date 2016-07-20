@@ -108,7 +108,7 @@ ggplot(cars, aes("var", speed)) + geom_boxplot(fill = "#E69F00", color = "black"
   <a id="codetoggle1" onclick="togglecode('graphcode1','codetoggle1');">Show Code</a>
 </div>
 <div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode1">
+<code id="graphcode1" style="white-space:normal;">
 ggplot(cars, aes("var", speed)) + geom_boxplot(fill = "#E69F00", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("Units") + scale_x_discrete(breaks = NULL) + ggtitle("Example") + annotate("text", x=.8, y=20, label = "3rd Quartile") + annotate("text", x=.8, y=16, label = "Median") + annotate("text", x=.8, y=13, label = "1st Quartile") + annotate("text", x=1.15, y=25, label = "Largest non-outlier value") + annotate("text", x=1.15, y=4.3, label = "Smallest non-outlier value") + annotate("point", x = 1, y = 27, colour = "blue", size = 3) + annotate("point", x = 1, y = 2, colour = "blue", size = 3) + annotate("text", x=1.057, y=27, label = "Outlier") + annotate("text", x=1.057, y=2, label = "Outlier") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 </code>
 </div>
