@@ -6,8 +6,8 @@ Date: 2016-03-22
 Author: David Blodgett <dblodgett@usgs.gov>
 Maintainer: Jake Nelson <jake.nelson7@gmail.com>
 Description: Package for NWC educational vignette.
-Imports: XML, jsonlite, dataRetrieval, utils, stats
-Suggests: testthat
+Imports: XML, jsonlite, dataRetrieval, utils, stats, ggplot2
+Suggests: testthat, xlsx
 License: file LICENSE
 LazyData: TRUE
 RoxygenNote: 5.0.1
