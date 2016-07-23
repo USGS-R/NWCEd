@@ -11,7 +11,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(xlsx)
 library(NWCEd)
 library(leaflet)
 library(ggplot2)
@@ -899,7 +898,7 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
   scale_color_manual(values=c("#990066", "#339966", "#FF0000", "#3300FF"))
 ```
 <div style="text-align:center">
-  <a id="displayText" href="javascript:toggle(11);">Show Hint</a>
+  <a id="displayText" href="javascript:toggle(11);">Show Answer</a>
 </div>  
   <div id="toggleText11" style="display: none">
 ![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure9.jpeg)
@@ -959,7 +958,7 @@ annual_diff = annual_diff%>%
 ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2014") 
 ```
 <div style="text-align:center">
-  <a id="displayText" href="javascript:toggle(12);">Show Hint</a>
+  <a id="displayText" href="javascript:toggle(12);">Show Answer</a>
 </div>  
   <div id="toggleText12" style="display: none">
 ![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure10.jpeg)
