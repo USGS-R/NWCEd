@@ -14,26 +14,21 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 fig_caption=TRUE
-library(bootstrap)
 ```
-<script>
-  function hidecode(id) {
-    document.getElementById(id).style.display = "none";
-  }
-  
-  function togglecode(id,senderid) {
-    var e=document.getElementById(id);
-    var e2=document.getElementById(senderid);
-    if(e.style.display == 'block') {
-      e.style.display = 'none';
-      e2.innerHTML='Show Answer';
-    } else {
-      e.style.display = 'block';
-      e2.innerHTML='Hide Answer';
-    }
-  }
-
-</script>
+<script language="javascript"> 
+    function toggle(num) {
+      var ele = document.getElementById("toggleText" + num);
+      var text = document.getElementById("displayText" + num);
+      if(ele.style.display == "block") {
+        ele.style.display = "none";
+        text.innerHTML = "show";
+      }
+      else {
+        ele.style.display = "block";
+        text.innerHTML = "hide";
+      }
+   } 
+  </script>
 ## Introduction
 <div style="text-align:justify">
 The United States Geological Survey (USGS) has developed a website called the National Water Census Data Portal (NWC-DP).  This website allows users to access unprecedented amounts of hydrologic data including precipitation, evapotranspiration (**ET**), and stream flow datasets.  Accompanying the available datasets are tools in the portal which can be used to plot and analyze desired datasets associated with delineated watersheds. The tool which will be explored in the following exercise is the Water Budget tool. 
@@ -198,12 +193,10 @@ Hovering the cursor over the plotted data activates a popup which displays infor
 <div style="text-align:justify; clear: left">
 What is a HUC? (_Hint: visit water.usgs.gov/GIS/huc.html_)
 <div style="text-align:left">
-  <a id="codetoggle1" onclick="togglecode('graphcode1','codetoggle1');">Show Answer</a>
+  <a id="displayText" href="javascript:toggle(1);">Show Answer</a>
 </div>
-<div style="text-align:justify; clear: left">
-<code id="graphcode1">
+  <div id="toggleText1" style="display: none">
 "The United States is divided and sub-divided into successively smaller hydrologic units which are classified into four levels: regions, sub-regions, accounting units, and cataloging units. The hydrologic units are arranged or nested within each other, from the largest geographic area (regions) to the smallest geographic area (cataloging units). Each hydrologic unit is identified by a unique hydrologic unit code (HUC) consisting of two to eight digits based on the four levels of classification in the hydrologic unit system." (water.usgs.gov/GIS/huc.html)
-</code>
 </div>
 <br>
 
@@ -212,24 +205,20 @@ What is a HUC? (_Hint: visit water.usgs.gov/GIS/huc.html_)
 
 Using the NWC-DP, find the 12 Digit HUC ID for the HUC that contains Silver City, New Mexico.
 <div style="text-align:left">
-  <a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Answer</a>
+  <a id="displayText" href="javascript:toggle(2);">Show Answer</a>
 </div>
-<div style="text-align:justify; clear: left">
-<code id="graphcode2">
+  <div id="toggleText2" style="display: none">
 130302020203
-</code>
 </div>
 
 <br>
 
 What is the name of the watershed?
 <div style="text-align:left">
-  <a id="codetoggle3" onclick="togglecode('graphcode3','codetoggle3');">Show Answer</a>
+  <a id="displayText" href="javascript:toggle(3);">Show Answer</a>
 </div>
-<div style="text-align:justify; clear: left">
-<code id="graphcode3">
+  <div id="toggleText3" style="display: none">
 Maudes Canyon-San Vicente Draw
-</code>
 </div>
 <br>
 
@@ -238,31 +227,13 @@ Maudes Canyon-San Vicente Draw
 
 What are the units of ET in the raw data associated with the HUC ID from **Problem 2**? (_Hint: Download the ET data and open the dataset in Excel._)
 <div style="text-align:left">
-  <a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Answer</a>
+  <a id="displayText" href="javascript:toggle(4);">Show Answer</a>
 </div>
-<div style="text-align:justify; clear: left">
-<code id="graphcode4">
+  <div id="toggleText4" style="display: none">
 mm/month
-</code>
 </div>
 
-</code>
-</div>
 
 <br>
 <br>
-
-<script>
-  //run this at start up
-  hidecode('graphcode1');
-  hidecode('graphcode2');
-  hidecode('graphcode3');
-  hidecode('graphcode4');
-</script>
-
-
-
-
-
-
-
+<br>

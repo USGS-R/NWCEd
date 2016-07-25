@@ -12,31 +12,28 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 fig_caption=TRUE
-library(bootstrap)
 library(psych)
 library(ggplot2)
 library(NWCEd)
 library(gridExtra)
 library(datasets)
 ```
-<script>
-  function hidecode(id) {
-    document.getElementById(id).style.display = "none";
-  }
-  
-  function togglecode(id,senderid) {
-    var e=document.getElementById(id);
-    var e2=document.getElementById(senderid);
-    if(e.style.display == 'block') {
-      e.style.display = 'none';
-      e2.innerHTML='Show Code';
-    } else {
-      e.style.display = 'block';
-      e2.innerHTML='Hide Code';
-    }
-  }
-
 </script>
+
+<script language="javascript"> 
+    function toggle(num) {
+      var ele = document.getElementById("toggleText" + num);
+      var text = document.getElementById("displayText" + num);
+      if(ele.style.display == "block") {
+        ele.style.display = "none";
+        text.innerHTML = "show";
+      }
+      else {
+        ele.style.display = "block";
+        text.innerHTML = "hide";
+      }
+   } 
+  </script>
 
 ## Introduction
 <div style="text-align:justify">
@@ -105,12 +102,14 @@ With the HUC ID obtained, we are ready to download the data and create our box p
 ggplot(cars, aes("var", speed)) + geom_boxplot(fill = "#E69F00", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("Units") + scale_x_discrete(breaks = NULL) + ggtitle("Example") + annotate("text", x=.8, y=20, label = "3rd Quartile") + annotate("text", x=.8, y=16, label = "Median") + annotate("text", x=.8, y=13, label = "1st Quartile") + annotate("text", x=1.15, y=25, label = "Largest non-outlier value") + annotate("text", x=1.15, y=4.3, label = "Smallest non-outlier value") + annotate("point", x = 1, y = 27, colour = "blue", size = 3) + annotate("point", x = 1, y = 2, colour = "blue", size = 3) + annotate("text", x=1.057, y=27, label = "Outlier") + annotate("text", x=1.057, y=2, label = "Outlier") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 ```
 <div style="text-align:center">
-  <a id="codetoggle1" onclick="togglecode('graphcode1','codetoggle1');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(1);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode1" style="white-space:normal;">
+  <div id="toggleText1" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
+library(ggplot2)
+library(datasets)
 ggplot(cars, aes("var", speed)) + geom_boxplot(fill = "#E69F00", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("Units") + scale_x_discrete(breaks = NULL) + ggtitle("Example") + annotate("text", x=.8, y=20, label = "3rd Quartile") + annotate("text", x=.8, y=16, label = "Median") + annotate("text", x=.8, y=13, label = "1st Quartile") + annotate("text", x=1.15, y=25, label = "Largest non-outlier value") + annotate("text", x=1.15, y=4.3, label = "Smallest non-outlier value") + annotate("point", x = 1, y = 27, colour = "blue", size = 3) + annotate("point", x = 1, y = 2, colour = "blue", size = 3) + annotate("text", x=1.057, y=27, label = "Outlier") + annotate("text", x=1.057, y=2, label = "Outlier") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-</code>
+```
 </div>
 
 <br>
@@ -130,15 +129,17 @@ annualgetetdata <- annualize(getetdata, method = "sum")
 ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
 ```
 <div style="text-align:center">
-  <a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(2);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left;word-wrap: break-word">
-<code id="graphcode2">
+  <div id="toggleText2" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
+library(ggplot2)
+library(NWCEd)
 getdata <- getNWCData(huc="101900030304")
 getetdata <- getdata[[1]]
 annualgetetdata <- annualize(getetdata, method = "sum")
 ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
-</code>
+```
 </div>
 <br>
 ```{r echo=FALSE}
@@ -156,15 +157,17 @@ annualgetprcpdata <- annualize(getprcpdata, method = "sum")
 ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
 ```
 <div style="text-align:center">
-  <a id="codetoggle3" onclick="togglecode('graphcode3','codetoggle3');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(3);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left;word-wrap: break-word">
-<code id="graphcode3">
+  <div id="toggleText3" style="display: none">
+```{r,fig.align='center',out.extra='angle=90',echo=TRUE, eval=FALSE}
+library(ggplot2)
+library(NWCEd)
 getdata <- getNWCData(huc="101900030304")
-getetdata <- getdata[[1]]
-annualgetetdata <- annualize(getetdata, method = "sum")
-ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
-</code>
+getprcpdata <- getdata[[2]]
+annualgetprcpdata <- annualize(getprcpdata, method = "sum")
+ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
+```
 </div>
 <br>
 
@@ -182,14 +185,16 @@ annualprcpgraph <- ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fi
 grid.arrange(annualetgraph, annualprcpgraph, ncol = 2)
 ```
 <div style="text-align:center">
-  <a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(4);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode4">
+  <div id="toggleText4" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
+library(ggplot2)
+library(gridExtra)
 annualetgraph <- ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
 annualprcpgraph <- ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
 grid.arrange(annualetgraph, annualprcpgraph, ncol = 2)
-</code>
+```
 </div>
 
 <br>
@@ -207,15 +212,17 @@ plot(x, hx, type="l", lty=2, xlab="x value",
 
 ```
 <div style="text-align:center">
-  <a id="codetoggle5" onclick="togglecode('graphcode5','codetoggle5');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(5);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode5">
+  <div id="toggleText5" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
 x <- seq(-4, 4, length=100)
 hx <- dnorm(x)
+
 plot(x, hx, type="l", lty=2, xlab="x value",
   ylab="Density", main="Normal Distribution")
-</code>
+
+```
 </div>
 
 <br>
@@ -225,15 +232,17 @@ This is a density plot showing normal distribution.  It is completely symmetrica
 <br>
 
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
+
 ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "black", fill = "forestgreen") + ggtitle("Annual ET Histogram") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
 ```
 <div style="text-align:center">
-  <a id="codetoggle6" onclick="togglecode('graphcode6','codetoggle6');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(6);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode6">
+  <div id="toggleText6" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
+library(ggplot2)
 ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "black", fill = "forestgreen") + ggtitle("Annual ET Histogram") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
-</code>
+```
 </div>
 
 <br>
@@ -245,6 +254,7 @@ Briefly glancing at this histogram, it may be temptimg to say that the graph ind
 <br>
  <!-- This code was used to produce comparative histograms -->
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
+library(ggplot2)
 # Plot of annualethist1 with binwidth = 0.5
 annualethist1 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 0.5, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 0.5") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 # Plot of annualethist2 with binwidth = 1
@@ -258,21 +268,27 @@ annualethist5 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidt
 # Plot of annualethist6 with binwidth = 15
 annualethist6 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 15, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 15") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 grid.arrange(annualethist1, annualethist2, annualethist3, annualethist4, annualethist5, annualethist6, ncol = 2)
-
 ```
 <div style="text-align:center">
-  <a id="codetoggle7" onclick="togglecode('graphcode7','codetoggle7');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(7);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode7">
+  <div id="toggleText7" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
+library(ggplot2)
+# Plot of annualethist1 with binwidth = 0.5
 annualethist1 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 0.5, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 0.5") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+# Plot of annualethist2 with binwidth = 1
 annualethist2 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 1, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 1") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+# Plot of annualethist3 with binwidth = 3
 annualethist3 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 3") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+# Plot of annualethist4 with binwidth = 6
 annualethist4 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 6, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 6") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+# Plot of annualethist5 with binwidth = 10
 annualethist5 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 10, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 10") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+# Plot of annualethist6 with binwidth = 15
 annualethist6 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 15, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 15") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 grid.arrange(annualethist1, annualethist2, annualethist3, annualethist4, annualethist5, annualethist6, ncol = 2)
-</code>
+```
 </div>
 <br>
 
@@ -284,12 +300,13 @@ As you can see, changing the band width can drastically change the appearance of
 ggplot(annualgetetdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 3, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 310.00), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 320.20), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 330.46), color="purple", linetype = "solid", size = 2) + annotate("text", x=312.3, y=-.003, label = "50%") + annotate("text", x=322.5, y=-.003, label = "90%") + annotate("text", x=332.8, y=-.003, label = "99%") + xlab("mm ET") + ylab("Density")
 ```
 <div style="text-align:center">
-  <a id="codetoggle8" onclick="togglecode('graphcode8','codetoggle8');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(8);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode8">
+  <div id="toggleText8" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
+library(ggplot2)
 ggplot(annualgetetdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 3, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 310.00), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 320.20), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 330.46), color="purple", linetype = "solid", size = 2) + annotate("text", x=312.3, y=-.003, label = "50%") + annotate("text", x=322.5, y=-.003, label = "90%") + annotate("text", x=332.8, y=-.003, label = "99%") + xlab("mm ET") + ylab("Density")
-</code>
+```
 </div>
 <br>
 This plot shows a density curve plotted on top of the histogram of the annual ET data.  A vertical red dashed line indicates the median.  As you can see, the hump of the curve is shifted to the right with the tail on the left.  This much more clearly describes the distribution of the data.  The 90th and 99th percentiles have been plotted with vertical orange and purple lines, respectively.  The 90th percentile and 99th percentiles were found to be 320.20 and 330.34 mm ET, respectively.  This means that in a given year for our designated watershed, there is a 10% chance of losing more than 320.2 mm of water to ET and a 1% chance of losing more than 330.46 mm water to ET.  Lets take a look at the density plot for the annual precipitation dataset.
@@ -300,12 +317,13 @@ This plot shows a density curve plotted on top of the histogram of the annual ET
 ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 12, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 378), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 466.80), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 499.96), color="purple", linetype = "solid", size = 2) + annotate("text", x=390.5, y=-.0005, label = "50%") + annotate("text", x=479.5, y=-.0005, label = "90%") + annotate("text", x=512, y=-.0005, label = "99%") + xlab("mm ET") + ylab("Density")
 ```
 <div style="text-align:center">
-  <a id="codetoggle9" onclick="togglecode('graphcode9','codetoggle9');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(9);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left; word-wrap: break-word">
-<code id="graphcode9">
+  <div id="toggleText9" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
+library(ggplot2)
 ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 12, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 378), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 466.80), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 499.96), color="purple", linetype = "solid", size = 2) + annotate("text", x=390.5, y=-.0005, label = "50%") + annotate("text", x=479.5, y=-.0005, label = "90%") + annotate("text", x=512, y=-.0005, label = "99%") + xlab("mm ET") + ylab("Density")
-</code>
+```
 </div>
 <br>
 
@@ -320,12 +338,11 @@ The 50th, 90th, and 99th percentiles for this dataset are 378.00, 466.80, and 49
 <div style="text-align:justify; clear: left">
 * Find the 12-Digit HUC ID for HUC that encompasses Billings, Montana.
 <br>
-<a id="codetoggle1" onclick="togglecode('hint1','codetoggle1');">Hint</a>
+<div style="text-align:left">
+  <a id="displayText" href="javascript:toggle(10);">Show Hint</a>
 </div>
-<div style="text-align:justify; clear: left">
-<code id="hint1">
-![**Figure 1: The NWC-DP homepage.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab3_NWC-DP_Images/Figure4.jpg)
-</code>
+  <div id="toggleText10" style="display: none">
+![**Figure 4: The correct HUC.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab3_NWC-DP_Images/Figure4.JPG)
 </div>
 
 * Download the annual precipitation data for this HUC by copying and pasting the following code into the RStudio console.  Remember to change the HUC ID. 
@@ -341,27 +358,38 @@ annualgetprcpdata <- annualize(getprcpdata, method = "sum")
 ```{r Problem1 box plot, eval=FALSE, echo=T}
 ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
 ```
-<a id="codetoggle1" onclick="togglecode('answer2','codetoggle1');">Answer</a>
+<div style="text-align:left">
+  <a id="displayText" href="javascript:toggle(11);">Show Answer</a>
 </div>
-<div style="text-align:justify; clear: left">
-<code id="answer2">
-  0%   25%   50%   75%  100% 
-<br>
-157.0 254.5 315.0 359.5 443.0 
-</code>
+  <div id="toggleText11" style="display: none">
+```{r,fig.align='center',out.extra='angle=90', echo=FALSE, eval=TRUE}
+# Download and store both the ET and precipitation associated with the HUC ID in "getdata" variable
+getdata <- getNWCData(huc="100700041006")
+# Separates precipitation dataset from ET and stores in "getprcpdata" variable
+getprcpdata <- getdata[[2]]
+# Converts daily precipitation data to annual precipitation and stores in "annualgetprcpdata" variable
+annualgetprcpdata <- annualize(getprcpdata, method = "sum")
+
+ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 100700041006")
+```
+
+```{r quantile code, eval=TRUE, echo=FALSE}
+library(stats)
+annualgetprcpdata <- annualize(getprcpdata, method = "sum")
+quantile(annualgetprcpdata$data)
+```
 </div>
 * Find the 50th, 90th, and 99th **percentile** for the annual precipitation data by copying and pasting the following code into the RStudio console.  _Hint: The "quantile" function used in the code is made available through the "stats" package and is normally installed by default.  If the "stats" library is not installed, copy and paste the following code in the RStudio console: install.packages("stats")_
 ```{r find percentiles code, eval=FALSE, echo=T}
 quantile(annualgetprcpdata$data, prob = c(0.5,0.9,0.99))
 ```
-<a id="codetoggle1" onclick="togglecode('hint2','codetoggle1');">Answer</a>
+<div style="text-align:left">
+  <a id="displayText" href="javascript:toggle(12);">Show Answer</a>
 </div>
-<div style="text-align:justify; clear: left">
-<code id="hint2">
- 50%    90%    99%
-<br>
-315.00 407.20 434.84 
-</code>
+  <div id="toggleText12" style="display: none">
+```{r find percentiles code2, eval=TRUE, echo=FALSE}
+quantile(annualgetprcpdata$data, prob = c(0.5,0.9,0.99))
+```
 </div>
 
 <br>
@@ -379,18 +407,4 @@ ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), 
 <br>
 <br>
 
-<script>
-  //run this at start up
-  hidecode('graphcode1');
-  hidecode('graphcode2');
-  hidecode('graphcode3');
-  hidecode('graphcode4');
-  hidecode('graphcode5');
-  hidecode('graphcode6');
-  hidecode('graphcode7');
-  hidecode('graphcode8');
-  hidecode('graphcode9');
-  hidecode('hint1');
-  hidecode('hint2');
-  hidecode('answer2');
-</script>
+

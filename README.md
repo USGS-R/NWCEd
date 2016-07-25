@@ -1,79 +1,142 @@
 # NWCEd
-Get up and running: 
+
+<br>
+
+## Purpose and Content Overview
+
+The purpose of the NWCEd package is to introduce users to the tools and functionalities of the [National Water Census Data Portal](http://cida.usgs.gov/nwc/) (NWC-DP).  The materials found in the package include custom functions, which allow the user to download hydrologic datasets and HUC information from the NWC-DP.  The materials also include a series of stand-alone labs which instruct users on how to download and analyze NWC-DP datasets numerically and graphically in R.  It is recommended that the labs be used as supplemental material in hydroscience courses at the college level.
+
+<br>
+
+## Getting Started
+
+#### Step 1
+Install and load devtools package in your environment.
 ```{r}
+install.packages("devtools")
 library(devtools)
-install_github("USGS-R/NWCCompare")
-dataOut<-getNWCData(huc="121101110705",local=FALSE)
-summary(dataOut$et)
-summary(dataOut$prcp)
-summary(dataOut$streamflow)
 ```
+#### Step 2
+Install and load NWCEd package in your environment.
+```{r}
+install_github("dblodgett-usgs/NWCEd")
+library(NWCEd)
+```
+#### Step 3
+Install and load the following packages to run in the respective labs using the same process as *Step 1*.
+
++-------------------+---------------------------------------------------------+
+| Lab #             | Package Name                                            |   
++===================+=========================================================+
+| Lab 3             | - "psych"                                               | 
+|                   | - "ggplot2"                                             |
+|                   | - "gridExtra"                                           |
+|                   | - "datasets"                                            |
++-------------------+---------------------------------------------------------+
+| Lab 4             | - "leaflet"                                             | 
+|                   | - "ggplot2"                                             |
+|                   | - "dplyr"                                               |  
+|                   | - "scales"                                              |
+|                   | - "stats"                                               |
++-------------------+---------------------------------------------------------+
+
 
 [![Travis](https://travis-ci.org/dblodgett-usgs/NWCEd.svg?branch=master)](https://travis-ci.org/dblodgett-usgs/NWCEd)
 
-# Package Vignette 
+<br>
 
-Problem statement, how its relevant, example water budget data--example watersheds showing different hydrologic settings.
-Discuss learning objectives and how they relate to the problem statement (expectations of what the user is going to learn)
+   
 
-## Canned examples that illustrate the problem
+<br>
+
+## Learning Objectives
+<div style="text-align:left">
+
+Below is a table which lists the learning objectives for the the lab materials as a whole.  Individual labs may not meet all the learning objectives.  For material description, please see the Materials Description table below.
+
++-------------------+---------------------------------------------------------+
+| Learning Objective| Objective Description                                   |   
++===================+=========================================================+
+| Access            | Learn how to access hydrologic data and associated      | 
+|                   | metadata from the NWC-DP                                |
++-------------------+---------------------------------------------------------+
+| Analyze           | Learn how to analyze NWC-DP data using numerical and    | 
+|                   | graphical methods in R                                  |
++-------------------+---------------------------------------------------------+
+| Communicate       | Practice how to communicate analysis through the use of | 
+|                   | graphs                                                  |
++-------------------+---------------------------------------------------------+
+
+<br>
+
+## Materials Description
+<div style="text-align:left">
+The description of each of the lab materials is provided in the table below as well as a link to each of the respective labs.
+
++---------------+---------------------------------------+--------------------+
+| Lab #         | Material Description                  |        Links       |
++===============+=======================================+====================+
+| Lab 1         | - Accessing and navigating the NWC-DP | [Lab 1](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_1.html)       |
+|               | - NWC-DP Water Budget tool            |                    |
+|               | - Introduction to HUC's               |                    |  
++---------------+---------------------------------------+--------------------+
+| Lab 2         | - Accessing the NWC-DP                | [Lab 2](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_2.html)       |
+|               | - NWC-DP Streamflow Stats tool        |                    |
+|               | - How to download stats results       |                    |
++---------------+---------------------------------------+--------------------+
+| Lab 3         | - Accessing ET/precipitation data     | [Lab 3](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_3.html)       |   
+|               |   from NWC-DP                         |                    |
+|               | - Analysing and plotting box plots,   |                    |
+|               |   histograms, and density curve plots |                    |
+|               |   in R                                |                    |
+|               | - Writing exercises                   |                    |
++---------------+---------------------------------------+--------------------+
+| Lab 4         | - Analyzing time series and bar plots | [Lab 4](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_4.html)       |   
+|               |   in R using NWC-DP data              |                    |
+|               | - Water balances                      |                    |
+|               | - Double-mass balance curve analysis  |                    |
++---------------+---------------------------------------+--------------------+
+| Lab 5         | - Analyzing time series and bar plots | [Lab 5](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_4.html)       |   
+|               |   in R using NWC-DP data              |                    |
+|               | - Water balances                      |                    |
+|               | - Double-mass balance curve analysis  |                    |
++---------------+---------------------------------------+--------------------+
+
+<br>
+
+## Function Names and Descriptions
+<div style="text-align:left">
 
 
-Need function to plot raw time series of water budget data.
-	Will require convert from monthly or daily to annual or longer.
-	
-#### Function1 (Annual Time Series Plot Function)
-    *store a list of values in a variable
-    **convert values to annual 
-    ***check the heading of the column from which the list is being pulled
-    *store a list of respective values in another variable
-    **convert values to annual
-    *function should plot the defined variables
-    **predefined plot size and plot format
++------------------+---------------------------------------------------------+
+| Function Name    | Function Description                                    |   
++==================+=========================================================+
+| getNWCData()     | Downloads hydrologic datasets associated with a         | 
+|                  | user-specified HUC ID                                   |
++------------------+---------------------------------------------------------+
+| getNWCWatershed()| Downloads HUC spacial data for user selected HUC ID     | 
+|                  |                                                         |
++------------------+---------------------------------------------------------+
+| annualize()      | Converts daily time series datasets to annual time      | 
+|                  | series datasets                                         |
++------------------+---------------------------------------------------------+
+| getNWISSite()    | Verifies the information exists for user-selected NWIS  | 
+|                  | gage                                                    |
++------------------+---------------------------------------------------------+
+| getSWECSVBlock() | Accepts a url and returns a data frame of data for that | 
+|                  | SOS request                                             |
++------------------+---------------------------------------------------------+
 
-Link to NWC Portal for more.
+<br>
 
-Additional reading links.
+## Additional Reading Links
 
-# What are approaches to address/understand/solve the problem?
+[Double-Mass Curves](http://pubs.usgs.gov/wsp/1541b/report.pdf)<br>
+[Statistical Methods in Water Resources](http://pubs.usgs.gov/twri/twri4a3/pdf/twri4a3-new.pdf)<br>
+[Daymet Model](https://daymet.ornl.gov/)<br>
+[CIDA USGS THREDDS Data Server](http://cida.usgs.gov/thredds/catalog.html?dataset=cida.usgs.gov/ssebopeta/monthly)
 
-## Static examples that illustrate different ways to think about uncertainty in the data.
-
-Need a way to combine raw water budget data into a 'closed' water budget.
-Need a way to modify time series according to different types of uncertainty and generate plots.
-	End up with a plot showing original data along with adjusted data according to assumed uncertainty.
-	Also show new 'balanced' water budget based on assumed uncertainty.
-
-#### Function2 (Closed Annual Water Budget Plotting Function)	
-	*Function should be modified from function 1
-	**Should convert datasets to annual, plotting size and formats should be the same
-	*function should include user inputs for precip, ET, runoff
-	**function should convert all datasets to annual
-	**function should calculate the closed water budget by adding/subtracting datasets
-	*function should allow user option of inputting in types of uncertainty
-	**uncertainty inputs should be defaulted to none
-	
-## Objectives of the exercise
-
-Determine what the substance of the lesson plan is and summarize. 
-Show how a user could step through a solution.
-
-# Custom Report and Exercise 
-
-User creates their own report. 
-	Will need a function to generate the actual markdown report akin to the Vignette.
-	
-#### Function3 (Markdown Report Function)
-
-  *
-
-## Base case - User's (or a specific chosen) Water Shed Without Changes.
-
-## Come up with a proposed solution or to the base case.
-
-## Compare how their solution compares to the original.
-
-## Justify why their solution makes hydrologic sense.
+<br>
 
 Disclaimer
 ----------
@@ -88,3 +151,7 @@ This software is provided "AS IS."
  [
     ![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)
   ](http://creativecommons.org/publicdomain/zero/1.0/)
+  
+  
+
+  

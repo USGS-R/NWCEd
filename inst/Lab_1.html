@@ -113,24 +113,20 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<script>
-  function hidecode(id) {
-    document.getElementById(id).style.display = "none";
-  }
-  
-  function togglecode(id,senderid) {
-    var e=document.getElementById(id);
-    var e2=document.getElementById(senderid);
-    if(e.style.display == 'block') {
-      e.style.display = 'none';
-      e2.innerHTML='Show Answer';
-    } else {
-      e.style.display = 'block';
-      e2.innerHTML='Hide Answer';
-    }
-  }
-
-</script>
+<script language="javascript"> 
+    function toggle(num) {
+      var ele = document.getElementById("toggleText" + num);
+      var text = document.getElementById("displayText" + num);
+      if(ele.style.display == "block") {
+        ele.style.display = "none";
+        text.innerHTML = "show";
+      }
+      else {
+        ele.style.display = "block";
+        text.innerHTML = "hide";
+      }
+   } 
+  </script>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <div style="text-align:justify">
@@ -324,47 +320,42 @@ The continental United States has been subdivided into 8-digit and 12-digit HUC 
 <div style="text-align:justify; clear: left">
 What is a HUC? (<em>Hint: visit water.usgs.gov/GIS/huc.html</em>)
 <div style="text-align:left">
-<p><a id="codetoggle1" onclick="togglecode('graphcode1','codetoggle1');">Show Answer</a></p>
+<p><a id="displayText" href="javascript:toggle(1);">Show Answer</a></p>
 </div>
-<div style="text-align:justify; clear: left">
-<p><code id="graphcode1"> “The United States is divided and sub-divided into successively smaller hydrologic units which are classified into four levels: regions, sub-regions, accounting units, and cataloging units. The hydrologic units are arranged or nested within each other, from the largest geographic area (regions) to the smallest geographic area (cataloging units). Each hydrologic unit is identified by a unique hydrologic unit code (HUC) consisting of two to eight digits based on the four levels of classification in the hydrologic unit system.” (water.usgs.gov/GIS/huc.html) </code></p>
+<div id="toggleText1" style="display: none">
+<p>“The United States is divided and sub-divided into successively smaller hydrologic units which are classified into four levels: regions, sub-regions, accounting units, and cataloging units. The hydrologic units are arranged or nested within each other, from the largest geographic area (regions) to the smallest geographic area (cataloging units). Each hydrologic unit is identified by a unique hydrologic unit code (HUC) consisting of two to eight digits based on the four levels of classification in the hydrologic unit system.” (water.usgs.gov/GIS/huc.html)</p>
 </div>
 <p><br></p>
-<h4 id="problem-2">Problem 2</h4>
+</div>
+<div id="problem-2" class="section level4">
+<h4>Problem 2</h4>
 Using the NWC-DP, find the 12 Digit HUC ID for the HUC that contains Silver City, New Mexico.
 <div style="text-align:left">
-<p><a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Answer</a></p>
+<p><a id="displayText" href="javascript:toggle(2);">Show Answer</a></p>
 </div>
-<div style="text-align:justify; clear: left">
-<p><code id="graphcode2"> 130302020203 </code></p>
+<div id="toggleText2" style="display: none">
+<p>130302020203</p>
 </div>
 <p><br></p>
 What is the name of the watershed?
 <div style="text-align:left">
-<p><a id="codetoggle3" onclick="togglecode('graphcode3','codetoggle3');">Show Answer</a></p>
+<p><a id="displayText" href="javascript:toggle(3);">Show Answer</a></p>
 </div>
-<div style="text-align:justify; clear: left">
-<p><code id="graphcode3"> Maudes Canyon-San Vicente Draw </code></p>
+<div id="toggleText3" style="display: none">
+<p>Maudes Canyon-San Vicente Draw</p>
 </div>
 <p><br></p>
-<h4 id="problem-3">Problem 3</h4>
+</div>
+<div id="problem-3" class="section level4">
+<h4>Problem 3</h4>
 What are the units of ET in the raw data associated with the HUC ID from <strong>Problem 2</strong>? (<em>Hint: Download the ET data and open the dataset in Excel.</em>)
 <div style="text-align:left">
-<p><a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Answer</a></p>
+<p><a id="displayText" href="javascript:toggle(4);">Show Answer</a></p>
 </div>
-<div style="text-align:justify; clear: left">
-<p><code id="graphcode4"> mm/month </code></p>
+<div id="toggleText4" style="display: none">
+<p>mm/month</p>
 </div>
-<p></code></p>
-</div>
-<p><br> <br></p>
-<script>
-  //run this at start up
-  hidecode('graphcode1');
-  hidecode('graphcode2');
-  hidecode('graphcode3');
-  hidecode('graphcode4');
-</script>
+<p><br> <br> <br></p>
 </div>
 </div>
 

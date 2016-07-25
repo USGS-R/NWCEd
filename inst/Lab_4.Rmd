@@ -11,31 +11,27 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(xlsx)
 library(NWCEd)
 library(leaflet)
 library(ggplot2)
 library(dplyr)
 options(warn = -1)
 ```
-<script>
-  function hidecode(id) {
-    document.getElementById(id).style.display = "none";
-  }
-  
-  function togglecode(id,senderid) {
-    var e=document.getElementById(id);
-    var e2=document.getElementById(senderid);
-    if(e.style.display == 'block') {
-      e.style.display = 'none';
-      e2.innerHTML='Show Code';
-    } else {
-      e.style.display = 'block';
-      e2.innerHTML='Hide Code';
-    }
-  }
 
-</script>
+<script language="javascript"> 
+    function toggle(num) {
+      var ele = document.getElementById("toggleText" + num);
+      var text = document.getElementById("displayText" + num);
+      if(ele.style.display == "block") {
+        ele.style.display = "none";
+        text.innerHTML = "show";
+      }
+      else {
+        ele.style.display = "block";
+        text.innerHTML = "hide";
+      }
+   } 
+  </script>
 
 ## Introduction
 <div style="text-align:justify">
@@ -126,26 +122,28 @@ leaflet() %>%
   addGeoJSON(NWCwatershed, weight = 2, color = "#444444", fill = FALSE)
 ```
 <br>
+
 <div style="text-align:center">
-  <a id="codetoggle1" onclick="togglecode('graphcode1','codetoggle1');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(1);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left">
-<code id="graphcode1" style="white-space: normal;text-align:left;">
+  <div id="toggleText1" style="display: none">
+```{r map watershed code, echo=TRUE, eval=FALSE}
 library(NWCEd)
-<br>library(leaflet)
-<br>huc12<-"160202030505"
-<br>NWCwatershed<-getNWCWatershed(huc="160202030505",local=FALSE)
-<br>coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]  
-<!-- Break -->
+library(leaflet)
+# Enter the huc12 to be analyzed like this:
+huc12<-"160202030505"
+NWCwatershed<-getNWCWatershed(huc="160202030505",local=FALSE)
+coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
 coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
-<!-- Break -->
 names(coords)<-c('lon','lat')
+
 leaflet() %>%
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
   addTiles() %>% 
   addGeoJSON(NWCwatershed, weight = 2, color = "#444444", fill = FALSE)
-</code>
-</div>
+```
+  </div>
+
 
 <br>
 
@@ -194,35 +192,44 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 ```
 
 <div style="text-align:center">
-  <a id="codetoggle2" onclick="togglecode('graphcode2','codetoggle2');">Show Code</a>
+  <a id="displayText" href="javascript:toggle(2);">Show Code</a>
 </div>
-<div style="text-align:justify; clear: left;">
-<code id="graphcode2" style="white-space: normal;text-align:left;">
-<br>library(ggplot2)
-<br>library(NWCEd)
-<br>huc12<-"160202030505"
-<br>NWCdata<-getNWCData(huc=huc12)
-<br>annual_dataet<-annualize(NWCdata$et, method=sum)
-<br>annual_dataet$group<-'ET'
-<br>annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
-<br>annual_dataprcp$group<-'P'
-<br>annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
-<br>annual_diff<-as.data.frame(annual_union$data.y - annual_union$data.x)
-<br>names(annual_diff) = c('data')
-<br>annual_diff$group<-'diff'
-<br>annual_diff$year<-annual_union$year
-<br>library(scales)
-<br>library(ggplot2)
-<br>require(stats)
-<br>plotData<-rbind(annual_dataet,annual_dataprcp,annual_diff)
-<br>ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+  <div id="toggleText2" style="display: none">
+```{r data setup code, echo=TRUE, eval=FALSE}
+# Load required libraries.
+library(ggplot2)
+library(NWCEd)
+library(scales)
+library(stats)
+# Super basic plot of precip and et.
+NWCdata<-getNWCData(huc=huc12)
+# annualize et data.
+annual_dataet<-annualize(NWCdata$et, method=sum)
+# Add a group attribute to all et data.
+annual_dataet$group<-'ET'
+# Annualize prcp data.
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+# Add a group attribute to all prcp data.
+annual_dataprcp$group<-'P'
+# Merge prcp and et together.
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+# Create a difference variable.
+annual_diff<-as.data.frame(annual_union$data.y - annual_union$data.x)
+# Give the difference data a name.
+names(annual_diff) = c('data')
+# Add the difference data to a group.
+annual_diff$group<-'diff'
+# Add the same year data to the difference data.
+annual_diff$year<-annual_union$year
+
+plotData<-rbind(annual_dataet,annual_dataprcp,annual_diff)
+ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
   scale_x_discrete(name = "year") + ylab("mm") + 
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Difference Between Precipitation and ET", colour = "Explanation") +
   theme(legend.position = c(0.91, 0.83)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
-</code>
-</div>
-
+```
+  </div>
 <br>
 
 From the graph, we see the precipitation data in red, the ET data under the precipitation line in green, and the difference of the two datasets in maroon below the ET line.  As the graph shows, there is only ET data available from the year 2000 through 2014 in our dataset.  How does the precipitation line look in comparison to the ET line?  Which shows more variation from year to year?  Regarding precipitation, what years stick out to you?  Does there appear to be any patterns?  Could global climate variability be evidenced in the precipitation dataset?
@@ -286,39 +293,38 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
   scale_color_manual(values=c("#990066", "#339966", "#FF0000", "#3300FF"))
 ```
 <div style="text-align:center">
-  <a id="codetoggle3" onclick="togglecode('graphcode3','codetoggle3');">Show Code</a>
-</div>
-<div style="text-align:justify; clear: left;">
-<code id="graphcode3" style="white-space: normal;">
-<br>library(NWCEd)
-<br>library(ggplot2)
-<br>NWCdata<-getNWCData(huc="031501070601", local = FALSE)
-<br>NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
-<br>areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
-<br>NWCdata$et$data<-NWCdata$et$data*0.0032808
-<br>annual_dataet<-annualize(NWCdata$et, method=sum)
-<br>annual_dataet$group<-'ET'
-<br>NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
-<br>annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
-<br>annual_dataprcp$group<-'P'
-<br>NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
-<br>annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
-<br>annual_datastrf$group<-'Q'
-<br>annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
-<br>annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
-<br>names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
-<br>annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
-<br>names(annual_diff) = c('data')
-<br>annual_diff$group<-'diff'
-<br>annual_diff$year<-annual_union$year
-<br>plotData<-rbind(annual_dataet,annual_dataprcp,annual_datastrf,annual_diff)
-<br>ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
+  <a id="displayText" href="javascript:toggle(3);">Show Code</a>
+</div>  
+  <div id="toggleText3" style="display: none">
+```{r waterbalance plot code, echo=TRUE, eval=FALSE }
+NWCdata<-getNWCData(huc="031501070601", local = FALSE)
+NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
+areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
+NWCdata$et$data<-NWCdata$et$data*0.0032808
+annual_dataet<-annualize(NWCdata$et, method=sum)
+annual_dataet$group<-'ET'
+NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+annual_dataprcp$group<-'P'
+NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
+annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
+annual_datastrf$group<-'Q'
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
+names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
+annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
+names(annual_diff) = c('data')
+annual_diff$group<-'diff'
+annual_diff$year<-annual_union$year
+plotData<-rbind(annual_dataet,annual_dataprcp,annual_datastrf,annual_diff)
+
+ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
   scale_x_discrete(name = "year") + ylab("ft") +
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Basic Diff Plot", colour = "Explanation") +
   scale_color_manual(values=c("#990066", "#339966", "#FF0000", "#3300FF"))
-</code>
-</div>
+```  
+ </div> 
 <br>
 
 Precipitation, ET, streamflow, and the difference are marked in red, green, blue, and maroon, respectively.  The diff line represents the leftover preciptiation after ET and streamflow have been subtracted from the original precipitation.  The diff line includes water stored in the ground through percolation and in lakes and reservoirs within the system boundaries.  Look at the diff line on the plot above.  What years experienced positive storage?  What years experienced negative storage?  This may be a little bit difficult to read.  Lets take a look at a different plot which shows the storage for the same location.
@@ -352,37 +358,39 @@ annual_diff = annual_diff%>%
 
 ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2010") 
 ```
-
 <div style="text-align:center">
-  <a id="codetoggle4" onclick="togglecode('graphcode4','codetoggle4');">Show Code</a>
-</div>
-<div style="text-align:justify; clear: left;">
-<code id="graphcode4" style="white-space: normal;">
-<br>library(dplyr)
-<br>NWCdata<-getNWCData(huc="031501070601", local = FALSE)
-<br>NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
-<br>areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
-<br>NWCdata$et$data<-NWCdata$et$data*0.0032808
-<br>annual_dataet<-annualize(NWCdata$et, method=sum)
-<br>annual_dataet$group<-'ET'
-<br>NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
-<br>annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
-<br>annual_dataprcp$group<-'P'
-<br>NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
-<br>annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
-<br>annual_datastrf$group<-'Q'
-<br>annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
-<br>annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
-<br>names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
-<br>annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
-<br>names(annual_diff) = c('data')
-<br>annual_diff$group<-'diff'
-<br>annual_diff$year<-annual_union$year
-<br>annual_diff = annual_diff%>%
-  <br>mutate(pos = data >= 0)
-<br>ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2010") 
-</code>
-</div>
+  <a id="displayText" href="javascript:toggle(4);">Show Code</a>
+</div>  
+  <div id="toggleText4" style="display: none">
+```{r storage barplot code, echo=TRUE, eval=FALSE}
+library(dplyr)
+NWCdata<-getNWCData(huc="031501070601", local = FALSE)
+NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
+areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
+NWCdata$et$data<-NWCdata$et$data*0.0032808
+annual_dataet<-annualize(NWCdata$et, method=sum)
+annual_dataet$group<-'ET'
+NWCdata$prcp$data<-NWCdata$prcp$data*0.0032808
+annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
+annual_dataprcp$group<-'P'
+NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
+annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
+annual_datastrf$group<-'Q'
+annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
+annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
+names(annual_union)<-c("year","ET","groupET","P","groupP","Q","groupQ")
+annual_diff<-as.data.frame(annual_union$P - annual_union$ET - annual_union$Q)
+names(annual_diff) = c('data')
+annual_diff$group<-'diff'
+annual_diff$year<-annual_union$year
+
+annual_diff = annual_diff%>%
+  mutate(pos = data >= 0)
+
+ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2010") 
+``` 
+ </div>
+ 
 <br>
 
 This bar graph makes it very easy to see which years had positive storage and which years had negative storage.  If we are assuming that the law of conservation of mass applies to water balances, how can we have negative storage?  We must remember that negative storage for our time series simply means that there is no water being stored.  In our case, there is water being pulled out of storage.  Where are possible locations for water to be stored within this HUC?  Using the same methods as described in **Step 2** zoom in and look for possible storage places within the system.
@@ -415,25 +423,27 @@ leaflet() %>%
 ```
 <br>
 <div style="text-align:center">
-  <a id="codetoggle5" onclick="togglecode('graphcode5','codetoggle5');">Show Code</a>
-</div>
-<div style="text-align:justify; clear: left;">
-<code id="graphcode5" style="white-space: normal;">
-<br>huc12<-"031601090601"
-<br>library(NWCEd)
-<br>library(leaflet)
-<br>NWCwatershed<-getNWCWatershed(huc=huc12,local=FALSE)
-<br>coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
-<br>coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
-<br>names(coords)<-c('lon','lat')
-<br>leaflet() %>% 
+  <a id="displayText" href="javascript:toggle(5);">Show Code</a>
+</div>  
+  <div id="toggleText5" style="display: none">
+```{r jasperhuc map watershed code, echo=TRUE, eval=FALSE}
+library(NWCEd)
+library(leaflet)
+# Enter the huc12 to be analyzed like this:
+huc12<-"031601090601"
+# Get watershed geometry and put it on a map.
+NWCwatershed<-getNWCWatershed(huc=huc12,local=FALSE)
+coords<-NWCwatershed$features[[1]]$geometry$coordinates[[1]][[1]]
+coords<-as.data.frame(matrix(unlist(coords),nrow=length(coords),byrow = T))
+names(coords)<-c('lon','lat')
+leaflet() %>% 
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
   addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}") %>%
   addWMSTiles(baseUrl = "http://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
               options = WMSTileOptions(format = "image/png", transparent = TRUE, opacity = 1),                attribution = "Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012") %>% 
   addGeoJSON(NWCwatershed, weight = 5, color = "#ff7800", fill = FALSE)
-</code>
-</div>
+```  
+  </div>
 <br>
 
 Storage is mainly comprised of ground water, although additional storage areas can include lakes and rivers.
@@ -543,38 +553,57 @@ ggplot(plot4, aes(x=x, y=y)) + geom_smooth(data = plotsegment, color = "blue") +
 
 ```
 <div style="text-align:center">
-  <a id="codetoggle6" onclick="togglecode('graphcode6','codetoggle6');">Show Code</a>
-</div>
-<div style="text-align:justify; clear: left;">
-<code id="graphcode6" style="white-space: normal;">
+  <a id="displayText" href="javascript:toggle(6);">Show Code</a>
+</div>  
+  <div id="toggleText6" style="display: none">
+```{r double-mass plot 2 code, echo=TRUE, eval=FALSE}
+
+# Download data from NWC-DP for HUC# 150601060306
 NWCdata<-getNWCData(huc="150601060306", local = FALSE)
+# Assign NWCdataprcp variable the precipitation dataset 
 NWCdataprcp1<-NWCdata$prcp
+# Convert units from mm to inches
 NWCdataprcp1$data<-NWCdataprcp1$data*.0393701
+# Convert data from daily to annual precipitation
 NWCdataprcpsumannual1<-annualize(NWCdataprcp1, method = sum)
+# Cumulates annual precipitation data for the site
 NWcdataprcpsumannualcum1<-cumsum(NWCdataprcpsumannual1$data)
+
+# Repeat previous steps for next three HUC#
 NWCdata<-getNWCData(huc="150701020908", local = FALSE)
 NWCdataprcp2<-NWCdata$prcp
 NWCdataprcp2$data<-NWCdataprcp2$data*.0393701
 NWCdataprcpsumannual2<-annualize(NWCdataprcp2, method = sum)
 NWcdataprcpsumannualcum2<-cumsum(NWCdataprcpsumannual2$data)
+
 NWCdata<-getNWCData(huc="150601060305", local = FALSE)
 NWCdataprcp3<-NWCdata$prcp
 NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
+
+# Read in manually altered dataset
 csv_data<-download.file("https://rawgit.com/jnelson7/NWCEd/43da87970865520fa698640f726e8762b348e95c/inst/extdata/doublemassplot2sheet1.csv", quiet = TRUE, destfile = './doublemassplot2sheet1.csv')
 NWCdataprcpsumannual4<-read.csv('./doublemassplot2sheet1.csv')
+
 csv_data2<-download.file("https://rawgit.com/jnelson7/NWCEd/43da87970865520fa698640f726e8762b348e95c/inst/extdata/doublemassplot2sheet2.csv", quiet = TRUE, destfile = './doublemassplot2sheet2.csv')
+
 NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
+# Averaging the annual precipitation for the 4 sites
 annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
+# Cumulates the averaged annual precipitation for the 4 sites
 annualaveragecum<-cumsum(annualaverage)
+# Creates a dataframe with mean cumulative annual precipitation and the cumulative annual precipitation for the first HUC
 plot4<-data.frame(x = annualaveragecum, y = NWcdataprcpsumannualcum4)
+# Separates dataset at the curve break
 plotsegment<-plot4[c(1:17),]
 plotsegment2<-plot4[c(17:35),]
+# Plots the newly created dataframe
 ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="blue") + xlab("Mean Cumulative Precipitation (inches) ") + ylab("Cumulative Precipitation for HUC# 031601090601 (inches)") + ggtitle("Hypothetical HUC near Phoenix, AZ") + theme(panel.background = element_rect(fill = "grey75")) + annotate("text", x=365, y=175, label = "Break in Curve", size = 4) 
 ggplot(plot4, aes(x=x, y=y)) + geom_smooth(data = plotsegment, color = "blue") + geom_smooth(data = plotsegment2, color = "yellow") + annotate("text", x=365, y=175, label = "Break in Curve", size = 4) + theme(panel.background = element_rect(fill = "grey75")) + xlab("Mean Cumulative Precipitation (inches) ") + ylab("Cumulative Precipitation for HUC# 031601090601 (inches)") + ggtitle("Hypothetical HUC near Phoenix, AZ")
-</code>
-</div>
+
+``` 
+  </div>
 <br>
 
 We would expect the data points to plot in a linear fashion.  However, when we look at this double-mass curve, we can clearly see a break in the curve.  If we were to do some research on this hypothetical rain gage, we would find that development occured in close proximity to the gage.  A sprinkler system was installed and the gage was collecting additional readings when the sprinklers were running.  We are needing to adjust our data to reflect the natural conditions without the sprinklers.  To do this, we can multiply the "bad" data by the ratio of the slope of the "good" data.  We can use the following equation to help us adjust our data:
@@ -643,34 +672,55 @@ plot4<-data.frame(x = annualaveragecum, y = NWcdataprcpsumannualcum4)
 ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="green") + xlab("Mean Cumulative Precipitation (inches) ") + ylab("Cumulative Precipitation for HUC# 031601090601 (inches)") + ggtitle("Hypothetical HUC near Phoenix, AZ") + theme(panel.background = element_rect(fill = "grey75")) + geom_smooth(data = plotsegment , color="blue") + geom_smooth(data = plotsegment2, color="yellow")
 ```
 <div style="text-align:center">
-  <a id="codetoggle7" onclick="togglecode('graphcode7','codetoggle7');">Show Code</a>
-</div>
-<div style="text-align:justify; clear: left;">
-<code id="graphcode7" style="white-space: normal;">
+  <a id="displayText" href="javascript:toggle(7);">Show Code</a>
+</div>  
+  <div id="toggleText7" style="display: none">
+```{r corrected vs uncorrected code , echo=TRUE, eval=FALSE}
+# Download data from NWC-DP for HUC# 150601060306
 NWCdata<-getNWCData(huc="150601060306", local = FALSE)
+# Assign NWCdataprcp variable the precipitation dataset 
 NWCdataprcp1<-NWCdata$prcp
+# Convert units from mm to inches
 NWCdataprcp1$data<-NWCdataprcp1$data*.0393701
+# Convert data from daily to annual precipitation
 NWCdataprcpsumannual1<-annualize(NWCdataprcp1, method = sum)
+# Cumulates annual precipitation data for the site
 NWcdataprcpsumannualcum1<-cumsum(NWCdataprcpsumannual1$data)
+
+# Repeat previous steps for next three HUC#
+
 NWCdata<-getNWCData(huc="150701020908", local = FALSE)
 NWCdataprcp2<-NWCdata$prcp
 NWCdataprcp2$data<-NWCdataprcp2$data*.0393701
 NWCdataprcpsumannual2<-annualize(NWCdataprcp2, method = sum)
 NWcdataprcpsumannualcum2<-cumsum(NWCdataprcpsumannual2$data)
+
 NWCdata<-getNWCData(huc="150601060305", local = FALSE)
 NWCdataprcp3<-NWCdata$prcp
 NWCdataprcp3$data<-NWCdataprcp3$data*.0393701
 NWCdataprcpsumannual3<-annualize(NWCdataprcp3, method = sum)
 NWcdataprcpsumannualcum3<-cumsum(NWCdataprcpsumannual3$data)
-NWCdataprcpsumannual4<-read.csv('./doublemassplot2sheet2.csv')
-NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
-annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
-annualaveragecum<-cumsum(annualaverage)
-plot4<-data.frame(x = annualaveragecum, y = NWcdataprcpsumannualcum4)
-ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="green") + xlab("Mean Cumulative Precipitation (inches) ") + ylab("Cumulative Precipitation for HUC# 031601090601 (inches)") + ggtitle("Hypothetical HUC near Phoenix, AZ") + theme(panel.background = element_rect(fill = "grey75")) + geom_smooth(data = plotsegment , color="blue") + geom_smooth(data = plotsegment2, color="yellow")
-</code>
-</div>
 
+# Read in manually altered dataset 
+
+NWCdataprcpsumannual4<-read.csv('./doublemassplot2sheet2.csv')
+
+NWcdataprcpsumannualcum4<-cumsum(NWCdataprcpsumannual4$data)
+
+# Averaging the annual precipitation for the 4 sites
+annualaverage <- (NWCdataprcpsumannual1$data + NWCdataprcpsumannual2$data + NWCdataprcpsumannual3$data + NWCdataprcpsumannual4$data)/4
+
+# Cumulates the averaged annual precipitation for the 4 sites
+annualaveragecum<-cumsum(annualaverage)
+
+# Creates a dataframe with mean cumulative annual precipitation and the cumulative annual precipitation for the first HUC
+
+plot4<-data.frame(x = annualaveragecum, y = NWcdataprcpsumannualcum4)
+
+# Plots the newly created dataframe
+ggplot(plot4, aes(x=x, y=y)) + geom_point() + geom_smooth(color="green") + xlab("Mean Cumulative Precipitation (inches) ") + ylab("Cumulative Precipitation for HUC# 031601090601 (inches)") + ggtitle("Hypothetical HUC near Phoenix, AZ") + theme(panel.background = element_rect(fill = "grey75")) + geom_smooth(data = plotsegment , color="blue") + geom_smooth(data = plotsegment2, color="yellow")
+```
+  </div>
 <br>
 
 ```{r corrected vs uncorrected and diff plot, echo=FALSE}
@@ -716,41 +766,52 @@ ggplot(bounddata, aes(x=year, y=data, group=group,colour = group)) +  geom_line(
   theme(legend.position = c(0.10, 0.83)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
 ```
 <div style="text-align:center">
-  <a id="codetoggle8" onclick="togglecode('graphcode8','codetoggle8');">Show Code</a>
-</div>
-<div style="text-align:justify; clear: left;">
-<code id="graphcode8" style="white-space: normal;">
+  <a id="displayText" href="javascript:toggle(8);">Show Code</a>
+</div>  
+  <div id="toggleText8" style="display: none">
+```{r corrected vs uncorrected and diff plot code, echo=TRUE, eval=FALSE}
 library(scales)
 library(ggplot2)
+
 correcteddata<- read.csv('./doublemassplot2sheet2.csv')
+
 uncorrecteddata<- read.csv('./doublemassplot2sheet1.csv')
+
 file.remove('./doublemassplot2sheet1.csv')
 file.remove('./doublemassplot2sheet2.csv')
+
 correcteddata$group<-'Corrected'
 drops<-c("NA.")
 correcteddata<- correcteddata[,!(names(correcteddata) %in% drops)]
 correcteddata<-subset(correcteddata, select = -c(X))
+
 uncorrecteddata$group<-'Uncorrected'
 drops<-c("NA.")
 uncorrecteddata<- uncorrecteddata[,!(names(uncorrecteddata) %in% drops)]
 uncorrecteddata<-subset(uncorrecteddata, select = -c(X))
+
+
 datamerge<-merge(correcteddata,uncorrecteddata,by.x = "year",by.y = "year")
 datadiff<-as.data.frame(datamerge$data.y-datamerge$data.x)
 datadiff$year<-datamerge$year
 names(datadiff) = c('data')
 names(datadiff[[2]]) = c('year')
+
 datadiff$group<-'Difference'
+
 colnames(datadiff)<-c("data","year","group")
 datadiff<-datadiff[,c(2,1,3)]
+
+
 bounddata<-rbind(datadiff,correcteddata,uncorrecteddata)
+
 ggplot(bounddata, aes(x=year, y=data, group=group,colour = group)) +  geom_line() +
   scale_x_discrete(name = "year") + ylab("inches") + 
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Difference Between Precipitation and ET", colour = "Explanation") +
   theme(legend.position = c(0.10, 0.83)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
-</code>
-</div>
-
+``` 
+  </div>
 <br>
 As you can clearly see, not correcting the data would result in values that are substantially higher than expected.  What water management problems might occur if the uncorrected data was used in planning?
 <br>
@@ -773,22 +834,16 @@ Describe what a bar graph, time series graph, and double-mass curve are and expl
 <div style="text-align:justify; clear: left">
 * Find the 12-Digit HUC ID for HUC that encompasses Gunnison National Forest in Colorado.
 <br>
-<a id="codetoggle1" onclick="togglecode('hint1','codetoggle1');">Hint</a>
-</div>
-<div style="text-align:justify; clear: left">
-<code id="hint1">
+ <a id="displayText" href="javascript:toggle(9);">Show Hint</a>
+  <div id="toggleText9" style="display: none">
 Search for "Callow Creek CO" and select "Callow Creek CO Mesa County"
 ![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure7.JPG)
-</code>
 </div>
 * Verify the selected 12-Digit HUC contains streamflow data.
 <br>
-<a id="codetoggle1" onclick="togglecode('hint2','codetoggle1');">Hint</a>
-</div>
-<div style="text-align:justify; clear: left">
-<code id="hint2">
+  <a id="displayText" href="javascript:toggle(10);">Show Hint</a>
+  <div id="toggleText10" style="display: none">
 ![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure8.JPG)
-</code>
 </div>
 * Plot an annual time series graph for the selected HUC which shows ET, precipitation, and runoff datasets in R using the code block below.  _Hint: make sure and change the HUC ID in the second and third lines of code.  Update the title of the plot at the bottom of the code block._  Look at the ET line.  How do you explain the two major low points?  Research the site including weather events dating back to 1980.  Can you find any information that could help support the graph you have produced?
 ```{r Problem 2 plot, echo=TRUE, eval=FALSE }
@@ -843,12 +898,10 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
   scale_color_manual(values=c("#990066", "#339966", "#FF0000", "#3300FF"))
 ```
 <div style="text-align:center">
-<a id="codetoggle9" onclick="togglecode('answer1','codetoggle9');">Answer</a>
-</div>
-<div style="text-align:justify; clear: left">
-<code id="answer1">
+  <a id="displayText" href="javascript:toggle(11);">Show Answer</a>
+</div>  
+  <div id="toggleText11" style="display: none">
 ![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure9.jpeg)
-</code>
 </div>
 <br>
 
@@ -905,30 +958,13 @@ annual_diff = annual_diff%>%
 ggplot(annual_diff, aes(x=year, y=data, fill=pos)) + geom_bar(stat='identity', position = 'identity', color='black', size=0.25)+ scale_fill_manual(values=c('#FFDDDD','#CCEEFF'), guide = FALSE) + xlab("Year") + ylab("Annual Storage (ft)") + ggtitle("Annual Storage from 2000 to 2014") 
 ```
 <div style="text-align:center">
-<a id="codetoggle1" onclick="togglecode('answer2','codetoggle1');">Answer</a>
-</div>
-<div style="text-align:justify; clear: left">
-<code id="answer2">
+  <a id="displayText" href="javascript:toggle(12);">Show Answer</a>
+</div>  
+  <div id="toggleText12" style="display: none">
 ![](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure10.jpeg)
-</code>
 </div>
 
 <br>
 <br>
 
-<script>
-  //run this at start up
-  hidecode('graphcode1');
-  hidecode('graphcode2');
-  hidecode('graphcode3');
-  hidecode('graphcode4');
-  hidecode('graphcode5');
-  hidecode('graphcode6');
-  hidecode('graphcode7');
-  hidecode('graphcode8');
-  hidecode('hint1');
-  hidecode('hint2');
-  hidecode('answer1');
-  hidecode('answer2');
-</script>
 
