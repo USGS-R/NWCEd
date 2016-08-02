@@ -1,28 +1,57 @@
 ---
-title: "Lab_5"
+title: "Lab 5: Log-Pearson Type III Analysis"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(iterators)
+library(foreach)
+library(NWCEd)
+library(ggplot2)
 ```
 
-## R Markdown
+<script language="javascript"> 
+    function toggle(num) {
+      var ele = document.getElementById("toggleText" + num);
+      var text = document.getElementById("displayText" + num);
+      if(ele.style.display == "block") {
+        ele.style.display = "none";
+        text.innerHTML = "show";
+      }
+      else {
+        ele.style.display = "block";
+        text.innerHTML = "hide";
+      }
+   } 
+  </script>
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Introduction
+<div style="text-align:justify">
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+</div>
 
-```{r cars}
-summary(cars)
-```
+## Important Questions to Ask Yourself
 
-## Including Plots
+1. What information is contained in a time series plot?
+2. How do I interpret the quality of a dataset using a box plot?
+3. Who is the intended audience I am trying to communicate information with?
 
-You can also embed plots, for example:
+## Useful Terms and Acronyms
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+Term               | Defintion
+----------------   | ---------------------------------------------------
+Time Series        | A series of values obtained at successive times
+NWIS               | National Water Information System
+Area Weighted Mean | The sum of area-weighted values divided by the total area
+Water Balance      | A method used to account for water flowing in and out of a system
+Double-Mass Curve  | A graphical method used to study consistency and trends in data
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Exercise 1 
+
+<br>
+
+#### Step 1
+<div style="text-align:justify">
+In this exercise we will learn how to obtain an HUC ID from the National Water Cenus Data-Portal (NWC-DP).  For this lab we will need to download runoff data in addition to the ET and precipitation data which requires slightly different steps from those shown in **Lab 3**.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
+</div>
