@@ -1,4 +1,4 @@
-#' Lp3 function
+#' PrecipLp3 function
 #'
 #' @param Cs
 #' @param k1
@@ -15,7 +15,7 @@
 #' @importFrom ggplot2
 #' @examples
 
-Lp3<-function(Cs,k1,k2,k3,k4,k5,k6,k7,k8){
+PrecipLp3<-function(Cs,k1,k2,k3,k4,k5,k6,k7,k8){
 
 test2$prcp<-na.omit(test2$prcp)
 
