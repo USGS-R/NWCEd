@@ -1,25 +1,20 @@
 #' Lp3 function
 #'
-#' @param Cs
-#' @param k1
-#' @param k2
-#' @param k3
-#' @param k4
-#' @param k5
-#' @param k6
-#' @param k7
-#' @param k8
+#' @param inputData
+#' @param datatype
 #'
-#' @return printout of skew coefficient
+#' @return printout of skew coefficients
 #' @export
-#' @importFrom ggplot2
+#' @importFrom foreach
 #' @examples
 
-Lp3<-function(Cs,k1,k2,k3,k4,k5,k6,k7,k8){
+Lp3<-function(inputData,datatype) {
+print(datatype)
+if (datatype == "prcp"){
 
-test2$prcp<-na.omit(test2$prcp)
-
-dates<-c(test2$prcp$date)
+  inputData$prcp<-na.omit(inputData$prcp)
+  inputData$prcp$data<-inputData$prcp$data*0.0393701
+dates<-c(inputData$prcp$date)
 
 wtr_yr <- function(dates, start_month=9) {
   # Convert dates into POSIXlt
@@ -32,7 +27,7 @@ wtr_yr <- function(dates, start_month=9) {
   adj.year
 }
 # Setting up the data
-df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),test2$prcp$data)
+df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),inputData$prcp$data)
 
 split(df, df$wtr_yr)
 df$dates<-NULL
@@ -46,105 +41,304 @@ variables = 1
 
 MAX<- matrix(ncol=variables, nrow = iterations)
   foreach (i=iter(test5,by="row")) %do%{
-    a<-max(i$test2.prcp.data)
+    a<-max(i$inputData.prcp.data)
     MAX<-c(MAX,a)
   }
 MAX<-na.omit(MAX)
+print(MAX)
 MAX<-data.frame(MAX)
+print(MAX)
 MAX$MAX<-MAX$MAX[order(-MAX$MAX)]
+print(MAX$MAX)
 
 n = nrow(MAX)
+print(n)
 
 RankMax = c(1:n)
+print(RankMax)
 
 # Finding Log(max)
-
-
 LoggedMax<-matrix(ncol = variables, nrow = iterations)
   foreach (i=iter(MAX,by="row")) %do%{
-    a<-log(i)
-    LoggedMax<-c(LoggedMax,a)
-  }
-LoggedMax<-na.omit(LoggedMax)
-LoggedMax<-data.frame(LoggedMax)
+    a<-log10(i[1])
+    LoggedMax<-c(LoggedMax,a)}
+  print(LoggedMax)
+  LoggedMax<-na.omit(LoggedMax)
+  print(LoggedMax)
+  LoggedMax<-data.frame(LoggedMax)
+  print(LoggedMax)
 
 # Finding the averages of the Max and log values
 AverageMax<-mean(MAX$MAX)
+print(AverageMax)
 AverageLog<-mean(LoggedMax$LoggedMax)
+print(AverageLog)
 
 # {(loggedMax-mean(loggedMax))^2}
-
-
 SquareDiff<-matrix(ncol = variables, nrow = iterations)
 foreach (i=iter(LoggedMax,by="row")) %do%{
-  a<-((i-AverageLog)^2)
+  a<-((i[1]-AverageLog)^2)
   SquareDiff<-c(SquareDiff,a)
 }
 SquareDiff<-na.omit(SquareDiff)
 SquareDiff<-data.frame(SquareDiff)
+print(SquareDiff)
 
 # {(loggedMax-mean(loggedMax))^3}
-
 CubeDiff<-matrix(ncol = variables, nrow = iterations)
 foreach (i=iter(LoggedMax,by="row")) %do%{
-  a<-((i-AverageLog)^3)
+  a<-((i[1]-AverageLog)^3)
   CubeDiff<-c(CubeDiff,a)
 }
 CubeDiff<-na.omit(CubeDiff)
 CubeDiff<-data.frame(CubeDiff)
+print(CubeDiff)
 
 # Return Period {(n+1)/m}
-
 ReturnPeriod<-matrix(ncol = variables, nrow = iterations)
 foreach (i=iter(RankMax,by="row")) %do%{
-  a<-((n+1)/i)
+  a<-((n+1)/i[1])
   ReturnPeriod<-c(ReturnPeriod,a)
 }
 ReturnPeriod<-na.omit(ReturnPeriod)
 ReturnPeriod<-data.frame(ReturnPeriod)
+print(ReturnPeriod)
 
 # 1/Return Period
-
 inverseReturnPeriod<-matrix(ncol = variables, nrow = iterations)
 foreach (i=iter(ReturnPeriod,by="row")) %do%{
-  a<-(1/i)
+  a<-(1/i[1])
   inverseReturnPeriod<-c(inverseReturnPeriod,a)
 }
 inverseReturnPeriod<-na.omit(inverseReturnPeriod)
 inverseReturnPeriod<-data.frame(inverseReturnPeriod)
+print(inverseReturnPeriod)
 
 SumSquareDiff<-sum(SquareDiff$SquareDiff)
-SumCubeDiff<-sum(CubeDiff)
+print(SumSquareDiff)
+
+SumCubeDiff<-sum(CubeDiff$CubeDiff)
+print(SumCubeDiff)
 
 Variance <- (SumSquareDiff/(n-1))
+print(Variance)
+
 StandardDeviation <- sqrt(Variance)
-Ck <- Cs
+print(StandardDeviation)
 
+# adds column of Skew factors to log-Pearson Type III Distributions table (Haan,1977,Table 7.7)
+Cs <- n*SumCubeDiff/((n-1)*(n-2)*StandardDeviation^3)
+Cs<-round(Cs,digits=1)
+print(Cs)
+Cs2<-rep(Cs,61)
+
+# matches skew coefficients and extracts frequency factors from same row
+frequencyfactors<-read.csv('./Frequency_Factors_Log_Pearson_Type_III.csv')
+print(frequencyfactors)
+frequencyfactors<-merge(frequencyfactors,Cs2)
+print(frequencyfactors)
+frequencyfactors<-frequencyfactors[-c(62:3721),]
+print(frequencyfactors)
+frequencyfactors<-frequencyfactors[frequencyfactors$Cs1 == frequencyfactors$y, ]
+print(frequencyfactors)
+frequencyfactors$Cs1<-NULL
+print(frequencyfactors)
+frequencyfactors$y<-NULL
+print(frequencyfactors)
+frequencyfactors<-t(frequencyfactors)
+print(frequencyfactors)
+
+# Creates recurrence table
 ReturnPeriod<-c(1.01,2,5,10,25,50,100,200)
+ReturnPeriod<-data.frame(ReturnPeriod)
+print(ReturnPeriod)
 
-kcoeff<-c(k1,k2,k3,k4,k5,k6,k7,k8)
+# Performs general equation to obtain new log values
+enddataframe<-matrix(ncol=variables,nrow=iterations)
+  foreach (i = iter(frequencyfactors, by = "row")) %do%{
+    a<-10^(AverageLog+(i[1]*StandardDeviation))
+    enddataframe<-c(enddataframe,a)
+  }
 
-endval1<-10^(AverageLog+k1*StandardDeviation)
-endval2<-10^(AverageLog+k2*StandardDeviation)
-endval3<-10^(AverageLog+k3*StandardDeviation)
-endval4<-10^(AverageLog+k4*StandardDeviation)
-endval5<-10^(AverageLog+k5*StandardDeviation)
-endval6<-10^(AverageLog+k6*StandardDeviation)
-endval7<-10^(AverageLog+k7*StandardDeviation)
-endval8<-10^(AverageLog+k8*StandardDeviation)
+enddataframe<-enddataframe[!is.na(enddataframe)]
+print(enddataframe)
 
-endval<-c(endval1,endval2,endval3,endval4,endval5,endval6,endval7,endval8)
+# combines new dataframe with new log values and recurrence interval
+x<-ReturnPeriod
+y<-enddataframe
 
-ReturnPeriodandEndval<-data.frame(ReturnPeriod,endval)
+df<-cbind(x,y)
 
-plotthis<-ggplot(ReturnPeriodandEndval, aes(x=ReturnPeriod, y=endval)) + geom_point() +
-xlab("Return Period (years)") + ylab("Precipitation (mm)") + ggtitle("Precipitation Frequency") +
-theme(panel.background = element_rect(fill = "grey75")) + geom_line(data = ReturnPeriodandEndval, color="blue")
-
-return(plotthis)
-
+# Plots the graph showing new log values and recurrence interval
+plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
+  xlab("Return Period (years)") + ylab("Precipitation (inches)") + ggtitle("Precipitation Frequency") +
+  theme(panel.background = element_rect(fill = "grey75")) + geom_line(data = df, color="blue")
 }
 
+  else if ((datatype == "et")) {
+    happyday$et<-na.omit(happyday$et)
+
+    dates<-c(happyday$et$date)
+
+    wtr_yr <- function(dates, start_month=9) {
+      # Convert dates into POSIXlt
+      dates.posix = as.POSIXlt(dates)
+      # Year offset
+      offset = ifelse(dates.posix$mon >= start_month - 1, 1, 0)
+      # Water year
+      adj.year = dates.posix$year + 1900 + offset
+      # Return the water year
+      adj.year
+    }
+    # Setting up the data
+    df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),happyday$et$data)
+
+    split(df, df$wtr_yr)
+    df$dates<-NULL
+
+    test5<-split(df,f = df$wtr_yr)
+
+    # Finding max values for each water year
+
+    iterations = 150
+    variables = 1
+
+    MAX<- matrix(ncol=variables, nrow = iterations)
+    foreach (i=iter(test5,by="row")) %do%{
+      a<-max(i$happyday.et.data)
+      MAX<-c(MAX,a)
+    }
+    MAX<-na.omit(MAX)
+    print(MAX)
+    MAX<-data.frame(MAX)
+    print(MAX)
+    MAX$MAX<-MAX$MAX[order(-MAX$MAX)]
+    print(MAX$MAX)
+
+    n = nrow(MAX)
+    print(n)
+
+    RankMax = c(1:n)
+    print(RankMax)
+    # Finding Log(max)
+
+
+    LoggedMax<-matrix(ncol = variables, nrow = iterations)
+    foreach (i=iter(MAX,by="row")) %do%{
+      a<-log10(i[1])
+      LoggedMax<-c(LoggedMax,a)}
+    print(LoggedMax)
+    LoggedMax<-na.omit(LoggedMax)
+    print(LoggedMax)
+    LoggedMax<-data.frame(LoggedMax)
+    print(LoggedMax)
+
+    # Finding the averages of the Max and log values
+    AverageMax<-mean(MAX$MAX)
+    print(AverageMax)
+    AverageLog<-mean(LoggedMax$LoggedMax)
+    print(AverageLog)
+    # {(loggedMax-mean(loggedMax))^2}
+
+
+    SquareDiff<-matrix(ncol = variables, nrow = iterations)
+    foreach (i=iter(LoggedMax,by="row")) %do%{
+      a<-((i[1]-AverageLog)^2)
+      SquareDiff<-c(SquareDiff,a)
+    }
+    SquareDiff<-na.omit(SquareDiff)
+    SquareDiff<-data.frame(SquareDiff)
+    print(SquareDiff)
+
+
+    # {(loggedMax-mean(loggedMax))^3}
+
+    CubeDiff<-matrix(ncol = variables, nrow = iterations)
+    foreach (i=iter(LoggedMax,by="row")) %do%{
+      a<-((i[1]-AverageLog)^3)
+      CubeDiff<-c(CubeDiff,a)
+    }
+    CubeDiff<-na.omit(CubeDiff)
+    CubeDiff<-data.frame(CubeDiff)
+    print(CubeDiff)
+    # Return Period {(n+1)/m}
+
+    ReturnPeriod<-matrix(ncol = variables, nrow = iterations)
+    foreach (i=iter(RankMax,by="row")) %do%{
+      a<-((n+1)/i[1])
+      ReturnPeriod<-c(ReturnPeriod,a)
+    }
+    ReturnPeriod<-na.omit(ReturnPeriod)
+    ReturnPeriod<-data.frame(ReturnPeriod)
+    print(ReturnPeriod)
+    # 1/Return Period
+
+    inverseReturnPeriod<-matrix(ncol = variables, nrow = iterations)
+    foreach (i=iter(ReturnPeriod,by="row")) %do%{
+      a<-(1/i[1])
+      inverseReturnPeriod<-c(inverseReturnPeriod,a)
+    }
+    inverseReturnPeriod<-na.omit(inverseReturnPeriod)
+    inverseReturnPeriod<-data.frame(inverseReturnPeriod)
+    print(inverseReturnPeriod)
+
+    SumSquareDiff<-sum(SquareDiff$SquareDiff)
+    print(SumSquareDiff)
+
+    SumCubeDiff<-sum(CubeDiff$CubeDiff)
+    print(SumCubeDiff)
+
+    Variance <- (SumSquareDiff/(n-1))
+    print(Variance)
+
+    StandardDeviation <- sqrt(Variance)
+    print(StandardDeviation)
+
+    Cs <- n*SumCubeDiff/((n-1)*(n-2)*StandardDeviation^3)
+    Cs<-round(Cs,digits=1)
+    print(Cs)
+    Cs2<-rep(Cs,61)
+
+    frequencyfactors<-read.csv('./Frequency_Factors_Log_Pearson_Type_III.csv')
+    print(frequencyfactors)
+    frequencyfactors<-merge(frequencyfactors,Cs2)
+    print(frequencyfactors)
+    frequencyfactors<-frequencyfactors[-c(62:3721),]
+    print(frequencyfactors)
+    frequencyfactors<-frequencyfactors[frequencyfactors$Cs1 == frequencyfactors$y, ]
+    print(frequencyfactors)
+    frequencyfactors$Cs1<-NULL
+    print(frequencyfactors)
+    frequencyfactors$y<-NULL
+    print(frequencyfactors)
+    frequencyfactors<-t(frequencyfactors)
+    print(frequencyfactors)
+
+    ReturnPeriod<-c(1.01,2,5,10,25,50,100,200)
+    ReturnPeriod<-data.frame(ReturnPeriod)
+    print(ReturnPeriod)
+
+    enddataframe<-matrix(ncol=variables,nrow=iterations)
+    foreach (i = iter(frequencyfactors, by = "row")) %do%{
+      a<-10^(AverageLog+(i[1]*StandardDeviation))
+      enddataframe<-c(enddataframe,a)
+    }
+
+    enddataframe<-enddataframe[!is.na(enddataframe)]
+    print(enddataframe)
+
+    x<-ReturnPeriod
+    y<-enddataframe
+
+    df<-cbind(x,y)
+
+    plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
+      xlab("Return Period (years)") + ylab("ET (mm)") + ggtitle("ET Frequency") +
+      theme(panel.background = element_rect(fill = "grey75")) + geom_line(data = df, color="yellow")
+}
+  return(plotthis)
+  print(datatype)
+}
 
 
 
