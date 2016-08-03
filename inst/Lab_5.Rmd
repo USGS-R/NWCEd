@@ -1,6 +1,12 @@
 ---
 title: "Lab 5: Log-Pearson Type III Analysis"
-output: html_document
+output: 
+  html_document:
+    toc: true # table of content true
+    depth: 2  # up to two depths of headings (specified by #, ##)
+    number_sections: false  ## if you want number sections at each table header
+    theme: cerulean  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
 ---
 
 ```{r setup, include=FALSE}
@@ -28,7 +34,7 @@ library(ggplot2)
 
 ## Introduction
 <div style="text-align:justify">
-
+Water managers, hydrologists, and engineers are responsible for making decisions that not only impact people today, but future generations to come.  These decisions could include how large to design a culvert for a stream, what legislature should be implemented regarding water use, how to properly plan for population growth for a city based on available water resources, and so on.  These decisions are difficult to make, especially when the decisions impacting the future must be made according to the available data of today.  To help in making these decisions, hydrologic models have been created to predict the size of hydrologic events, flooding, and to project the status of water budgets.  The purpose of this lab is to introduce a probability density model commonly known as the **Log-Pearson Type III distribution** model.  This lab will walk through the steps of how to model National Water Census Data Portal (NWC-DP) data using both Microsoft Excel and the Lp3 function found in the NWCEd package in R.  
 </div>
 
 ## Important Questions to Ask Yourself
@@ -53,5 +59,25 @@ Double-Mass Curve  | A graphical method used to study consistency and trends in 
 
 #### Step 1
 <div style="text-align:justify">
-In this exercise we will learn how to obtain an HUC ID from the National Water Cenus Data-Portal (NWC-DP).  For this lab we will need to download runoff data in addition to the ET and precipitation data which requires slightly different steps from those shown in **Lab 3**.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
-</div>
+In this exercise we will learn how to download a .csv file containing precipitation time series data from the National Water Cenus Data-Portal (NWC-DP) and generate a Log-Pearson Type III distribution model for the selected data.  To begin, log on to the NWC-DP using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.  For more detailed instruction on how to navigate through the NWC-DP and its features, please review **Lab 1** and **Lab 2**.
+
+<br>
+
+![**Figure 1: The NWC-DP homepage.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure1.jpg)
+
+<br>
+
+After clicking on the Water Budget icon, a new screen will load which displays an interactive map.  In the search bar, type "**Grand Junction**" and select the first suggestion that appears under the search bar as shown in Figure 2 below.
+
+<br>
+
+![**Figure 2: Grand Junction search.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure2.JPG)
+
+<br>
+
+
+
+
+
+
+
