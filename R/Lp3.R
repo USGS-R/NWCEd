@@ -175,10 +175,16 @@ plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
   theme(panel.background = element_rect(fill = "grey75")) + geom_line(data = df, color="blue")
 }
 
-  else if ((datatype == "et")) {
-    happyday$et<-na.omit(happyday$et)
+  else if ((datatype == "streamflow")) {
+    inputData$streamflow$agency_cd<-NULL
+    inputData$streamflow$site_no<-NULL
+    inputData$streamflow$cd_00060_00003<-NULL
+    names(inputData$streamflow)[names(inputData$streamflow)=="data_00060_00003"]<-"data"
+    names(inputData$streamflow)[names(inputData$streamflow)=="Date"]<-"date"
 
-    dates<-c(happyday$et$date)
+    inputData$streamflow<-na.omit(inputData$streamflow)
+
+    dates<-c(inputData$streamflow$date)
 
     wtr_yr <- function(dates, start_month=9) {
       # Convert dates into POSIXlt
@@ -191,7 +197,7 @@ plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
       adj.year
     }
     # Setting up the data
-    df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),happyday$et$data)
+    df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),inputData$streamflow$data)
 
     split(df, df$wtr_yr)
     df$dates<-NULL
@@ -205,7 +211,7 @@ plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
 
     MAX<- matrix(ncol=variables, nrow = iterations)
     foreach (i=iter(test5,by="row")) %do%{
-      a<-max(i$happyday.et.data)
+      a<-max(i$inputData.streamflow.data)
       MAX<-c(MAX,a)
     }
     MAX<-na.omit(MAX)
@@ -333,7 +339,7 @@ plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
     df<-cbind(x,y)
 
     plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
-      xlab("Return Period (years)") + ylab("ET (mm)") + ggtitle("ET Frequency") +
+      xlab("Return Period (years)") + ylab("Streamflow (CFS)") + ggtitle("Streamflow Frequency") +
       theme(panel.background = element_rect(fill = "grey75")) + geom_line(data = df, color="yellow")
 }
   return(plotthis)
