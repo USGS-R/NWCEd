@@ -59,7 +59,9 @@ Double-Mass Curve  | A graphical method used to study consistency and trends in 
 
 #### Step 1
 <div style="text-align:justify">
-In this exercise we will learn how to download a .csv file containing precipitation time series data from the National Water Cenus Data-Portal (NWC-DP) and generate a Log-Pearson Type III distribution model for the selected data.  To begin, log on to the NWC-DP using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.  For more detailed instruction on how to navigate through the NWC-DP and its features, please review **Lab 1** and **Lab 2**.
+In this exercise we will learn how to download a .csv file containing precipitation time series data from the National Water Cenus Data-Portal (NWC-DP) and generate a Log-Pearson Type III distribution model for the selected data.  For information regarding the theory behind the Log-Pearson Type III distribution model, please read information put out by the [USGS](http://water.usgs.gov/osw/bulletin17b/dl_flow.pdf), the [University of Western Ontario](http://ir.lib.uwo.ca/cgi/viewcontent.cgi?article=1039&context=wrrr), and the [Water Resources Research](http://onlinelibrary.wiley.com/doi/10.1029/WR011i005p00681/abstract) journal.  
+<br>
+To begin, log on to the NWC-DP using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.  For more instruction on how to navigate through the NWC-DP and its features, please review **Lab 1** and **Lab 2**.
 
 <br>
 
@@ -67,16 +69,134 @@ In this exercise we will learn how to download a .csv file containing precipitat
 
 <br>
 
-After clicking on the Water Budget icon, a new screen will load which displays an interactive map.  In the search bar, type "**Grand Junction**" and select the first suggestion that appears under the search bar as shown in Figure 2 below.
+After clicking on the Water Budget icon, a new screen will load which displays an interactive map.  For this exercise we want to download data associated with the HUC that encompasses Orchard Mesa, Colorado.  This HUC is located just south of Grand Junction, Colorado.  In the search bar, type "**Grand Junction**" and click on the first suggestion that appears under the search bar as shown in Figure 2 below.
 
 <br>
 
-![**Figure 2: Grand Junction search.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure2.JPG)
+![**Figure 2: Grand Junction search.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure2.1.JPG)
+
+<br>
+
+The map will zoom in to the general region where we can more easily see the HUC we want to select.  Under the **`HUC Layer`** dropdown box, select the **12 Digit** layer (see Figure 3 and Figure 4 below).  Select the HUC that encompasses Orchard Mesa, Colorado as indicated by the red arrow in Figure 4.
+
+<br>
+
+<div style= "width: 429px; height= 300px; float: left">
+![**Figure 3: The Grand Junction, Colorado region.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure3.JPG)
+</div><div style= "width: 473px; height= 300px; float: right">
+![**Figure 4: A 12 Digit HUC layer displayed over Grand Junction, CO.**](https://cdn.rawgit.com/jnelson7/NWCEd/0b629f5f66fc9209203e3ac05c27a45876d21e67/inst/Lab5_NWC-DP_Images/Figure4.JPG)
+
+</div>
+
+<br>
+
+<div style="text-align:justify; clear: left">
+
+<br>
+
+Once the new page has loaded, verify that the HUC you selected is the intended HUC you wanted to select.  Next, click on the **`Download Precipitation`** button to download a .csv file of the precipitationd data associated with the HUC as shown in Figure 5 below.
+
+<br>
+
+![**Figure 5: Download precipitation dataset associated with HUC # 140200050803.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure5.JPG)
 
 <br>
 
 
+#### Step 2
+<div style="text-align:justify">
+Once the file has been downloaded, open it in Microsoft Excel.  _Please note that while these steps are to be carried out in Microsoft Excel, similar open source software such as Google Sheets can run the steps with slight adjustments._  Once the file has been downloaded and upen in Excel, the spreadsheet should look similar to that displayed in Figure 6 below.
 
+<br>
+
+![**Figure 6: Opened csv file of precipitation data.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure6.JPG)
+
+<br>
+
+The first thing we need to do is prepare the spreadsheet for the analysis.  We are needing to compile and separate the data based on their respective **water years**.  To do this, add a column in between column A and column B.  This can be done simply by selecting cell **B6**.  Then while holding down the **`control`** and **`shift`** buttons, press the **`down arrow`** key.  Once the cells are selected, right click and select **insert** with the **`Shift cells right`** option selected.  Click **`OK`**.  The column of area weighted mean precipitation values shifts to the right.
+<br>
+
+<div style= "width: 400px; height= 220px;PADDING-RIGHT: 10px; float: left">
+<br>
+
+![**Figure 7: Opening the Format Cells window.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure7.1.JPG)
+</div>
+<div style="text-align:justify">
+<br>
+Next, select the empty cell **B6**.  Select all the empty cells in between the given dates and data values using the same steps given previously.  When all the empty cells have been selected, right click and select **`Format Cells`**.  A popup window appears as shown in Figure 7.  With the **Number** tab selected, click on **General** in the **Category** box.  Doing this will allow us to use a custom formula to convert the dates in column A to water year dates in the empty column B.
+<br>
+Now that the empty column B has been prepared, we are ready to convert the dates listed in column A into water years.  In the empty cell **B6**, enter the following statement:
+
+$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$
+
+This statement checks the month of the year in the A column to see if it is in the current water year.  If it is, the year is extracted from the cell in column A and inserted into the emtpy adjacent cell in column B.  If the month is greater than 9, then 1 is added to the current year to match the correct water year date.  Once the formula has been entered into **B6**, double click in the bottom-right corner of the cell to populate the proceeding cells in column B.
+</div>
+
+<br>
+
+<div style="text-align:justify; clear: left">
+Scroll down column B to verify that the year is updating every October.  Once the water years have been assigned correctly to the corresponding precipitation values, we are ready to sort our data.
+
+<br>
+
+<div style="text-align:justify; clear: left">
+
+#### Step 3
+<div style="text-align:justify">
+We are now ready to begin the analysis.  As a check, make sure your spreadsheet looks like the one depicted in Figure 8 below.  Please note the addition of the **"WtrYr"** table header.  Make sure there are no empty columns in between the water year column and the precipitation value column.  
+</div>
+<br>
+
+![**Figure 8: Spreadsheet formatting check.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure8.1.JPG)
+
+<br>
+
+We will now begin using a pivot table in excel to help us quickly run the Log-Pearson Type III distribution for our data.  The methods shown in this lab correspond to Microst Excel 2016.  These steps can also be performed in previous versions.  In your spreadsheet, select the **WtrYr** and **Area Weighted Mean Precipitation** columns including the headers as shown in Figure 9.  Under the **`Insert`** tab, click on **PivotTable** button in the upper left-hand corner of the screen.  A **Create PivotTable** popup window will then display on the screen.  Select **New Worksheet**.  Doing this will open the pivot table in a new sheet.
+
+<br>
+
+![**Figure 9: Creating the pivot table.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure9.1.JPG)
+
+<br>
+
+<div style="text-align:justify">
+After clicking **`OK`** a new sheet will open up as shown in Figure 10.  On the right of sheet is the **PivotTable Fields** ribbon.  Clicking anywhere in the sheet outside of the **PivotTable** box will hide the pivot table ribbon.  clicking anywhere inside the PivotTable box will show the ribbon again.  
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 10: New pivot table.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure10.1.JPG)
+
+<br>
+</div>
+
+<div style="text-align:justify">
+In the PivotTable Fields ribbon, hover the cursor over the **`WtrYr`** words.  Click on the **WtrYr** and drag it into the **ROWS** box below.  If done successfully, the **`WtrYr`** box will update with a check mark.  A column will appear in the sheet with the rows in the column populated with the water years we obtained previously.  Hover the cursor over the **`Area Weighted Mean Precipitation`** words under the **`WtrYr`** box.  Click and drag it into the **VALUES** box in the lower right-hand corner of the screen.  The corresponding box will update with a check mark as before, and a new column is added to the sheet containing all the precipitation values.
+
+<br>
+</div>
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 11: Populating the pivot table.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure11.JPG)
+
+<br>
+</div>
+
+<div style="text-align:justify">
+
+<br>
+In the **VALUES** box, click on the **`Count of Area`** drop down menu.  Click on the **Value Field Settings** option.  A **Value Field Settings** popup window is displayed as shown in Figure 12.  Select the **Max** option under the **`Summarize Values By`** tab.  Then click **`OK`**.    
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 12: Finding the max values for each water year.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure12.1.JPG)
+
+<br>
+</div>
+
+<div style="text-align:justify">
 
 
 
