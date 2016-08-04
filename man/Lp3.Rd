@@ -50,7 +50,7 @@ Lp3(inputData, datatype)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (inputData, datatype) 
+function (inputData, datatype)
 {
     print(datatype)
     if (datatype == "prcp") {
@@ -59,7 +59,7 @@ function (inputData, datatype)
         dates <- c(inputData$prcp$date)
         wtr_yr <- function(dates, start_month = 9) {
             dates.posix = as.POSIXlt(dates)
-            offset = ifelse(dates.posix$mon >= start_month - 
+            offset = ifelse(dates.posix$mon >= start_month -
                 1, 1, 0)
             adj.year = dates.posix$year + 1900 + offset
             adj.year
@@ -149,7 +149,7 @@ function (inputData, datatype)
         print(frequencyfactors)
         frequencyfactors <- frequencyfactors[-c(62:3721), ]
         print(frequencyfactors)
-        frequencyfactors <- frequencyfactors[frequencyfactors$Cs1 == 
+        frequencyfactors <- frequencyfactors[frequencyfactors$Cs1 ==
             frequencyfactors$y, ]
         print(frequencyfactors)
         frequencyfactors$Cs1 <- NULL
@@ -162,7 +162,7 @@ function (inputData, datatype)
         ReturnPeriod <- data.frame(ReturnPeriod)
         print(ReturnPeriod)
         enddataframe <- matrix(ncol = variables, nrow = iterations)
-        foreach(i = iter(frequencyfactors, by = "row")) \%do\% 
+        foreach(i = iter(frequencyfactors, by = "row")) \%do\%
             {
                 a <- 10^(AverageLog + (i[1] * StandardDeviation))
                 enddataframe <- c(enddataframe, a)
@@ -172,24 +172,24 @@ function (inputData, datatype)
         x <- ReturnPeriod
         y <- enddataframe
         df <- cbind(x, y)
-        plotthis <- ggplot(df, aes(x = ReturnPeriod, y = y)) + 
-            geom_point() + xlab("Return Period (years)") + ylab("Precipitation (inches)") + 
-            ggtitle("Precipitation Frequency") + theme(panel.background = element_rect(fill = "grey75")) + 
+        plotthis <- ggplot(df, aes(x = ReturnPeriod, y = y)) +
+            geom_point() + xlab("Return Period (years)") + ylab("Precipitation (inches)") +
+            ggtitle("Precipitation Frequency") + theme(panel.background = element_rect(fill = "grey75")) +
             geom_line(data = df, color = "blue")
     }
     else if ((datatype == "streamflow")) {
         inputData$streamflow$agency_cd <- NULL
         inputData$streamflow$site_no <- NULL
         inputData$streamflow$cd_00060_00003 <- NULL
-        names(inputData$streamflow)[names(inputData$streamflow) == 
+        names(inputData$streamflow)[names(inputData$streamflow) ==
             "data_00060_00003"] <- "data"
-        names(inputData$streamflow)[names(inputData$streamflow) == 
+        names(inputData$streamflow)[names(inputData$streamflow) ==
             "Date"] <- "date"
         inputData$streamflow <- na.omit(inputData$streamflow)
         dates <- c(inputData$streamflow$date)
         wtr_yr <- function(dates, start_month = 9) {
             dates.posix = as.POSIXlt(dates)
-            offset = ifelse(dates.posix$mon >= start_month - 
+            offset = ifelse(dates.posix$mon >= start_month -
                 1, 1, 0)
             adj.year = dates.posix$year + 1900 + offset
             adj.year
@@ -279,7 +279,7 @@ function (inputData, datatype)
         print(frequencyfactors)
         frequencyfactors <- frequencyfactors[-c(62:3721), ]
         print(frequencyfactors)
-        frequencyfactors <- frequencyfactors[frequencyfactors$Cs1 == 
+        frequencyfactors <- frequencyfactors[frequencyfactors$Cs1 ==
             frequencyfactors$y, ]
         print(frequencyfactors)
         frequencyfactors$Cs1 <- NULL
@@ -292,7 +292,7 @@ function (inputData, datatype)
         ReturnPeriod <- data.frame(ReturnPeriod)
         print(ReturnPeriod)
         enddataframe <- matrix(ncol = variables, nrow = iterations)
-        foreach(i = iter(frequencyfactors, by = "row")) \%do\% 
+        foreach(i = iter(frequencyfactors, by = "row")) \%do\%
             {
                 a <- 10^(AverageLog + (i[1] * StandardDeviation))
                 enddataframe <- c(enddataframe, a)
@@ -302,9 +302,9 @@ function (inputData, datatype)
         x <- ReturnPeriod
         y <- enddataframe
         df <- cbind(x, y)
-        plotthis <- ggplot(df, aes(x = ReturnPeriod, y = y)) + 
-            geom_point() + xlab("Return Period (years)") + ylab("Streamflow (CFS)") + 
-            ggtitle("Streamflow Frequency") + theme(panel.background = element_rect(fill = "grey75")) + 
+        plotthis <- ggplot(df, aes(x = ReturnPeriod, y = y)) +
+            geom_point() + xlab("Return Period (years)") + ylab("Streamflow (CFS)") +
+            ggtitle("Streamflow Frequency") + theme(panel.background = element_rect(fill = "grey75")) +
             geom_line(data = df, color = "yellow")
     }
     return(plotthis)
