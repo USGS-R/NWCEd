@@ -198,6 +198,115 @@ In the **VALUES** box, click on the **`Count of Area`** drop down menu.  Click o
 
 <div style="text-align:justify">
 
+Now the max values for each water year have been calculated, copy and paste the table you just created to the right in the same sheet.  Select the **Max of Area Weighted Mean Precipitation** column, right click, and sort from largest to smallest.  Make sure to expand the selection.  _Note that the pivot table generated a grand total value at the bottom of the column that needs to be deleted before sorting._  Create a new column titled **Rank**.  Rank the max precipitation column from 1 to 36 as shown in Figure 13 below.
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 13: Sorted and ranked max precipitation.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure13.JPG)
+
+<br>
+</div>
+
+<div style="text-align:justify">
+
+Once the max precipitation values have been ranked, create a new column.  Title the column **Log(MaxPrecip)**.  Use the Excel formula **log(E4)** and copy it down the column as shown in Figure 14 below.  From there, calculate the average of the max preciptiation values and the max of the average of the log of the precipitation values.  To find the averages, use the Excel formula **=AVERAGE(E4:E39)** with the respective column range as the argument.  Figure 15 shows the averages for the max precipitation and log of max precipitation columns.
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 14: Sorted and ranked max precipitation.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure14.JPG)
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 15: Sorted and ranked max precipitation.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure15.JPG)
+
+<br>
+</div>
+
+<div style="text-align:justify">
+
+Create a new column to the right of the **Log(MaxPrecip)** column titled **(Log(MaxPrecip)-avg(Log(MaxPrecip))^2**.  Use the formula from the column title to populate the column.  _Don't forget the absolute reference to the avg(log(MaxPrecip)) when copying the formula down the column_.  Create another column to the right of the previous column titled **(Log(MaxPrecip)-avg(Log(MaxPrecip))^3**.  Using the formula in the title, populate the cells in the respective column.  Next, create another column titled **Tr** for the return period.  Use the Excel formula ((n+1)/m) to populate the column where n is the number of observations in the Max of Area column and m is the respective rank.  In this example, n = 36.  Next, create another column titled **Exceedence Probability**.  Populate this column by using the Excel formula (1/Tr).  Figure 16 below shows the additional columns made.  Using the Excel formula Sum(), find the sum for the **(Log(MaxPrecip)-avg(Log(MaxPrecip))^2** and **(Log(MaxPrecip)-avg(Log(MaxPrecip))^3** columns as shown in Figure 17 below.
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 16: Additional columns created.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure16.JPG)
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 17: Summation of columns.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure17.JPG)
+
+<br>
+</div>
+
+<div style="text-align:justify">
+#### Step 3
+With our spreadsheet completed, we are ready to calculate the **variance**, **standard deviation**, and **skew coefficient**.  The formula to calculate the variance is provided below:
+
+<br>
+$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$
+<br>
+
+The standard deviation is equal to the square root of the variance.  The formula is displayed below.
+
+<br>
+$$\sigma log(MaxPrecip) = \sqrt{variance}$$
+<br>
+
+The skew coefficient can be calculated using the following formula:
+
+<br>
+$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$
+<br>
+
+Calculate the variance, standard deviation, and skew coefficient in your Excel spreadsheet using the formulas given.  For this example, the variance, standard deviation, and skew coefficient were found to be 0.016, 0.127, and -0.408, respectively.  
+
+<br>
+
+We now need to create our final table in the spreadsheet.  Create three columns with titles as **Return Period**, **k**, and **MaxPrecip**.  The **Return Period** column needs to be populated with the following values: 1.01, 2, 5, 10, 25, 50, 100, 200.  To find the k values, we need to turn to a **Frequency Factors** table.  Click [here](http://insaat.erciyes.edu.tr/mcobaner/MIY%5CPearson_tablosu.pdf) to view the table.  You'll notice that the skew coefficients range from -3 to 3 and the column headers range in percent change from 99% to 0.5%.  To use the table, look up the row with the coefficient that corresponds to the one calculated.  From there move across the table to the right on the same row and pull to obtain frequency factors for each of the recurrence intervals.  In our case, the calculated skew coefficient is -0.408.  We can use linear interpolation to obtain the frequency factor values which correspond to the calculated skew coefficient.  These values are shown in Figure 18 below.
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 18: Interpolated frequency factors.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure19.JPG)
+
+<br>
+</div>
+
+<div style="text-align:justify">
+Finally we are ready to calculate the **MaxPrecip** column.  The formula to do this is given below:
+
+<br>
+$$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$
+<br>
+
+With the formula, populate the **MaxPrecip** column.  _Hint: Remeber that Log base 10 is undone by 10^_.  With the last column filled in, the table should look similar to the table shown in Figure 19 below.
+
+<br>
+</div>
+
+<div style= "width: 925px; height= 220px;PADDING-RIGHT: 10px; float: left">
+![**Figure 19: Interpolated frequency factors.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure20.JPG)
+
+<br>
+</div>
+
+<div style="text-align:justify">
+
+
+
+
+
+
 
 
 
