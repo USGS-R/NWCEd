@@ -329,7 +329,7 @@ variable_name<-getNWCData(huc = "160202030505", local = FALSE)
 Once the data is downloaded and stored in a variable of your choice, we are ready to use the Log-Pearson Type III function.  The function name is **Lp3**.  It has two arguments: variable name with stored data and dataset type ("prcp" or "streamflow").  The function will read the data from the user-named variable, run through the Log-Pearson Type III method and returns a frequency curve.  Below is the code which can be copied and pasted in the R console. 
 
 ```{r Log Pearson Type III function, eval=TRUE, echo=TRUE}
-Lp3(variable_name, "streamflow")
+Lp3(variable_name, "prcp")
 ```
 
 
