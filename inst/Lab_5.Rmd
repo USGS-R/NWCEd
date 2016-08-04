@@ -302,6 +302,38 @@ With the formula, populate the **MaxPrecip** column.  _Hint: Remeber that Log ba
 
 <div style="text-align:justify">
 
+Create a scatter plot with smooth lines and markers of the return period and max precipitation.  Now right click on the x-axis and select **Format Axis**.  Under the Format Axis ribbon on the right, click in the **Logarithic scale** box.  This will change the scale on the plot to a logarithmic scale.  Feel free to add minor gridlines to plot.  The two plots are shown below.  How do they compare?  What differences do you see?  How can the logarithmic scale help to estimate values between known return periods?
+
+<br>
+</div>
+
+<div style= "width: 500px; height= 400px;">
+![**Figure 20: Log-Pearson Type III with linear scale.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure21.1.JPG)
+
+
+<br>
+
+<div style= "width: 500px; height= 400px;">
+![**Figure 20: Log-Pearson Type III with log scale.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure22.1.JPG)
+</div>
+<br>
+
+<div style="text-align:justify">
+#### Step 4
+Now that we have learned the steps in applying the Log-Pearson Type III distribution to a dataset in Excel, we are ready to learn the Log-Pearson Type III function in the **NWCEd** R package.  These steps assume that R has been installed along with the required packages which include **iterators**, **foreach**, **NWCEd**, and **ggplot2**.  The first step is to download the desired dataset from the NWC-DP.  This can be done by using the **getNWCData** function in the NWCEd package.  Below is a block of code that walks through how this is to be done.
+
+```{r get NWC-DP dataset, eval=TRUE, echo=TRUE}
+# Uses the getNWCData function to pull down hydrologic datasets for specified HUC ID
+variable_name<-getNWCData(huc = "160202030505", local = FALSE)
+```
+Once the data is downloaded and stored in a variable of your choice, we are ready to use the Log-Pearson Type III function.  The function name is **Lp3**.  It has two arguments: variable name with stored data and dataset type ("prcp" or "streamflow").  The function will read the data from the user-named variable, run through the Log-Pearson Type III method and returns a frequency curve.  Below is the code which can be copied and pasted in the R console. 
+```{r Log Pearson Type III function, echo=TRUE}
+library(iterators)
+library(foreach)
+library(ggplot2)
+library(NWCEd)
+Lp3(variable_name, "prcp")
+```
 
 
 
