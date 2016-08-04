@@ -35,14 +35,15 @@ options(warn = -1)
 
 ## Introduction
 <div style="text-align:justify">
-
+Water managers, hydrologists, and engineers depend on data for design purposes and for improving decision making.  Hydrologic data is often collected and compiled as a time series dataset.  A time series dataset includes a collection of observations with respect to the time in which they were observed.  The National Water Census Data Portal (NWC-DP) houses thousands of hydrologic datasets including precipitation, evapotranspiration, and streamflow.  The purpose of this lab is to provide guidance on how to access these time series datasets from the NWC-DP and how to read and interpret the datasets through numerical and graphical means in R.  This lab includes discussion on water balances, bar graphs, and double-mass curves.   
 </div>
 
 ## Important Questions to Ask Yourself
 
 1. What information is contained in a time series plot?
-2. How do I interpret the quality of a dataset using a box plot?
-3. Who is the intended audience I am trying to communicate information with?
+2. How does a bar graph communicate information differently than a time series plot?
+3. How do I know if my data is good or not?
+4. Who is the intended audience I am trying to communicate information with?
 
 ## Useful Terms and Acronyms
 
@@ -60,7 +61,7 @@ Double-Mass Curve  | A graphical method used to study consistency and trends in 
 
 #### Step 1
 <div style="text-align:justify">
-In this exercise we will learn how to obtain an HUC ID from the National Water Cenus Data-Portal (NWC-DP).  For this lab we will need to download runoff data in addition to the ET and precipitation data which requires slightly different steps from those shown in **Lab 3**.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
+In this exercise we will learn how to obtain an HUC ID from the National Water Cenus Data-Portal (NWC-DP).  For this lab we will need to download runoff data in addition to the evapotranspiration (ET) and precipitation data which requires slightly different steps from those shown in **Lab 3**.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
 </div>
 <br>
 
