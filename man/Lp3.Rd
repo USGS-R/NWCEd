@@ -2,14 +2,25 @@
 % Please edit documentation in R/Lp3.R
 \name{Lp3}
 \alias{Lp3}
-\title{Lp3 Function}
+\title{Lp3 Function Needs a single sentence description}
 \usage{
 Lp3(inputData, datatype)
 }
 \arguments{
-\item{datatype}{}
+\item{inputData}{\code{data.frame} as returned by getNWCData?}
+
+\item{datatype}{\code{character} choose from ... ?}
+}
+\value{
+plotthis is returned, describe it here.
 }
 \description{
-Lp3 Function
+Needs a more thorough paragraph describing what it does, why, and a bit of how.
+}
+\examples{
+\dontrun{
+variable_name<-getNWCData(huc = "160202030505", local = FALSE)
+Lp3(variable_name, "prcp")
+}
 }
 
