@@ -1,30 +1,26 @@
-#' Lp3 Function
+#' Lp3 Function Needs a single sentence description
 #'
-#' @param inputData
-#' @param datatype
+#' Needs a more thorough paragraph describing what it does, why, and a bit of how.
 #'
-#' @return
+#' @param inputData \code{data.frame} as returned by getNWCData?
+#' @param datatype \code{character} choose from ... ?
+#'
+#' @return plotthis is returned, describe it here.
 #' @export
 #' @import foreach
 #' @import iterators
 #' @examples
+#' \dontrun{
+#' variable_name<-getNWCData(huc = "160202030505", local = FALSE)
+#' Lp3(variable_name, "prcp")
+#' }
 Lp3<-function(inputData,datatype) {
-    if (datatype == "prcp"){
+  if (datatype == "prcp"){
 
     inputData$prcp<-na.omit(inputData$prcp)
     inputData$prcp$data<-inputData$prcp$data*0.0393701
     dates<-c(inputData$prcp$date)
 
-    wtr_yr <- function(dates, start_month=9) {
-      # Convert dates into POSIXlt
-      dates.posix = as.POSIXlt(dates)
-      # Year offset
-      offset = ifelse(dates.posix$mon >= start_month - 1, 1, 0)
-      # Water year
-      adj.year = dates.posix$year + 1900 + offset
-      # Return the water year
-      adj.year
-    }
     # Setting up the data
     df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),inputData$prcp$data)
 
@@ -116,7 +112,6 @@ Lp3<-function(inputData,datatype) {
     Cs2<-rep(Cs,61)
 
     # matches skew coefficients and extracts frequency factors from same row
-    frequencyfactors<-read.csv('./Frequency_Factors_Log_Pearson_Type_III.csv')
     frequencyfactors<-merge(frequencyfactors,Cs2)
     frequencyfactors<-frequencyfactors[-c(62:3721),]
     frequencyfactors<-frequencyfactors[frequencyfactors$Cs1 == frequencyfactors$y, ]
@@ -160,16 +155,6 @@ Lp3<-function(inputData,datatype) {
 
     dates<-c(inputData$streamflow$date)
 
-    wtr_yr <- function(dates, start_month=9) {
-      # Convert dates into POSIXlt
-      dates.posix = as.POSIXlt(dates)
-      # Year offset
-      offset = ifelse(dates.posix$mon >= start_month - 1, 1, 0)
-      # Water year
-      adj.year = dates.posix$year + 1900 + offset
-      # Return the water year
-      adj.year
-    }
     # Setting up the data
     df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),inputData$streamflow$data)
 
@@ -283,6 +268,19 @@ Lp3<-function(inputData,datatype) {
     plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
       xlab("Return Period (years)") + ylab("Streamflow (CFS)") + ggtitle("Streamflow Frequency") +
       theme(panel.background = element_rect(fill = "grey75")) + geom_line(data = df, color="yellow")
+  } else {
+    stop("Didn't get a datatype of 'prcp' or 'streamflow', must choose one or the other for the Lp3 function.")
   }
   return(plotthis)
+}
+
+wtr_yr <- function(dates, start_month=9) {
+  # Convert dates into POSIXlt
+  dates.posix = as.POSIXlt(dates)
+  # Year offset
+  offset = ifelse(dates.posix$mon >= start_month - 1, 1, 0)
+  # Water year
+  adj.year = dates.posix$year + 1900 + offset
+  # Return the water year
+  adj.year
 }

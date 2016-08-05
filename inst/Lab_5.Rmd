@@ -11,8 +11,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(iterators)
-library(foreach)
 library(NWCEd)
 library(ggplot2)
 ```
