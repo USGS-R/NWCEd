@@ -1,4 +1,5 @@
-library(ggplot)
+library(ggplot2)
+library(NWCEd)
 # Super basic plot of precip and et.
 NWCdata<-getNWCData(huc="031601030306")
 NWCdata$et$group<-'et'
@@ -28,16 +29,16 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
 
 # Lets look at some modeled streamflow data.
 # From: http://cida.usgs.gov/nwc/#!streamflow-stats/huc/031601090601
-NWCdata<-getNWCData(huc="031501070601", local = FALSE)
+NWCdata<-getNWCData(huc="031601030306", local = FALSE)
 # Note that we need to normalize the streamflow to watershed area!
-NWCwatershed<-getNWCWatershed(huc="031501070601",local=FALSE)
+NWCwatershed<-getNWCWatershed(huc="160202030505",local=FALSE)
 areasqft<-NWCwatershed$features[[1]]$properties$areaacres*43560
 annual_dataet<-annualize(NWCdata$et, method=sum)
 annual_dataet$group<-'ET'
 annual_dataprcp<-annualize(NWCdata$prcp, method=sum)
 annual_dataprcp$group<-'P'
-NWCdata$streamflow$data<-NWCdata$streamflow$data*60*60*24/areasqft
-annual_datastrf<-annualize(NWCdata$streamflow,method=sum)
+NWCdata$streamflow$data<-NWCdata$streamflow$data_00060_00003*60*60*24*304.8/areasqft # convert from cfs to mm
+annual_datastrf<-annualize(NWCdata$streamflow$data,method=sum)
 annual_datastrf$group<-'Q'
 annual_union<-merge(annual_dataet,annual_dataprcp,by.x="year",by.y="year")
 annual_union<-merge(annual_union,annual_datastrf,by.x="year",by.y="year")
