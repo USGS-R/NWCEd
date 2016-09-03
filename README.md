@@ -161,11 +161,11 @@ This software is provided "AS IS."
 
 
 
-| Lab # | Package Name |
+| Lab # | Additional Required Packages |
 | --- | --- |
-| Lab 3 | <ul><li>"psych"</li><li>"ggplot2"</li><li>"gridExtra"</li><li>"datasets"</li></ul> |
-| Lab 4 | <ul><li>"ggplot2"</li><li>"dplyr"</li><li>"scales"</li><li>"stats"</li><li>"leaflet"</li></ul> |
-
+| Lab 3 | <ul><li>"datasets"</li><li>"ggplot2"</li><li>"gridExtra"</li><li>"psych"</li></ul> |
+| Lab 4 | <ul><li>"dplyr"</li><li>"ggplot2"</li><li>"leaflet"</li><li>"scales"</li><li>"stats"</li></ul> |
+| Lab 5 | <ul><li>"foreach"</li><li>"ggplot2"</li><li>"iterators"</li></ul> |
 
 
 
