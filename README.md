@@ -31,12 +31,9 @@ Install and load the following packages to run in the respective labs using the 
 | Lab 4 | <ul><li>"dplyr"</li><li>"ggplot2"</li><li>"leaflet"</li><li>"scales"</li><li>"stats"</li></ul> |
 | Lab 5 | <ul><li>"foreach"</li><li>"ggplot2"</li><li>"iterators"</li></ul> |
 
-
-[![Travis](https://travis-ci.org/dblodgett-usgs/NWCEd.svg?branch=master)](https://travis-ci.org/dblodgett-usgs/NWCEd)
-
 <br>
 
-   
+[![Travis](https://travis-ci.org/dblodgett-usgs/NWCEd.svg?branch=master)](https://travis-ci.org/dblodgett-usgs/NWCEd)
 
 <br>
 
