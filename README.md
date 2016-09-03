@@ -138,6 +138,10 @@ This software is provided "AS IS."
   
   
 
+| Learning Objective | Objective Description | Links |
+| --- | --- | --- |
+| Lab 1 | <ul><li>Accessing the NWC-DP</li><li>NWC-DP water Budget tool</li><li>Introduction to HUC's</li></ul> | [Lab 1](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_1.html) |
+| Lab 2 | <ul><li>Accessing the NWC-DP</li><li>NWC-DP Streamflow Stats tool</li><li>Downloading stats results</li></ul> | [Lab 2](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_2.html) |
 
 
 
