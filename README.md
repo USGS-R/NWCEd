@@ -57,34 +57,13 @@ Below is a table which lists the learning objectives for the the lab materials a
 <div style="text-align:left">
 The description of each of the lab materials is provided in the table below as well as a link to each of the respective labs.
 
-+---------------+---------------------------------------+--------------------+
-| Lab #         | Material Description                  |        Links       |
-+===============+=======================================+====================+
-| Lab 1         | - Accessing and navigating the NWC-DP | [Lab 1](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_1.html)       |
-|               | - NWC-DP Water Budget tool            |                    |
-|               | - Introduction to HUC's               |                    |  
-+---------------+---------------------------------------+--------------------+
-| Lab 2         | - Accessing the NWC-DP                | [Lab 2](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_2.html)       |
-|               | - NWC-DP Streamflow Stats tool        |                    |
-|               | - How to download stats results       |                    |
-+---------------+---------------------------------------+--------------------+
-| Lab 3         | - Accessing ET/precipitation data     | [Lab 3](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_3.html)       |   
-|               |   from NWC-DP                         |                    |
-|               | - Analysing and plotting box plots,   |                    |
-|               |   histograms, and density curve plots |                    |
-|               |   in R                                |                    |
-|               | - Writing exercises                   |                    |
-+---------------+---------------------------------------+--------------------+
-| Lab 4         | - Analyzing time series and bar plots | [Lab 4](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_4.html)       |   
-|               |   in R using NWC-DP data              |                    |
-|               | - Water balances                      |                    |
-|               | - Double-mass balance curve analysis  |                    |
-+---------------+---------------------------------------+--------------------+
-| Lab 5         | - Analyzing time series and bar plots | [Lab 5](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab_4.html)       |   
-|               |   in R using NWC-DP data              |                    |
-|               | - Water balances                      |                    |
-|               | - Double-mass balance curve analysis  |                    |
-+---------------+---------------------------------------+--------------------+
+| Lab # | Material Description | Link |
+| --- | --- | --- |
+| Lab 1 | <ul><li>Accessing the NWC-DP</li><li>NWC-DP water Budget tool</li><li>Introduction to HUC's</li></ul> | [Lab 1](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_1.html) |
+| Lab 2 | <ul><li>Accessing the NWC-DP</li><li>NWC-DP Streamflow Stats tool</li><li>Downloading stats results</li></ul> | [Lab 2](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_2.html) |
+| Lab 3 | <ul><li>Accessing ET/ precipitation data from NWC-DP</li><li>Analyzing and plotting box plots, histograms, and density curve plots in R</li><li>Writing exercises</li></ul> | [Lab 3](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_3.html) |
+| Lab 4 | <ul><li>Analyzing time series and bar plots in R using NWC-DP data</li><li>Water balances</li><li>Double-mass curve analysis</li></ul> | [Lab 4](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_4.html) |
+| Lab 5 | <ul><li>Using a Log Pearson Type III model to analyze NWC-DP data in Excel</li><li>Using a Log Pearson Type III model to analyze NWC-DP data in R</li></ul> | [Lab 5](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_5.html) |
 
 <br>
 
@@ -137,15 +116,14 @@ This software is provided "AS IS."
   ](http://creativecommons.org/publicdomain/zero/1.0/)
   
   
-
-| Lab # | Material Description | Link |
-| --- | --- | --- |
-| Lab 1 | <ul><li>Accessing the NWC-DP</li><li>NWC-DP water Budget tool</li><li>Introduction to HUC's</li></ul> | [Lab 1](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_1.html) |
-| Lab 2 | <ul><li>Accessing the NWC-DP</li><li>NWC-DP Streamflow Stats tool</li><li>Downloading stats results</li></ul> | [Lab 2](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_2.html) |
-| Lab 3 | <ul><li>Accessing ET/ precipitation data from NWC-DP</li><li>Analyzing and plotting box plots, histograms, and density curve plots in R</li><li>Writing exercises</li></ul> | [Lab 3](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_3.html) |
-| Lab 4 | <ul><li>Analyzing time series and bar plots in R using NWC-DP data</li><li>Water balances</li><li>Double-mass curve analysis</li></ul> | [Lab 4](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_4.html) |
-| Lab 5 | <ul><li>Using a Log Pearson Type III model to analyze NWC-DP data in Excel</li><li>Using a Log Pearson Type III model to analyze NWC-DP data in R</li></ul> | [Lab 5](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab_5.html) |
-
+| Function Name | Function Description |
+| --- | --- |
+| getNWCData() | Downloads hydrologic datasets associated with a user-specified HUC ID |
+| getNWCWatershed() | Downloads HUC spacial data for user selected HUC ID |
+| annualize() | Converts daily time series datasets to annual time series datasets |
+| getNWISSite() | Verifies the information exists for user-selected NWIS gage  |
+| getSWECSVBlock() | Accepts a url and returns a data frame of data for that SOS request |
+| Lp3 | Accepts a variable containing a NWC-DP dataset, applies a Log-Pearson Type III distribution, and returns a plot |
 
 
 
