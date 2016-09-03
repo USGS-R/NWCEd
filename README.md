@@ -159,3 +159,14 @@ This software is provided "AS IS."
 | Analyze | Learn how to analyze NWC-DP data using numerical and graphical methods in R |
 | communicate | Practice how to communicate analysis through the use of graphs |
   
+| Lab # | Package Name |
+| --- | --- |
+| Lab 3 | - "psych"  |
+          - "ggplot2"
+		  - "gridExtra"
+		  - "datasets"
+| Lab 4 | - "leaflet" |
+		  - "ggplot2"
+		  - "dplyr"
+		  - "scales"
+		  - "stats"
