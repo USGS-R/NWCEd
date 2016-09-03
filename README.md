@@ -158,15 +158,18 @@ This software is provided "AS IS."
 | Access | Learn how to access hydrologic data and associated metatdata from the NWC-DP |
 | Analyze | Learn how to analyze NWC-DP data using numerical and graphical methods in R |
 | communicate | Practice how to communicate analysis through the use of graphs |
-  
+
+
+
 | Lab # | Package Name |
 | --- | --- |
-| Lab 3 | - "psych"  |
-          - "ggplot2"
-		  - "gridExtra"
-		  - "datasets"
-| Lab 4 | - "leaflet" |
-		  - "ggplot2"
-		  - "dplyr"
-		  - "scales"
-		  - "stats"
+| Lab 3 | <ul><li>"psych"</li><li>"ggplot2"</li></ul><ul><li>"gridExtra"</li></ul>|  
+
+
+
+
+
+
+
+
+
