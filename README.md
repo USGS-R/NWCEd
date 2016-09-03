@@ -25,20 +25,11 @@ library(NWCEd)
 #### Step 3
 Install and load the following packages to run in the respective labs using the same process as *Step 1*.
 
-+-------------------+---------------------------------------------------------+
-| Lab #             | Package Name                                            |   
-+===================+=========================================================+
-| Lab 3             | - "psych"                                               | 
-|                   | - "ggplot2"                                             |
-|                   | - "gridExtra"                                           |
-|                   | - "datasets"                                            |
-+-------------------+---------------------------------------------------------+
-| Lab 4             | - "leaflet"                                             | 
-|                   | - "ggplot2"                                             |
-|                   | - "dplyr"                                               |  
-|                   | - "scales"                                              |
-|                   | - "stats"                                               |
-+-------------------+---------------------------------------------------------+
+| Lab # | Additional Required Packages |
+| --- | --- |
+| Lab 3 | <ul><li>"datasets"</li><li>"ggplot2"</li><li>"gridExtra"</li><li>"psych"</li></ul> |
+| Lab 4 | <ul><li>"dplyr"</li><li>"ggplot2"</li><li>"leaflet"</li><li>"scales"</li><li>"stats"</li></ul> |
+| Lab 5 | <ul><li>"foreach"</li><li>"ggplot2"</li><li>"iterators"</li></ul> |
 
 
 [![Travis](https://travis-ci.org/dblodgett-usgs/NWCEd.svg?branch=master)](https://travis-ci.org/dblodgett-usgs/NWCEd)
@@ -54,18 +45,11 @@ Install and load the following packages to run in the respective labs using the 
 
 Below is a table which lists the learning objectives for the the lab materials as a whole.  Individual labs may not meet all the learning objectives.  For material description, please see the Materials Description table below.
 
-+-------------------+---------------------------------------------------------+
-| Learning Objective| Objective Description                                   |   
-+===================+=========================================================+
-| Access            | Learn how to access hydrologic data and associated      | 
-|                   | metadata from the NWC-DP                                |
-+-------------------+---------------------------------------------------------+
-| Analyze           | Learn how to analyze NWC-DP data using numerical and    | 
-|                   | graphical methods in R                                  |
-+-------------------+---------------------------------------------------------+
-| Communicate       | Practice how to communicate analysis through the use of | 
-|                   | graphs                                                  |
-+-------------------+---------------------------------------------------------+
+| Learning Objective | Objective Description |
+| --- | --- |
+| Access | Learn how to access hydrologic data and associated metatdata from the NWC-DP |
+| Analyze | Learn how to analyze NWC-DP data using numerical and graphical methods in R |
+| communicate | Practice how to communicate analysis through the use of graphs |
 
 <br>
 
@@ -153,19 +137,11 @@ This software is provided "AS IS."
   ](http://creativecommons.org/publicdomain/zero/1.0/)
   
   
-| Learning Objective | Objective Description |
-| --- | --- |
-| Access | Learn how to access hydrologic data and associated metatdata from the NWC-DP |
-| Analyze | Learn how to analyze NWC-DP data using numerical and graphical methods in R |
-| communicate | Practice how to communicate analysis through the use of graphs |
 
 
 
-| Lab # | Additional Required Packages |
-| --- | --- |
-| Lab 3 | <ul><li>"datasets"</li><li>"ggplot2"</li><li>"gridExtra"</li><li>"psych"</li></ul> |
-| Lab 4 | <ul><li>"dplyr"</li><li>"ggplot2"</li><li>"leaflet"</li><li>"scales"</li><li>"stats"</li></ul> |
-| Lab 5 | <ul><li>"foreach"</li><li>"ggplot2"</li><li>"iterators"</li></ul> |
+
+
 
 
 
