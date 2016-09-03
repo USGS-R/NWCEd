@@ -87,7 +87,7 @@ The description of each of the lab materials is provided in the table below as w
 [Double-Mass Curves](http://pubs.usgs.gov/wsp/1541b/report.pdf)<br>
 [Statistical Methods in Water Resources](http://pubs.usgs.gov/twri/twri4a3/pdf/twri4a3-new.pdf)<br>
 [Daymet Model](https://daymet.ornl.gov/)<br>
-[CIDA USGS THREDDS Data Server](http://cida.usgs.gov/thredds/catalog.html?dataset=cida.usgs.gov/ssebopeta/monthly)
+[CIDA USGS THREDDS Data Server](http://cida.usgs.gov/thredds/catalog.html?dataset=cida.usgs.gov/ssebopeta/monthly)<br>
 [Log-Pearson Type III Distribution](http://ascelibrary.org/doi/pdf/10.1061/(ASCE)1084-0699(2007)12%3A5(482))
 
 <br>
