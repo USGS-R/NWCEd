@@ -71,24 +71,14 @@ The description of each of the lab materials is provided in the table below as w
 <div style="text-align:left">
 
 
-+------------------+---------------------------------------------------------+
-| Function Name    | Function Description                                    |   
-+==================+=========================================================+
-| getNWCData()     | Downloads hydrologic datasets associated with a         | 
-|                  | user-specified HUC ID                                   |
-+------------------+---------------------------------------------------------+
-| getNWCWatershed()| Downloads HUC spacial data for user selected HUC ID     | 
-|                  |                                                         |
-+------------------+---------------------------------------------------------+
-| annualize()      | Converts daily time series datasets to annual time      | 
-|                  | series datasets                                         |
-+------------------+---------------------------------------------------------+
-| getNWISSite()    | Verifies the information exists for user-selected NWIS  | 
-|                  | gage                                                    |
-+------------------+---------------------------------------------------------+
-| getSWECSVBlock() | Accepts a url and returns a data frame of data for that | 
-|                  | SOS request                                             |
-+------------------+---------------------------------------------------------+
+| Function Name | Function Description |
+| --- | --- |
+| getNWCData() | Downloads hydrologic datasets associated with a user-specified HUC ID |
+| getNWCWatershed() | Downloads HUC spacial data for user selected HUC ID |
+| annualize() | Converts daily time series datasets to annual time series datasets |
+| getNWISSite() | Verifies the information exists for user-selected NWIS gage  |
+| getSWECSVBlock() | Accepts a url and returns a data frame of data for that SOS request |
+| Lp3 | Accepts a variable containing a NWC-DP dataset, applies a Log-Pearson Type III distribution, and returns a plot |
 
 <br>
 
@@ -98,6 +88,7 @@ The description of each of the lab materials is provided in the table below as w
 [Statistical Methods in Water Resources](http://pubs.usgs.gov/twri/twri4a3/pdf/twri4a3-new.pdf)<br>
 [Daymet Model](https://daymet.ornl.gov/)<br>
 [CIDA USGS THREDDS Data Server](http://cida.usgs.gov/thredds/catalog.html?dataset=cida.usgs.gov/ssebopeta/monthly)
+[Log-Pearson Type III Distribution](http://ascelibrary.org/doi/pdf/10.1061/(ASCE)1084-0699(2007)12%3A5(482))
 
 <br>
 
@@ -115,15 +106,7 @@ This software is provided "AS IS."
     ![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)
   ](http://creativecommons.org/publicdomain/zero/1.0/)
   
-  
-| Function Name | Function Description |
-| --- | --- |
-| getNWCData() | Downloads hydrologic datasets associated with a user-specified HUC ID |
-| getNWCWatershed() | Downloads HUC spacial data for user selected HUC ID |
-| annualize() | Converts daily time series datasets to annual time series datasets |
-| getNWISSite() | Verifies the information exists for user-selected NWIS gage  |
-| getSWECSVBlock() | Accepts a url and returns a data frame of data for that SOS request |
-| Lp3 | Accepts a variable containing a NWC-DP dataset, applies a Log-Pearson Type III distribution, and returns a plot |
+
 
 
 
