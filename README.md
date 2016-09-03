@@ -153,5 +153,9 @@ This software is provided "AS IS."
   ](http://creativecommons.org/publicdomain/zero/1.0/)
   
   
-
+| Learning Objective | Objective Description |
+| --- | --- |
+| Access | Learn how to access hydrologic data and associated metatdata from the NWC-DP |
+| Analyze | Learn how to analyze NWC-DP data using numerical and graphical methods in R |
+| communicate | Practice how to communicate analysis through the use of graphs |
   
