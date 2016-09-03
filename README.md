@@ -163,12 +163,8 @@ This software is provided "AS IS."
 
 | Lab # | Package Name |
 | --- | --- |
-| Lab 3 | <ul><li>"psych"</li><li>"ggplot2"</li></ul><ul><li>"gridExtra"</li></ul>|  
-
-
-
-
-
+| Lab 3 | <ul><li>"psych"</li><li>"ggplot2"</li><li>"gridExtra"</li><li>"datasets"</li></ul> |
+| Lab 4 | <ul><li>"ggplot2"</li><li>"dplyr"</li><li>"scales"</li><li>"stats"</li><li>"leaflet"</li></ul> |
 
 
 
