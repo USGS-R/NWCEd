@@ -42,7 +42,6 @@ Lp3<-function(inputData,datatype) {
     MAX<-na.omit(MAX)
     MAX<-data.frame(MAX)
     MAX$MAX<-MAX$MAX[order(-MAX$MAX)]
-    print(MAX$MAX)
 
     n = nrow(MAX)
 
@@ -58,7 +57,6 @@ Lp3<-function(inputData,datatype) {
 
     # Finding the averages of the Max and log values
     AverageMax<-mean(MAX$MAX)
-    print(AverageMax)
     AverageLog<-mean(LoggedMax$LoggedMax)
 
     # {(loggedMax-mean(loggedMax))^2}
@@ -108,7 +106,6 @@ Lp3<-function(inputData,datatype) {
     # adds column of Skew factors to log-Pearson Type III Distributions table (Haan,1977,Table 7.7)
     Cs <- n*SumCubeDiff/((n-1)*(n-2)*StandardDeviation^3)
     Cs<-round(Cs,digits=1)
-    print(Cs)
     Cs2<-rep(Cs,61)
 
     # matches skew coefficients and extracts frequency factors from same row
