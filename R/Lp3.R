@@ -1,9 +1,12 @@
-#' Lp3 Function Needs a single sentence description
+#' The Lp3 function applies the Log-Pearson Type III model to hydrologic datasets from the National Water Census Data Portal to generate frequency distribution curves.
 #'
-#' The Lp3 FuNeeds a more thorough paragraph describing what it does, why, and a bit of how.
+#' The purpose of the Lp3 function is to apply the Log-Pearson Type III model to streamflow and precipitation datasets from the National Water Census Data Portal to obtain their respective frequency distribution curves.
+#' The desired datasets are to be previously downloaded from the Portal using the 'getNWCData' function and saved in a user-named variable. The user inputs two arguments into the Lp3 function: inputData (the user-named variable) and the desired dataset ("streamflow" or "prcp").
+#' The function singles out the desired dataset and and converts units from metric to english. The dataset is organized into water years. Next, the Log Pearson Type III model is applied to the data. The function calls in Frequency Factors from a csv.
+#' Freqency factors were taken from http://streamflow.engr.oregonstate.edu/analysis/floodfreq/skew.htm.
 #'
-#' @param inputData \code{data.frame} as returned by getNWCData?
-#' @param datatype \code{character} choose from ... ?
+#' @param inputData \code{data.frame} stored in user-named variable, returned by getNWCData
+#' @param datatype \code{character} choose from "streamflow" and "prcp"
 #'
 #' @return The return variable "plotthis" is a plot of the Log-Pearson Type III model applied to the user-selected USGS hydrologic dataset.
 #' @export
