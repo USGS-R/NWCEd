@@ -1,14 +1,14 @@
 #' Lp3 Function Needs a single sentence description
 #'
-#' Needs a more thorough paragraph describing what it does, why, and a bit of how.
+#' The Lp3 FuNeeds a more thorough paragraph describing what it does, why, and a bit of how.
 #'
 #' @param inputData \code{data.frame} as returned by getNWCData?
 #' @param datatype \code{character} choose from ... ?
 #'
-#' @return plotthis is returned, describe it here.
+#' @return The return variable "plotthis" is a plot of the Log-Pearson Type III model applied to the user-selected USGS hydrologic dataset.
 #' @export
-#' @import foreach
-#' @import iterators
+#' @importFrom foreach foreach
+#' @importFrom iterators iter
 #' @examples
 #' \dontrun{
 #' variable_name<-getNWCData(huc = "160202030505", local = FALSE)
