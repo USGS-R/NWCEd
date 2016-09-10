@@ -1,11 +1,11 @@
 #' The Lp3 function applies the Log-Pearson Type III model to hydrologic datasets from the National Water Census Data Portal to generate frequency distribution curves.
 #'
 #' The purpose of the Lp3 function is to apply the Log-Pearson Type III model to streamflow and precipitation datasets from the National Water Census Data Portal to obtain their respective frequency distribution curves.
-#' The desired datasets are to be previously downloaded from the Portal using the 'getNWCData' function and saved in a user-named variable. The user inputs two arguments into the Lp3 function: inputData (the user-named variable) and the desired dataset ("streamflow" or "prcp").
+#' The desired datasets are to be previously downloaded from the Portal using the 'getNWCData' function and saved in a user-named variable. The user inputs two arguments into the Lp3 function: check (the user-named variable) and the desired dataset ("streamflow" or "prcp").
 #' The function singles out the desired dataset and and converts units from metric to english. The dataset is organized into water years. Next, the Log Pearson Type III model is applied to the data. The function calls in Frequency Factors from a csv.
 #' Freqency factors were taken from http://streamflow.engr.oregonstate.edu/analysis/floodfreq/skew.htm.
 #'
-#' @param inputData \code{data.frame} stored in user-named variable, returned by getNWCData
+#' @param check \code{data.frame} stored in user-named variable, returned by getNWCData
 #' @param datatype \code{character} choose from "streamflow" and "prcp"
 #'
 #' @return The return variable "plotthis" is a plot of the Log-Pearson Type III model applied to the user-selected USGS hydrologic dataset.
@@ -17,15 +17,15 @@
 #' variable_name<-getNWCData(huc = "160202030505", local = FALSE)
 #' Lp3(variable_name, "prcp")
 #' }
-Lp3<-function(inputData,datatype) {
+Lp3<-function(check,datatype) {
   if (datatype == "prcp"){
 
-    inputData$prcp<-na.omit(inputData$prcp)
-    inputData$prcp$data<-inputData$prcp$data*0.0393701
-    dates<-c(inputData$prcp$date)
+    check$prcp<-na.omit(check$prcp)
+    check$prcp$data<-check$prcp$data*0.0393701
+    dates<-c(check$prcp$date)
 
     # Setting up the data
-    df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),inputData$prcp$data)
+    df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),check$prcp$data)
 
     split(df, df$wtr_yr)
     df$dates<-NULL
@@ -39,7 +39,7 @@ Lp3<-function(inputData,datatype) {
 
     MAX<- matrix(ncol=variables, nrow = iterations)
     foreach (i=iter(test5,by="row")) %do%{
-      a<-max(i$inputData.prcp.data)
+      a<-max(i$check.prcp.data)
       MAX<-c(MAX,a)
     }
     MAX<-na.omit(MAX)
@@ -145,18 +145,18 @@ Lp3<-function(inputData,datatype) {
   }
 
   else if ((datatype == "streamflow")) {
-    inputData$streamflow$agency_cd<-NULL
-    inputData$streamflow$site_no<-NULL
-    inputData$streamflow$cd_00060_00003<-NULL
-    names(inputData$streamflow)[names(inputData$streamflow)=="data_00060_00003"]<-"data"
-    names(inputData$streamflow)[names(inputData$streamflow)=="Date"]<-"date"
+    check$streamflow$agency_cd<-NULL
+    check$streamflow$site_no<-NULL
+    check$streamflow$cd_00060_00003<-NULL
+    names(check$streamflow)[names(check$streamflow)=="data_00060_00003"]<-"data"
+    names(check$streamflow)[names(check$streamflow)=="Date"]<-"date"
 
-    inputData$streamflow<-na.omit(inputData$streamflow)
+    check$streamflow<-na.omit(check$streamflow)
 
-    dates<-c(inputData$streamflow$date)
+    dates<-c(check$streamflow$date)
 
     # Setting up the data
-    df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),inputData$streamflow$data)
+    df = data.frame(dates,wtr_yr=wtr_yr(dates, 2),check$streamflow$data)
 
     split(df, df$wtr_yr)
     df$dates<-NULL
@@ -170,7 +170,7 @@ Lp3<-function(inputData,datatype) {
 
     MAX<- matrix(ncol=variables, nrow = iterations)
     foreach (i=iter(test5,by="row")) %do%{
-      a<-max(i$inputData.streamflow.data)
+      a<-max(i$check.streamflow.data)
       MAX<-c(MAX,a)
     }
     MAX<-na.omit(MAX)
@@ -268,9 +268,8 @@ Lp3<-function(inputData,datatype) {
     plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
       xlab("Return Period (years)") + ylab("Streamflow (CFS)") + ggtitle("Streamflow Frequency") +
       theme(panel.background = element_rect(fill = "grey75")) + geom_line(data = df, color="yellow")
-  } else {
-    stop("Didn't get a datatype of 'prcp' or 'streamflow', must choose one or the other for the Lp3 function.")
-  }
+    }
+    else {stop("Didn't get a datatype of 'prcp' or 'streamflow', must choose one or the other for the Lp3 function.")}
   return(plotthis)
 }
 
@@ -284,3 +283,4 @@ wtr_yr <- function(dates, start_month=9) {
   # Return the water year
   adj.year
 }
+
