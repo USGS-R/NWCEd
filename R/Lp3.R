@@ -241,7 +241,7 @@ Lp3<-function(inputData,datatype) {
     Cs<-round(Cs,digits=1)
     Cs2<-rep(Cs,61)
 
-    frequencyfactors<-read.csv('./Frequency_Factors_Log_Pearson_Type_III.csv')
+
     frequencyfactors<-merge(frequencyfactors,Cs2)
     frequencyfactors<-frequencyfactors[-c(62:3721),]
     frequencyfactors<-frequencyfactors[frequencyfactors$Cs1 == frequencyfactors$y, ]
