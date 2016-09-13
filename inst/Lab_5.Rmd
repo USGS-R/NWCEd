@@ -39,19 +39,17 @@ Water managers, hydrologists, and engineers are responsible for making decisions
 
 ## Important Questions to Ask Yourself
 
-1. What information is contained in a time series plot?
-2. How do I interpret the quality of a dataset using a box plot?
-3. Who is the intended audience I am trying to communicate information with?
+1. What information does a frequency distribution curve communicate?
+2. What ways are frequency distribution curves helpful?
+3. How do I generate a frequency distribution curve from raw data?
 
 ## Useful Terms and Acronyms
 
-Term               | Defintion
-----------------   | ---------------------------------------------------
-Time Series        | A series of values obtained at successive times
-NWIS               | National Water Information System
-Area Weighted Mean | The sum of area-weighted values divided by the total area
-Water Balance      | A method used to account for water flowing in and out of a system
-Double-Mass Curve  | A graphical method used to study consistency and trends in data
+Term                 | Defintion
+---------------------|--------------------------------------------------------------------------------------
+Log-Pearson Type III | A statistical method where hydrologic data is fixed to a probability distribution curve
+Water Year           | Describes a 12 month period beginning October 1st and ending the last day in September
+PivotTable           | A tool which allows for the organization of data in a spreadsheet
 
 ## Exercise 1 
 
@@ -102,7 +100,6 @@ Once the new page has loaded, verify that the HUC you selected is the intended H
 
 <br>
 
-
 #### Step 2
 <div style="text-align:justify">
 Once the file has been downloaded, open it in Microsoft Excel.  _Please note that while these steps are to be carried out in Microsoft Excel, similar open source software such as Google Sheets can run the steps with slight adjustments._  Once the file has been downloaded and upen in Excel, the spreadsheet should look similar to that displayed in Figure 6 below.
@@ -132,6 +129,7 @@ $$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$
 This statement checks the month of the year in the A column to see if it is in the current water year.  If it is, the year is extracted from the cell in column A and inserted into the emtpy adjacent cell in column B.  If the month is greater than 9, then 1 is added to the current year to match the correct water year date.  Once the formula has been entered into **B6**, double click in the bottom-right corner of the cell to populate the proceeding cells in column B.
 </div>
 
+
 <br>
 
 <div style="text-align:justify; clear: left">
@@ -139,13 +137,11 @@ Scroll down column B to verify that the year is updating every October.  Once th
 
 <br>
 
-<div style="text-align:justify; clear: left">
-
 #### Step 3
-<div style="text-align:justify">
+
 We are now ready to begin the analysis.  As a check, make sure your spreadsheet looks like the one depicted in Figure 8 below.  Please note the addition of the **"WtrYr"** table header.  Make sure there are no empty columns in between the water year column and the precipitation value column.  
-</div>
 <br>
+
 
 ![**Figure 8: Spreadsheet formatting check.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure8.1.JPG)
 
@@ -320,7 +316,9 @@ Create a scatter plot with smooth lines and markers of the return period and max
 <br>
 
 <div style="text-align:justify">
-#### Step 4
+## Exercise 2
+
+#### Step 1
 
 Now that we have learned the steps in applying the Log-Pearson Type III distribution to a dataset in Excel, we are ready to learn the Log-Pearson Type III function in the **NWCEd** R package.  These steps assume that R has been installed along with the required packages which include **iterators**, **foreach**, **NWCEd**, and **ggplot2**.  The first step is to download the desired dataset from the NWC-DP.  This can be done by using the **getNWCData** function in the NWCEd package.  Below is a block of code that walks through how this is to be done.
 
@@ -338,12 +336,10 @@ Once the data is downloaded and stored in a variable of your choice, we are read
 ```{r Log Pearson Type III function, eval=TRUE, echo=TRUE}
 Lp3(variable_name, "prcp")
 ```
-
 <br>
+</div>
 
 ## Try It Yourself
-
-<br>
 
 #### Problem 1
 
@@ -379,7 +375,7 @@ Lp3(prb2,"prcp")
 <br>
 
 #### Problem 3
-You have been asked to design a culvert to be installed in Cane Creek located in Cordova, Alabama. The city has design standard that requres the culvert be designed for the 100 year storm event. The site is located in a 12-Digit HUC with an ID of 031501070601. Produce a short report for the city engineer which gives the flow for a 100 year event. Include a plot of the frequency curve.
+You have been asked to design a culvert to be installed in Cane Creek located in Cordova, Alabama. The city has a standard that requres the culvert be designed for the 100 year storm event. The site is located in a 12-Digit HUC with an ID of 031501070601. Produce a short report for the city engineer which includes the flow for a 100 year event. Include a plot of the frequency curve.
 </div>
 <div style="text-align:center">
   <a id="displayText" href="javascript:toggle(4);">Show Answer</a>
@@ -390,6 +386,8 @@ prb3<-getNWCData("160202030505", local = FALSE)
 Lp3(prb3,"streamflow")
 ```
 </div>
+<br>
+<br>
 
 
 
