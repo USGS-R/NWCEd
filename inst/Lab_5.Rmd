@@ -30,7 +30,7 @@ library(foreach)
         text.innerHTML = "hide";
       }
    } 
-  </script>
+ </script>
 
 ## Introduction
 <div style="text-align:justify">
@@ -79,12 +79,13 @@ The map will zoom in to the general region where we can more easily see the HUC 
 
 <br>
 </div>
+
 <div style= "width: 429px; height= 300px; float: left">
 ![**Figure 3: The Grand Junction, Colorado region.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure3.JPG)
 </div>
+
 <div style= "width: 473px; height= 300px; float: right">
 ![**Figure 4: A 12 Digit HUC layer displayed over Grand Junction, CO.**](https://cdn.rawgit.com/jnelson7/NWCEd/0b629f5f66fc9209203e3ac05c27a45876d21e67/inst/Lab5_NWC-DP_Images/Figure4.JPG)
-
 </div>
 
 <br>
@@ -126,7 +127,7 @@ Next, select the empty cell **B6**.  Select all the empty cells in between the g
 <br>
 Now that the empty column B has been prepared, we are ready to convert the dates listed in column A into water years.  In the empty cell **B6**, enter the following statement:
 
-$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$
+`$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$`
 
 This statement checks the month of the year in the A column to see if it is in the current water year.  If it is, the year is extracted from the cell in column A and inserted into the emtpy adjacent cell in column B.  If the month is greater than 9, then 1 is added to the current year to match the correct water year date.  Once the formula has been entered into **B6**, double click in the bottom-right corner of the cell to populate the proceeding cells in column B.
 </div>
@@ -250,19 +251,19 @@ Create a new column to the right of the **Log(MaxPrecip)** column titled **(Log(
 With our spreadsheet completed, we are ready to calculate the **variance**, **standard deviation**, and **skew coefficient**.  The formula to calculate the variance is provided below:
 
 <br>
-$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$
+`$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$`
 <br>
 
 The standard deviation is equal to the square root of the variance.  The formula is displayed below.
 
 <br>
-$$\sigma log(MaxPrecip) = \sqrt{variance}$$
+`$$\sigma log(MaxPrecip) = \sqrt{variance}$$`
 <br>
 
 The skew coefficient can be calculated using the following formula:
 
 <br>
-$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$
+`$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$`
 <br>
 
 Calculate the variance, standard deviation, and skew coefficient in your Excel spreadsheet using the formulas given.  For this example, the variance, standard deviation, and skew coefficient were found to be 0.016, 0.127, and -0.408, respectively.  
@@ -284,7 +285,7 @@ We now need to create our final table in the spreadsheet.  Create three columns 
 Finally we are ready to calculate the **MaxPrecip** column.  The formula to do this is given below:
 
 <br>
-$$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$
+`$$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$`
 <br>
 
 With the formula, populate the **MaxPrecip** column.  _Hint: Remeber that Log base 10 is undone by 10^_.  With the last column filled in, the table should look similar to the table shown in Figure 19 below.
@@ -316,12 +317,10 @@ Create a scatter plot with smooth lines and markers of the return period and max
 </div>
 <br>
 
-<div style="text-align:justify">
-
 ## Exercise 2
 
 #### Step 1
-
+<div style="text-align:justify">
 Now that we have learned the steps in applying the Log-Pearson Type III distribution to a dataset in Excel, we are ready to learn the Log-Pearson Type III function in the **NWCEd** R package.  These steps assume that R has been installed along with the required packages which include **iterators**, **foreach**, **NWCEd**, and **ggplot2**.  The first step is to download the desired dataset from the NWC-DP.  This can be done by using the **getNWCData** function in the NWCEd package.  Below is a block of code that walks through how this is to be done.
 
 <br>
@@ -390,10 +389,3 @@ Lp3(prb3,"streamflow")
 </div>
 <br>
 <br>
-
-
-
-
-
-
-
