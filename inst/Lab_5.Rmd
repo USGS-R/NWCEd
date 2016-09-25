@@ -78,10 +78,11 @@ After clicking on the Water Budget icon, a new screen will load which displays a
 The map will zoom in to the general region where we can more easily see the HUC we want to select.  Under the **`HUC Layer`** dropdown box, select the **12 Digit** layer (see Figure 3 and Figure 4 below).  Select the HUC that encompasses Orchard Mesa, Colorado as indicated by the red arrow in Figure 4.
 
 <br>
-
+</div>
 <div style= "width: 429px; height= 300px; float: left">
 ![**Figure 3: The Grand Junction, Colorado region.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure3.JPG)
-</div><div style= "width: 473px; height= 300px; float: right">
+</div>
+<div style= "width: 473px; height= 300px; float: right">
 ![**Figure 4: A 12 Digit HUC layer displayed over Grand Junction, CO.**](https://cdn.rawgit.com/jnelson7/NWCEd/0b629f5f66fc9209203e3ac05c27a45876d21e67/inst/Lab5_NWC-DP_Images/Figure4.JPG)
 
 </div>
@@ -99,6 +100,7 @@ Once the new page has loaded, verify that the HUC you selected is the intended H
 ![**Figure 5: Download precipitation dataset associated with HUC # 140200050803.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure5.JPG)
 
 <br>
+</div>
 
 #### Step 2
 <div style="text-align:justify">
@@ -112,7 +114,7 @@ Once the file has been downloaded, open it in Microsoft Excel.  _Please note tha
 
 The first thing we need to do is prepare the spreadsheet for the analysis.  We are needing to compile and separate the data based on their respective **water years**.  To do this, add a column in between column A and column B.  This can be done simply by selecting cell **B6**.  Then while holding down the **`control`** and **`shift`** buttons, press the **`down arrow`** key.  Once the cells are selected, right click and select **insert** with the **`Shift cells right`** option selected.  Click **`OK`**.  The column of area weighted mean precipitation values shifts to the right.
 <br>
-
+</div>
 <div style= "width: 400px; height= 220px;PADDING-RIGHT: 10px; float: left">
 <br>
 
@@ -154,7 +156,7 @@ We will now begin using a pivot table in excel to help us quickly run the Log-Pe
 ![**Figure 9: Creating the pivot table.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure9.1.JPG)
 
 <br>
-
+</div>
 <div style="text-align:justify">
 After clicking **`OK`** a new sheet will open up as shown in Figure 10.  On the right of sheet is the **PivotTable Fields** ribbon.  Clicking anywhere in the sheet outside of the **PivotTable** box will hide the pivot table ribbon.  clicking anywhere inside the PivotTable box will show the ribbon again.  
 
@@ -308,14 +310,14 @@ Create a scatter plot with smooth lines and markers of the return period and max
 
 
 <br>
-
+</div>
 <div style= "width: 500px; height= 400px;">
 ![**Figure 20: Log-Pearson Type III with log scale.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure22.1.JPG)
-</div>
 </div>
 <br>
 
 <div style="text-align:justify">
+
 ## Exercise 2
 
 #### Step 1
