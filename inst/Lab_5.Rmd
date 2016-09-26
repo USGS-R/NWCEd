@@ -30,7 +30,7 @@ library(foreach)
         text.innerHTML = "hide";
       }
    } 
-  </script>
+ </script>
 
 ## Introduction
 <div style="text-align:justify">
@@ -78,12 +78,14 @@ After clicking on the Water Budget icon, a new screen will load which displays a
 The map will zoom in to the general region where we can more easily see the HUC we want to select.  Under the **`HUC Layer`** dropdown box, select the **12 Digit** layer (see Figure 3 and Figure 4 below).  Select the HUC that encompasses Orchard Mesa, Colorado as indicated by the red arrow in Figure 4.
 
 <br>
+</div>
 
 <div style= "width: 429px; height= 300px; float: left">
 ![**Figure 3: The Grand Junction, Colorado region.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure3.JPG)
-</div><div style= "width: 473px; height= 300px; float: right">
-![**Figure 4: A 12 Digit HUC layer displayed over Grand Junction, CO.**](https://cdn.rawgit.com/jnelson7/NWCEd/0b629f5f66fc9209203e3ac05c27a45876d21e67/inst/Lab5_NWC-DP_Images/Figure4.JPG)
+</div>
 
+<div style= "width: 473px; height= 300px; float: right">
+![**Figure 4: A 12 Digit HUC layer displayed over Grand Junction, CO.**](https://cdn.rawgit.com/jnelson7/NWCEd/0b629f5f66fc9209203e3ac05c27a45876d21e67/inst/Lab5_NWC-DP_Images/Figure4.JPG)
 </div>
 
 <br>
@@ -99,6 +101,7 @@ Once the new page has loaded, verify that the HUC you selected is the intended H
 ![**Figure 5: Download precipitation dataset associated with HUC # 140200050803.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure5.JPG)
 
 <br>
+</div>
 
 #### Step 2
 <div style="text-align:justify">
@@ -112,7 +115,7 @@ Once the file has been downloaded, open it in Microsoft Excel.  _Please note tha
 
 The first thing we need to do is prepare the spreadsheet for the analysis.  We are needing to compile and separate the data based on their respective **water years**.  To do this, add a column in between column A and column B.  This can be done simply by selecting cell **B6**.  Then while holding down the **`control`** and **`shift`** buttons, press the **`down arrow`** key.  Once the cells are selected, right click and select **insert** with the **`Shift cells right`** option selected.  Click **`OK`**.  The column of area weighted mean precipitation values shifts to the right.
 <br>
-
+</div>
 <div style= "width: 400px; height= 220px;PADDING-RIGHT: 10px; float: left">
 <br>
 
@@ -124,7 +127,7 @@ Next, select the empty cell **B6**.  Select all the empty cells in between the g
 <br>
 Now that the empty column B has been prepared, we are ready to convert the dates listed in column A into water years.  In the empty cell **B6**, enter the following statement:
 
-$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$
+`$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$`
 
 This statement checks the month of the year in the A column to see if it is in the current water year.  If it is, the year is extracted from the cell in column A and inserted into the emtpy adjacent cell in column B.  If the month is greater than 9, then 1 is added to the current year to match the correct water year date.  Once the formula has been entered into **B6**, double click in the bottom-right corner of the cell to populate the proceeding cells in column B.
 </div>
@@ -154,7 +157,7 @@ We will now begin using a pivot table in excel to help us quickly run the Log-Pe
 ![**Figure 9: Creating the pivot table.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure9.1.JPG)
 
 <br>
-
+</div>
 <div style="text-align:justify">
 After clicking **`OK`** a new sheet will open up as shown in Figure 10.  On the right of sheet is the **PivotTable Fields** ribbon.  Clicking anywhere in the sheet outside of the **PivotTable** box will hide the pivot table ribbon.  clicking anywhere inside the PivotTable box will show the ribbon again.  
 
@@ -248,19 +251,19 @@ Create a new column to the right of the **Log(MaxPrecip)** column titled **(Log(
 With our spreadsheet completed, we are ready to calculate the **variance**, **standard deviation**, and **skew coefficient**.  The formula to calculate the variance is provided below:
 
 <br>
-$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$
+`$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$`
 <br>
 
 The standard deviation is equal to the square root of the variance.  The formula is displayed below.
 
 <br>
-$$\sigma log(MaxPrecip) = \sqrt{variance}$$
+`$$\sigma log(MaxPrecip) = \sqrt{variance}$$`
 <br>
 
 The skew coefficient can be calculated using the following formula:
 
 <br>
-$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$
+`$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$`
 <br>
 
 Calculate the variance, standard deviation, and skew coefficient in your Excel spreadsheet using the formulas given.  For this example, the variance, standard deviation, and skew coefficient were found to be 0.016, 0.127, and -0.408, respectively.  
@@ -282,7 +285,7 @@ We now need to create our final table in the spreadsheet.  Create three columns 
 Finally we are ready to calculate the **MaxPrecip** column.  The formula to do this is given below:
 
 <br>
-$$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$
+`$$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$`
 <br>
 
 With the formula, populate the **MaxPrecip** column.  _Hint: Remeber that Log base 10 is undone by 10^_.  With the last column filled in, the table should look similar to the table shown in Figure 19 below.
@@ -308,18 +311,16 @@ Create a scatter plot with smooth lines and markers of the return period and max
 
 
 <br>
-
+</div>
 <div style= "width: 500px; height= 400px;">
 ![**Figure 20: Log-Pearson Type III with log scale.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure22.1.JPG)
 </div>
-</div>
 <br>
 
-<div style="text-align:justify">
 ## Exercise 2
 
 #### Step 1
-
+<div style="text-align:justify">
 Now that we have learned the steps in applying the Log-Pearson Type III distribution to a dataset in Excel, we are ready to learn the Log-Pearson Type III function in the **NWCEd** R package.  These steps assume that R has been installed along with the required packages which include **iterators**, **foreach**, **NWCEd**, and **ggplot2**.  The first step is to download the desired dataset from the NWC-DP.  This can be done by using the **getNWCData** function in the NWCEd package.  Below is a block of code that walks through how this is to be done.
 
 <br>
@@ -388,10 +389,3 @@ Lp3(prb3,"streamflow")
 </div>
 <br>
 <br>
-
-
-
-
-
-
-
