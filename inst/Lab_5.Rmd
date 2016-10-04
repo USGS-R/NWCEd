@@ -247,23 +247,23 @@ Create a new column to the right of the **Log(MaxPrecip)** column titled **(Log(
 </div>
 
 <div style="text-align:justify">
-#### Step 3
+#### Step 4
 With our spreadsheet completed, we are ready to calculate the **variance**, **standard deviation**, and **skew coefficient**.  The formula to calculate the variance is provided below:
 
-<br>
 `$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$`
+<br>
 <br>
 
 The standard deviation is equal to the square root of the variance.  The formula is displayed below.
 
-<br>
 `$$\sigma log(MaxPrecip) = \sqrt{variance}$$`
+<br>
 <br>
 
 The skew coefficient can be calculated using the following formula:
 
-<br>
 `$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$`
+<br>
 <br>
 
 Calculate the variance, standard deviation, and skew coefficient in your Excel spreadsheet using the formulas given.  For this example, the variance, standard deviation, and skew coefficient were found to be 0.016, 0.127, and -0.408, respectively.  
