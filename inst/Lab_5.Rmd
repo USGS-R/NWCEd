@@ -250,19 +250,22 @@ Create a new column to the right of the **Log(MaxPrecip)** column titled **(Log(
 #### Step 4
 With our spreadsheet completed, we are ready to calculate the **variance**, **standard deviation**, and **skew coefficient**.  The formula to calculate the variance is provided below:
 
-`$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$`
+
+$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$
 <br>
 <br>
 
 The standard deviation is equal to the square root of the variance.  The formula is displayed below.
 
-`$$\sigma log(MaxPrecip) = \sqrt{variance}$$`
+
+$$\sigma log(MaxPrecip) = \sqrt{variance}$$
 <br>
 <br>
 
 The skew coefficient can be calculated using the following formula:
 
-`$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$`
+
+$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$
 <br>
 <br>
 
@@ -284,8 +287,7 @@ We now need to create our final table in the spreadsheet.  Create three columns 
 <div style="text-align:justify">
 Finally we are ready to calculate the **MaxPrecip** column.  The formula to do this is given below:
 
-<br>
-`$$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$`
+$$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$
 <br>
 
 With the formula, populate the **MaxPrecip** column.  _Hint: Remeber that Log base 10 is undone by 10^_.  With the last column filled in, the table should look similar to the table shown in Figure 19 below.
