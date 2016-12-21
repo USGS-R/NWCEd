@@ -103,7 +103,7 @@ Make sure the **`Select`** button is selected first and click anywhere inside th
 
 <br>
 
-![**Figure 6-a: A monthly time series plot of precipitation and evapotranspiration.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleTimeSeriesa.JPG)
+![**Figure 6-a: A monthly time series plot of precipitation and evapotranspiration.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6aupdate.JPG)
 
 <br>
 
@@ -130,13 +130,13 @@ Notice at the top left corner of the screen are the buttons **`Show Accumulated 
 
 <br>
 
-<div style= "width: 500px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 7-b: HUC information for water budget.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetc.jpeg)
+<div style= "width: 500px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 7-b: HUC information for water budget.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetc.jpeg)
 </div> 
 <div style="text-align:justify"> The streamflow is measured using a NWIS gage.  The gage location is represented on the map with a red diamond with a black dot in the center.  On the left of the screen, information about the selected HUC including HUC number, watershed name, and drainage area is displayed.  What is the gage name for this selected HUC?  What is the HUC watershed drainage area?  What is the gage watershed drainage area?  Are they the same?  If they are not the same, what would cause them to be different?
 
 Notice the **`Annual`**, **`Monthly`**, and **`Daily`** buttons toward the lower-left corner of the screen .  Clicking on any of these buttons automatically adjusts the plots to the respective time series type.
 
-Click on the **`Daily`** button.  How would you describe the difference between the appearance of the Daily and Monthly time series plots?  Which do you prefer?  Why?  Move your cursor over the plot.  Actual data points from each of the respective datasets are displayed under the plot.
+Click the **`Daily`** button.  How would you describe the difference between the appearance of the Daily and Monthly time series plots?  Move your cursor over the plot.  Actual data points from each of the respective datasets are displayed under the plot.
 </div>
 
 <br>
