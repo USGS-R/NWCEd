@@ -35,7 +35,7 @@ The United States Geological Survey (USGS) has developed a website called the Na
 </div>
 ## Important Questions to Ask Yourself
 
-1. What is the purpose the NWC-DP?
+1. What is the purpose of the NWC-DP?
 2. What type of data am I working with?
 3. How are the datasets compiled?
 
