@@ -13,6 +13,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(NWCEd)
 library(ggplot2)
+library(iterators)
+library(foreach)
 ```
 
 <script language="javascript"> 
@@ -28,7 +30,7 @@ library(ggplot2)
         text.innerHTML = "hide";
       }
    } 
-  </script>
+ </script>
 
 ## Introduction
 <div style="text-align:justify">
@@ -37,19 +39,17 @@ Water managers, hydrologists, and engineers are responsible for making decisions
 
 ## Important Questions to Ask Yourself
 
-1. What information is contained in a time series plot?
-2. How do I interpret the quality of a dataset using a box plot?
-3. Who is the intended audience I am trying to communicate information with?
+1. What information does a frequency distribution curve communicate?
+2. What ways are frequency distribution curves helpful?
+3. How do I generate a frequency distribution curve from raw data?
 
 ## Useful Terms and Acronyms
 
-Term               | Defintion
-----------------   | ---------------------------------------------------
-Time Series        | A series of values obtained at successive times
-NWIS               | National Water Information System
-Area Weighted Mean | The sum of area-weighted values divided by the total area
-Water Balance      | A method used to account for water flowing in and out of a system
-Double-Mass Curve  | A graphical method used to study consistency and trends in data
+Term                 | Defintion
+---------------------|--------------------------------------------------------------------------------------
+Log-Pearson Type III | A statistical method where hydrologic data is fixed to a probability distribution curve
+Water Year           | Describes a 12 month period beginning October 1st and ending the last day in September
+PivotTable           | A tool which allows for the organization of data in a spreadsheet
 
 ## Exercise 1 
 
@@ -78,12 +78,14 @@ After clicking on the Water Budget icon, a new screen will load which displays a
 The map will zoom in to the general region where we can more easily see the HUC we want to select.  Under the **`HUC Layer`** dropdown box, select the **12 Digit** layer (see Figure 3 and Figure 4 below).  Select the HUC that encompasses Orchard Mesa, Colorado as indicated by the red arrow in Figure 4.
 
 <br>
+</div>
 
 <div style= "width: 429px; height= 300px; float: left">
 ![**Figure 3: The Grand Junction, Colorado region.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure3.JPG)
-</div><div style= "width: 473px; height= 300px; float: right">
-![**Figure 4: A 12 Digit HUC layer displayed over Grand Junction, CO.**](https://cdn.rawgit.com/jnelson7/NWCEd/0b629f5f66fc9209203e3ac05c27a45876d21e67/inst/Lab5_NWC-DP_Images/Figure4.JPG)
+</div>
 
+<div style= "width: 473px; height= 300px; float: right">
+![**Figure 4: A 12 Digit HUC layer displayed over Grand Junction, CO.**](https://cdn.rawgit.com/jnelson7/NWCEd/0b629f5f66fc9209203e3ac05c27a45876d21e67/inst/Lab5_NWC-DP_Images/Figure4.JPG)
 </div>
 
 <br>
@@ -99,7 +101,7 @@ Once the new page has loaded, verify that the HUC you selected is the intended H
 ![**Figure 5: Download precipitation dataset associated with HUC # 140200050803.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure5.JPG)
 
 <br>
-
+</div>
 
 #### Step 2
 <div style="text-align:justify">
@@ -113,7 +115,7 @@ Once the file has been downloaded, open it in Microsoft Excel.  _Please note tha
 
 The first thing we need to do is prepare the spreadsheet for the analysis.  We are needing to compile and separate the data based on their respective **water years**.  To do this, add a column in between column A and column B.  This can be done simply by selecting cell **B6**.  Then while holding down the **`control`** and **`shift`** buttons, press the **`down arrow`** key.  Once the cells are selected, right click and select **insert** with the **`Shift cells right`** option selected.  Click **`OK`**.  The column of area weighted mean precipitation values shifts to the right.
 <br>
-
+</div>
 <div style= "width: 400px; height= 220px;PADDING-RIGHT: 10px; float: left">
 <br>
 
@@ -125,10 +127,11 @@ Next, select the empty cell **B6**.  Select all the empty cells in between the g
 <br>
 Now that the empty column B has been prepared, we are ready to convert the dates listed in column A into water years.  In the empty cell **B6**, enter the following statement:
 
-$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$
+`$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$`
 
 This statement checks the month of the year in the A column to see if it is in the current water year.  If it is, the year is extracted from the cell in column A and inserted into the emtpy adjacent cell in column B.  If the month is greater than 9, then 1 is added to the current year to match the correct water year date.  Once the formula has been entered into **B6**, double click in the bottom-right corner of the cell to populate the proceeding cells in column B.
 </div>
+
 
 <br>
 
@@ -137,13 +140,11 @@ Scroll down column B to verify that the year is updating every October.  Once th
 
 <br>
 
-<div style="text-align:justify; clear: left">
-
 #### Step 3
-<div style="text-align:justify">
+
 We are now ready to begin the analysis.  As a check, make sure your spreadsheet looks like the one depicted in Figure 8 below.  Please note the addition of the **"WtrYr"** table header.  Make sure there are no empty columns in between the water year column and the precipitation value column.  
-</div>
 <br>
+
 
 ![**Figure 8: Spreadsheet formatting check.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure8.1.JPG)
 
@@ -156,7 +157,7 @@ We will now begin using a pivot table in excel to help us quickly run the Log-Pe
 ![**Figure 9: Creating the pivot table.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure9.1.JPG)
 
 <br>
-
+</div>
 <div style="text-align:justify">
 After clicking **`OK`** a new sheet will open up as shown in Figure 10.  On the right of sheet is the **PivotTable Fields** ribbon.  Clicking anywhere in the sheet outside of the **PivotTable** box will hide the pivot table ribbon.  clicking anywhere inside the PivotTable box will show the ribbon again.  
 
@@ -196,7 +197,7 @@ In the **VALUES** box, click on the **`Count of Area`** drop down menu.  Click o
 
 <div style="text-align:justify">
 
-Now the max values for each water year have been calculated, copy and paste the table you just created to the right in the same sheet.  Select the **Max of Area Weighted Mean Precipitation** column, right click, and sort from largest to smallest.  Make sure to expand the selection.  _Note that the pivot table generated a grand total value at the bottom of the column that needs to be deleted before sorting._  Create a new column titled **Rank**.  Rank the max precipitation column from 1 to 36 as shown in Figure 13 below.
+Now the max values for each water year have been calculated, copy and paste the values table you just created to the right in the same sheet. This new table should not be a pivottable. Make sure to only paste the values. This next part will not work in the pivottable. Select the **Max of Area Weighted Mean Precipitation** column, right click, and sort from largest to smallest. Make sure to expand the selection.  _Note that the pivot table generated a grand total value at the bottom of the column that needs to be deleted before sorting._  Create a new column titled **Rank**.  Rank the max precipitation column from 1 to 36 as shown in Figure 13 below.
 
 <br>
 </div>
@@ -228,7 +229,7 @@ Once the max precipitation values have been ranked, create a new column.  Title 
 
 <div style="text-align:justify">
 
-Create a new column to the right of the **Log(MaxPrecip)** column titled **(Log(MaxPrecip)-avg(Log(MaxPrecip))^2**.  Use the formula from the column title to populate the column.  _Don't forget the absolute reference to the avg(log(MaxPrecip)) when copying the formula down the column_.  Create another column to the right of the previous column titled **(Log(MaxPrecip)-avg(Log(MaxPrecip))^3**.  Using the formula in the title, populate the cells in the respective column.  Next, create another column titled **Tr** for the return period.  Use the Excel formula ((n+1)/m) to populate the column where n is the number of observations in the Max of Area column and m is the respective rank.  In this example, n = 36.  Next, create another column titled **Exceedence Probability**.  Populate this column by using the Excel formula (1/Tr).  Figure 16 below shows the additional columns made.  Using the Excel formula Sum(), find the sum for the **(Log(MaxPrecip)-avg(Log(MaxPrecip))^2** and **(Log(MaxPrecip)-avg(Log(MaxPrecip))^3** columns as shown in Figure 17 below.
+Create a new column to the right of the **Log(MaxPrecip)** column titled **(Log(MaxPrecip)-avg(Log(MaxPrecip))^2** . Use the formula from the column title to populate the column.  _Don't forget the absolute reference to the avg(log(MaxPrecip)) when copying the formula down the column_.  Create another column to the right of the previous column titled **(Log(MaxPrecip)-avg(Log(MaxPrecip))^3** . Using the formula in the title, populate the cells in the respective column.  Next, create another column titled **Tr** for the return period.  Use the Excel formula ((n+1)/m) to populate the column where n is the number of observations in the Max of Area column and m is the respective rank.  In this example, n = 36.  Next, create another column titled **Exceedence Probability**.  Populate this column by using the Excel formula (1/Tr).  Figure 16 below shows the additional columns made.  Using the Excel formula Sum(), find the sum for the **(Log(MaxPrecip)-avg(Log(MaxPrecip))^2** and **(Log(MaxPrecip)-avg(Log(MaxPrecip))^3** columns as shown in Figure 17 below.
 
 <br>
 </div>
@@ -246,23 +247,26 @@ Create a new column to the right of the **Log(MaxPrecip)** column titled **(Log(
 </div>
 
 <div style="text-align:justify">
-#### Step 3
+#### Step 4
 With our spreadsheet completed, we are ready to calculate the **variance**, **standard deviation**, and **skew coefficient**.  The formula to calculate the variance is provided below:
 
-<br>
+
 $$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^2}{n-1}$$
+<br>
 <br>
 
 The standard deviation is equal to the square root of the variance.  The formula is displayed below.
 
-<br>
+
 $$\sigma log(MaxPrecip) = \sqrt{variance}$$
+<br>
 <br>
 
 The skew coefficient can be calculated using the following formula:
 
-<br>
+
 $$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$
+<br>
 <br>
 
 Calculate the variance, standard deviation, and skew coefficient in your Excel spreadsheet using the formulas given.  For this example, the variance, standard deviation, and skew coefficient were found to be 0.016, 0.127, and -0.408, respectively.  
@@ -283,7 +287,6 @@ We now need to create our final table in the spreadsheet.  Create three columns 
 <div style="text-align:justify">
 Finally we are ready to calculate the **MaxPrecip** column.  The formula to do this is given below:
 
-<br>
 $$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$
 <br>
 
@@ -310,30 +313,81 @@ Create a scatter plot with smooth lines and markers of the return period and max
 
 
 <br>
-
+</div>
 <div style= "width: 500px; height= 400px;">
 ![**Figure 20: Log-Pearson Type III with log scale.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure22.1.JPG)
 </div>
 <br>
 
+## Exercise 2
+
+#### Step 1
 <div style="text-align:justify">
-#### Step 4
 Now that we have learned the steps in applying the Log-Pearson Type III distribution to a dataset in Excel, we are ready to learn the Log-Pearson Type III function in the **NWCEd** R package.  These steps assume that R has been installed along with the required packages which include **iterators**, **foreach**, **NWCEd**, and **ggplot2**.  The first step is to download the desired dataset from the NWC-DP.  This can be done by using the **getNWCData** function in the NWCEd package.  Below is a block of code that walks through how this is to be done.
+
+<br>
 
 ```{r Lp3 function, eval=TRUE, echo=TRUE}
 # Uses the getNWCData function to pull down hydrologic datasets for specified HUC ID
 variable_name<-getNWCData(huc = "160202030505", local = FALSE)
 ```
+<br>
+
 Once the data is downloaded and stored in a variable of your choice, we are ready to use the Log-Pearson Type III function.  The function name is **Lp3**.  It has two arguments: variable name with stored data and dataset type ("prcp" or "streamflow").  The function will read the data from the user-named variable, run through the Log-Pearson Type III method and returns a frequency curve.  Below is the code which can be copied and pasted in the R console. 
 
+<br>
 ```{r Log Pearson Type III function, eval=TRUE, echo=TRUE}
 Lp3(variable_name, "prcp")
 ```
+<br>
+</div>
 
+## Try It Yourself
 
+#### Problem 1
 
+<div style="text-align:justify; clear: left">
+Using the steps outlined previously in this exercise, use Microsoft Excel or similar open source software to plot a frequency curve for precipitation data associated with the 12-Digit HUC which encompasses the majority of the Seattle, Washington and Bellevue, Washington areas (see Hint).
+</div>
+<br>
+ <a id="displayText" href="javascript:toggle(1);">Show Hint</a>
+  <div id="toggleText1" style="display: none">
+![](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure23.JPG)
+</div>
+<div style="text-align:center">
+  <a id="displayText" href="javascript:toggle(2);">Show Answer</a>
+</div>
+<div id="toggleText2" style="display: none">
+![](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure24.JPG)
+</div>
+<br>
 
+#### Problem 2
+<div style="text-align:justify; clear: left">
+Plot a Log-Pearson Type III model to the same precipitation dataset from Problem 1 in R. Use the the getNWCData function to pull down the data. Use the Lp3 function to produce the plot.
+</div>
+<div style="text-align:center">
+  <a id="displayText" href="javascript:toggle(3);">Show Answer</a>
+</div>
+<div id="toggleText3" style="display: none">
+```{r Problem 2 Lp3 plot, eval=TRUE, echo=FALSE}
+prb2<-getNWCData("171100120400", local = FALSE)
+Lp3(prb2,"prcp")
+```
+</div>
+<br>
 
-
-
-
+#### Problem 3
+You have been asked to design a culvert to be installed in Cane Creek located in Cordova, Alabama. The city has a standard that requres the culvert be designed for the 100 year storm event. The site is located in a 12-Digit HUC with an ID of 031501070601. Produce a short report for the city engineer which includes the flow for a 100 year event. Include a plot of the frequency curve.
+</div>
+<div style="text-align:center">
+  <a id="displayText" href="javascript:toggle(4);">Show Answer</a>
+</div>
+<div id="toggleText4" style="display: none">
+```{r Problem 3 Lp3 plot, eval=TRUE, echo=FALSE}
+prb3<-getNWCData("160202030505", local = FALSE)
+Lp3(prb3,"streamflow")
+```
+</div>
+<br>
+<br>

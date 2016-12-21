@@ -19,7 +19,7 @@ library(devtools)
 #### Step 2
 Install and load NWCEd package in your environment.
 ```{r}
-install_github("dblodgett-usgs/NWCEd")
+install_github("NWCEd/NWCEd")
 library(NWCEd)
 ```
 #### Step 3
@@ -33,7 +33,7 @@ Install and load the following packages to run in the respective labs using the 
 
 <br>
 
-[![Travis](https://travis-ci.org/dblodgett-usgs/NWCEd.svg?branch=master)](https://travis-ci.org/dblodgett-usgs/NWCEd)
+[![Travis](https://travis-ci.org/NWCEd/NWCEd.svg?branch=master)](https://travis-ci.org/NWCEd/NWCEd)
 
 <br>
 

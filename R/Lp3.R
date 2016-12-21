@@ -1,14 +1,17 @@
-#' Lp3 Function Needs a single sentence description
+#' The Lp3 function applies the Log-Pearson Type III model to hydrologic datasets from the National Water Census Data Portal to generate frequency distribution curves.
 #'
-#' Needs a more thorough paragraph describing what it does, why, and a bit of how.
+#' The purpose of the Lp3 function is to apply the Log-Pearson Type III model to streamflow and precipitation datasets from the National Water Census Data Portal to obtain their respective frequency distribution curves.
+#' The desired datasets are to be previously downloaded from the Portal using the 'getNWCData' function and saved in a user-named variable. The user inputs two arguments into the Lp3 function: inputData (the user-named variable) and the desired dataset ("streamflow" or "prcp").
+#' The function singles out the desired dataset and and converts units from metric to english. The dataset is organized into water years. Next, the Log Pearson Type III model is applied to the data. The function calls in Frequency Factors from a csv.
+#' Freqency factors were taken from http://streamflow.engr.oregonstate.edu/analysis/floodfreq/skew.htm.
 #'
-#' @param inputData \code{data.frame} as returned by getNWCData?
-#' @param datatype \code{character} choose from ... ?
+#' @param inputData \code{data.frame} stored in user-named variable, returned by getNWCData
+#' @param datatype \code{character} choose from "streamflow" and "prcp"
 #'
-#' @return plotthis is returned, describe it here.
+#' @return The return variable "plotthis" is a plot of the Log-Pearson Type III model applied to the user-selected USGS hydrologic dataset.
 #' @export
-#' @import foreach
-#' @import iterators
+#' @importFrom foreach foreach
+#' @importFrom iterators iter
 #' @examples
 #' \dontrun{
 #' variable_name<-getNWCData(huc = "160202030505", local = FALSE)
@@ -42,7 +45,6 @@ Lp3<-function(inputData,datatype) {
     MAX<-na.omit(MAX)
     MAX<-data.frame(MAX)
     MAX$MAX<-MAX$MAX[order(-MAX$MAX)]
-    print(MAX$MAX)
 
     n = nrow(MAX)
 
@@ -58,7 +60,6 @@ Lp3<-function(inputData,datatype) {
 
     # Finding the averages of the Max and log values
     AverageMax<-mean(MAX$MAX)
-    print(AverageMax)
     AverageLog<-mean(LoggedMax$LoggedMax)
 
     # {(loggedMax-mean(loggedMax))^2}
@@ -108,7 +109,6 @@ Lp3<-function(inputData,datatype) {
     # adds column of Skew factors to log-Pearson Type III Distributions table (Haan,1977,Table 7.7)
     Cs <- n*SumCubeDiff/((n-1)*(n-2)*StandardDeviation^3)
     Cs<-round(Cs,digits=1)
-    print(Cs)
     Cs2<-rep(Cs,61)
 
     # matches skew coefficients and extracts frequency factors from same row
@@ -241,7 +241,7 @@ Lp3<-function(inputData,datatype) {
     Cs<-round(Cs,digits=1)
     Cs2<-rep(Cs,61)
 
-    frequencyfactors<-read.csv('./Frequency_Factors_Log_Pearson_Type_III.csv')
+
     frequencyfactors<-merge(frequencyfactors,Cs2)
     frequencyfactors<-frequencyfactors[-c(62:3721),]
     frequencyfactors<-frequencyfactors[frequencyfactors$Cs1 == frequencyfactors$y, ]
@@ -268,9 +268,8 @@ Lp3<-function(inputData,datatype) {
     plotthis<-ggplot(df, aes(x=ReturnPeriod, y=y)) + geom_point() +
       xlab("Return Period (years)") + ylab("Streamflow (CFS)") + ggtitle("Streamflow Frequency") +
       theme(panel.background = element_rect(fill = "grey75")) + geom_line(data = df, color="yellow")
-  } else {
-    stop("Didn't get a datatype of 'prcp' or 'streamflow', must choose one or the other for the Lp3 function.")
-  }
+    }
+    else {stop("Didn't get a datatype of 'prcp' or 'streamflow', must choose one or the other for the Lp3 function.")}
   return(plotthis)
 }
 
@@ -284,3 +283,4 @@ wtr_yr <- function(dates, start_month=9) {
   # Return the water year
   adj.year
 }
+
