@@ -35,18 +35,18 @@ The United States Geological Survey (USGS) has developed a website called the Na
 </div>
 ## Important Questions to Ask Yourself
 
-1. What is the purpose the NWC-DP?
+1. What is the purpose of the NWC-DP?
 2. What type of data am I working with?
 3. How are the datasets compiled?
 
 ## Useful Terms and Acronyms
 
-Term         | Defintion
+Term         | Definition
 ------------ | ---------------------------------------------------
 NWC-DP       | National Water Census Data Portal
 HUC          | Hydrologic Unit Code which identifies a watershed
 Watershed    | An area or ridge of land that separates waters flowing to different rivers, basins, or seas
-ET           | Evapotransiration - water transferred to the atmosphere through evaporation from soil and transpiration from plants
+ET           | Evapotranspiration - water transferred to the atmosphere through evaporation from soil and transpiration from plants
 
 ## Exercise 1
 
@@ -89,16 +89,16 @@ The continental United States has been subdivided into 8-digit and 12-digit HUC 
 
 <div style="text-align:justify; clear: left">
 <br>
-Given Figure 3 and Figure 4, what do you think is the difference between the 8 Digit HUC and the 12 Digit HUC?  Set the **`Huc Layer:`** to **12 Digit**.  Pan the map to find the 12 Digit HUC which contains Nashville, Tennesee as shown in **Figure 5** below.  
+Given Figure 3 and Figure 4, what do you think is the difference between the 8 Digit HUC and the 12 Digit HUC?  Set the **`Huc Layer:`** to **12 Digit**.  Pan the map to find the 12 Digit HUC which contains Nashville, Tennessee as shown in **Figure 5** below.  
 </div>
 
 <br>
 
-![**Figure 5: A 12 Digit HUC layer displayed over Madison, Wisconsin.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure5Nashville12Digit.JPG)
+![**Figure 5: A 12 Digit HUC layer displayed over Nashville, Tennessee.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure5Nashville12Digit.JPG)
 
 <br>
 <div style="text-align:justify">
-Make sure the **`Select`** button is selected first and click anywhere inside the boundary of the HUC which contains Nashville, Tennessee.  After clicking within the desired HUC boundary, a new page will load showing a monthly time series of area weighted mean precipitation data and area weighted mean actual evapotranspiration data as shown in **Figure 6-a** and **Figure 6-b**.  Subsequent labs will go in more detail regarding the attributes of the data.  
+Make sure the **`Select`** button is selected first and click anywhere inside the boundary of the HUC which contains Nashville, Tennessee.  After clicking within the desired HUC boundary, a new page will load showing a monthly time series of area weighted mean precipitation data and area weighted mean actual evapotranspiration data as shown in **Figure 6-a** and **Figure 6-b**.  Subsequent labs will go into more detail regarding the attributes of the data.  
 </div>
 
 <br>
@@ -126,7 +126,7 @@ Notice at the top left corner of the screen are the buttons **`Show Accumulated 
 
 <br>
 
-![**Figure 7-a: A monthly time series plot of precipitation,evapotranspiration, and streamflow datasets.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetb.JPG)
+![**Figure 7-a: A monthly time series plot of precipitation, evapotranspiration, and streamflow datasets.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetb.JPG)
 
 <br>
 
@@ -156,7 +156,7 @@ Click the **`Select Watershed to Compare`** button at the top of the page.  This
 
 <div style="text-align:justify; clear: left">
 <br>
-What differences to you see between the Cumberland River-Browns Creek watershed (encompassing Nashville, TN) and Headwaters Turtle Creek watershed (encompassing Dallas, TX)?
+What differences do you see between the Cumberland River-Browns Creek watershed (encompassing Nashville, TN) and Headwaters Turtle Creek watershed (encompassing Dallas, TX)?
 
 <br>
 
