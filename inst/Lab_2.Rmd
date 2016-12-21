@@ -53,7 +53,7 @@ After selecting the Streamflow Stats tool, a new page will open shown in **Figur
 
 <br>
 
-![**Figure 1: Streamflow Statistics Calculator homepage.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure1StreamflowStatsHomepage.JPG)
+![**Figure 1: Streamflow Statistics Calculator homepage.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure1StreamflowStatsHomepage.JPG)
 
 <br>
 
@@ -63,20 +63,20 @@ In the **`Stream Gage Filters:`** there are 4 layers which can be selected: "Gag
 
 <br>
 
-![**Figure 2: Gage layer selections.** ](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure4StreamflowGageFilter.JPG)
+![**Figure 2: Gage layer selections.** ](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure4StreamflowGageFilter.JPG)
 
 <br>
 
 <div style="text-align:justify">
-Before selecting a button, we must first understand where the streamflow data come from.  To obtain the metadata, right click on **Gages II dataset** and open a new tab.  A new page will open displaying an abstract for Gages II as shown in **Figure 3**.  Under the section titled "Links" there is a link to the metadata.  Click on the "Metadata" link.  The metadata page is shown in **Figure 4** below.
+Before selecting a button, we must first understand where the streamflow data come from.  To obtain the metadata, right click on **Gages II dataset**, located to the right of the Stream Gage Filters dropdown menu, and open a new tab.  A new page will open displaying an abstract for Gages II as shown in **Figure 3**.  Under the section titled "Links" there is a link to the metadata.  Click on the "Metadata" link.  The metadata page is shown in **Figure 4** below.
 </div>
 
 <br>
 
 <div style= "width: 425px; height= 300px; float: left">
-![**Figure 3: Gages-II abstract and metadata link.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure3MetaDataLink.JPG) 
+![**Figure 3: Gages-II abstract and metadata link.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure3MetaDataLink.JPG) 
 </div><div style= "width: 425px; height= 300px; float: right">
-![**Figure 4: Webpage displaying metadata.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure2MetaDataHomePage.JPG) 
+![**Figure 4: Webpage displaying metadata.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure2MetaDataHomePage.JPG) 
 </div>
 
 <br>
@@ -95,9 +95,9 @@ Go back to the "Streamflow Stats" tool homepage.  From the dropdown box, select 
 
 <br>
 <div style= "width: 400px; height= 300px; float: left">
-![**Figure 5: La Pine gage location. link.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure5LaPineArrow.JPG) 
+![**Figure 5: La Pine gage location link.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure5LaPineArrow.JPG) 
 </div><div style= "width: 460px; height= 300px; float: right">
-![**Figure 6: Webpage displaying metadata.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure6LaPineGageComparisonBlank.JPG) 
+![**Figure 6: Webpage displaying metadata.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure6LaPineGageComparisonBlank.JPG) 
 </div>
 
 <br>
@@ -110,7 +110,7 @@ Move your cursor over the plotted data.  You will notice that actual data points
 </div>
 <br>
 
-![**Figure 7: Statistic group tables. link.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure7StatisticGroups.JPG)
+![**Figure 7: Statistic group tables link.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure7StatisticGroups.JPG)
 
 <br>
 <div style="text-align:justify">
@@ -120,11 +120,11 @@ Notice that all the group names listed under the "Statistic Group Name" column h
 
 ####Step 4
 <div style="text-align:justify">
-Lets use the Streamflow Stats tool to perform some statistical analyses for the streamflow data collected at the Little Deschutes River gage near La Pine, Oregon.  Check the box in the Statistic Group table on the left side of the screen.  Click the **`Calculate Statistics`** button above the table.  The calculations may take a few minutes.  The results are shown in **Figure 8** below.
+Let's use the Streamflow Stats tool to perform some statistical analyses for the streamflow data collected at the Little Deschutes River gage near La Pine, Oregon.  Check the box in the Statistic Group table on the left side of the screen next to **Seven Fundamental Daily Streamflow Statistics**.  Click the **`Calculate Statistics`** button above the table.  The calculations may take a few minutes.  The results are shown in **Figure 8** below.
 </div>
 <br>
 
-![**Figure 8: Seven Fundamental Daily Streamflow Statistics results. link.**]( https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure8StatsResults.JPG)
+![**Figure 8: Seven Fundamental Daily Streamflow Statistics results link.**]( https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure8StatsResults.JPG)
 
 <br>
 
@@ -142,7 +142,7 @@ There are a few methods which can be used to view the statistics results generat
 <br>
 
 <div style="text-align:justify; clear: left">
-![**Figure 9: Changing file types in Excel to "All Files".**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure9ExcelImport.JPG)
+![**Figure 9: Changing file types in Excel to "All Files".**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure9ExcelImport.JPG)
 </div>
 <br>
 <div style="text-align:justify">
@@ -151,9 +151,9 @@ Once the correct file has been selected, a **`Text Import Wizard`** box will app
 <br>
 
 <div style= "width: 425px; height= 300px; float: left">
-![**Figure 10: Gages-II abstract and metadata link.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure10DelimitedTextWizard.JPG) 
+![**Figure 10: Gages-II abstract and metadata link.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure10DelimitedTextWizard.JPG) 
 </div><div style= "width: 425px; height= 300px; float: right">
-![**Figure 11: Webpage displaying metadata.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure11DelimiterSetting.JPG) 
+![**Figure 11: Webpage displaying metadata.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure11DelimiterSetting.JPG) 
 </div>
 
 <br>
@@ -162,12 +162,12 @@ Once the correct file has been selected, a **`Text Import Wizard`** box will app
 <br>
 
 <div style="text-align:justify">
-The wizard disappears and another popup box appears allowing the user to select a cell to import the data into.  The default cell is "A1".  Click **`Import`**.  The results of the statistical analysis performed using the **Streamflow Stats** tool through the NWC-DP is displayed in **Figure 12** below.  
+The wizard disappears and another popup box appears allowing the user to select a cell to import the data into.  Click **`Import`** or **`OK`**.  The results of the statistical analysis performed using the **Streamflow Stats** tool through the NWC-DP is displayed in **Figure 12** below.  
 </div>
 
 <br>
 
-![**Figure 12: Statistics results displayed in Excel.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure12ImportedData.JPG)
+![**Figure 12: Statistics results displayed in Excel.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab2_NWC-DP_Images/Figure12ImportedData.JPG)
 
 <br>
 
