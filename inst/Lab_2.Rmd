@@ -28,7 +28,7 @@ The United States Geological Survey (USGS) has developed the **Streamflow Stats*
 
 ## Useful Terms and Acronyms
 
-Term         | Defintion
+Term         | Definition
 ------------ | ---------------------------------------------------
 Metadata     | A set of data that describes and gives information about other data
 HUC          | Hydrologic Unit Code which identifies a watershed
