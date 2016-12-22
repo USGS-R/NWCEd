@@ -28,7 +28,7 @@ ggplot(plotData, aes(x=year, y=data, group=group,colour = group)) +  geom_line()
   theme(legend.position = c(0.1, 0.87)) + scale_color_manual(values=c("#990066", "#339966", "#FF0000"))
 
 # Lets look at some modeled streamflow data.
-# From: http://cida.usgs.gov/nwc/#!streamflow-stats/huc/031601090601
+# From: https://cida.usgs.gov/nwc/#!streamflow-stats/huc/031601090601
 NWCdata<-getNWCData(huc="031601030306", local = FALSE)
 # Note that we need to normalize the streamflow to watershed area!
 NWCwatershed<-getNWCWatershed(huc="160202030505",local=FALSE)

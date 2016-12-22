@@ -11,7 +11,7 @@
 #' data<-getNWISSite(huc="031601030306")
 #'
 getNWISSite<-function(huc) {
-  # Note that this file is available here: http://cida.usgs.gov/nwc/json/watershed_gages.json
+  # Note that this file is available here: https://cida.usgs.gov/nwc/json/watershed_gages.json
   lookup<-fromJSON(txt=readLines(system.file('extdata','watershed_gages.json',package='NWCEd')))
   returnval<-NULL
   for(l in 1:nrow(lookup)) {

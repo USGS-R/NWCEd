@@ -57,9 +57,9 @@ PivotTable           | A tool which allows for the organization of data in a spr
 
 #### Step 1
 <div style="text-align:justify">
-In this exercise we will learn how to download a .csv file containing precipitation time series data from the National Water Cenus Data-Portal (NWC-DP) and generate a Log-Pearson Type III distribution model for the selected data.  For information regarding the theory behind the Log-Pearson Type III distribution model, please read information put out by the [USGS](http://water.usgs.gov/osw/bulletin17b/dl_flow.pdf), the [University of Western Ontario](http://ir.lib.uwo.ca/cgi/viewcontent.cgi?article=1039&context=wrrr), and the [Water Resources Research](http://onlinelibrary.wiley.com/doi/10.1029/WR011i005p00681/abstract) journal.  
+In this exercise we will learn how to download a .csv file containing precipitation time series data from the National Water Cenus Data-Portal (NWC-DP) and generate a Log-Pearson Type III distribution model for the selected data.  For information regarding the theory behind the Log-Pearson Type III distribution model, please read information put out by the [USGS](https://water.usgs.gov/osw/bulletin17b/dl_flow.pdf), the [University of Western Ontario](http://ir.lib.uwo.ca/cgi/viewcontent.cgi?article=1039&context=wrrr), and the [Water Resources Research](http://onlinelibrary.wiley.com/doi/10.1029/WR011i005p00681/abstract) journal.  
 <br>
-To begin, log on to the NWC-DP using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.  For more instruction on how to navigate through the NWC-DP and its features, please review **Lab 1** and **Lab 2**.
+To begin, log on to the NWC-DP using the following URL: <https://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.  For more instruction on how to navigate through the NWC-DP and its features, please review **Lab 1** and **Lab 2**.
 
 <br>
 
