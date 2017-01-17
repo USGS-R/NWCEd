@@ -41,7 +41,7 @@ ET           | Evapotransiration - water transferred to the atmosphere through e
 
 #### Step 1
 <div style="text-align:justify">
-The purpose of Exercise 1 is to walk through the process of selecting a desired stream gage and comparing the respective data plot with the data plot of a second stream gage.  For information regarding operating within the NWC-DP interface, please consult **_Lab 1_**.  For this exercise, go to the NWC-DP homepage at <http://cida.usgs.gov/nwc/> as shown in **Figure 1** from **_Lab 1_**.  Click on the tab titled, "Streamflow Stats" in the Menu ribbon on the left of the page or anywhere in the large Streamflow Stats icon to access the tool.
+The purpose of Exercise 1 is to walk through the process of selecting a desired stream gage and comparing the respective data plot with the data plot of a second stream gage.  For information regarding operating within the NWC-DP interface, please consult **_Lab 1_**.  For this exercise, go to the NWC-DP homepage at <https://cida.usgs.gov/nwc/> as shown in **Figure 1** from **_Lab 1_**.  Click on the tab titled, "Streamflow Stats" in the Menu ribbon on the left of the page or anywhere in the large Streamflow Stats icon to access the tool.
 </div>
 
 <br>

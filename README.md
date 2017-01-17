@@ -4,7 +4,7 @@
 
 ## Purpose and Content Overview
 
-The purpose of the NWCEd package is to introduce users to the tools and functionalities of the [National Water Census Data Portal](http://cida.usgs.gov/nwc/) (NWC-DP).  The materials found in the package include custom functions, which allow the user to download hydrologic datasets and HUC information from the NWC-DP.  The materials also include a series of stand-alone labs which instruct users on how to download and analyze NWC-DP datasets numerically and graphically in R.  It is recommended that the labs be used as supplemental material in hydroscience courses at the college level.
+The purpose of the NWCEd package is to introduce users to the tools and functionalities of the [National Water Census Data Portal](https://cida.usgs.gov/nwc/) (NWC-DP).  The materials found in the package include custom functions, which allow the user to download hydrologic datasets and HUC information from the NWC-DP.  The materials also include a series of stand-alone labs which instruct users on how to download and analyze NWC-DP datasets numerically and graphically in R.  It is recommended that the labs be used as supplemental material in hydroscience courses at the college level.
 
 <br>
 
@@ -81,17 +81,17 @@ The description of each of the lab materials is provided in the table below as w
 
 ## Additional Reading Links
 
-[Double-Mass Curves](http://pubs.usgs.gov/wsp/1541b/report.pdf)<br>
-[Statistical Methods in Water Resources](http://pubs.usgs.gov/twri/twri4a3/pdf/twri4a3-new.pdf)<br>
+[Double-Mass Curves](https://pubs.usgs.gov/wsp/1541b/report.pdf)<br>
+[Statistical Methods in Water Resources](https://pubs.usgs.gov/twri/twri4a3/pdf/twri4a3-new.pdf)<br>
 [Daymet Model](https://daymet.ornl.gov/)<br>
-[CIDA USGS THREDDS Data Server](http://cida.usgs.gov/thredds/catalog.html?dataset=cida.usgs.gov/ssebopeta/monthly)<br>
+[CIDA USGS THREDDS Data Server](https://cida.usgs.gov/thredds/catalog.html?dataset=cida.usgs.gov/ssebopeta/monthly)<br>
 [Log-Pearson Type III Distribution](http://ascelibrary.org/doi/pdf/10.1061/(ASCE)1084-0699(2007)12%3A5(482))
 
 <br>
 
 Disclaimer
 ----------
-This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey, an agency of the United States Department of Interior. For more information, see the official USGS copyright policy at [http://www.usgs.gov/visual-id/credit_usgs.html#copyright](http://www.usgs.gov/visual-id/credit_usgs.html#copyright)
+This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey, an agency of the United States Department of Interior. For more information, see the official USGS copyright policy at [https://www.usgs.gov/visual-id/credit_usgs.html#copyright](https://www.usgs.gov/visual-id/credit_usgs.html#copyright)
 
 
 Although this software program has been used by the U.S. Geological Survey (USGS), no warranty, expressed or implied, is made by the USGS or the U.S. Government as to the accuracy and functioning of the program and related program material nor shall the fact of distribution constitute any such warranty, and no responsibility is assumed by the USGS in connection therewith.

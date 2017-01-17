@@ -13,7 +13,7 @@
 #'
 getNWCWatershed<-function(huc,local) {
 
-  baseURL<-"http://cida.usgs.gov/nwc/geoserver/ows"
+  baseURL<-"https://cida.usgs.gov/nwc/geoserver/ows"
 
   if (local) {
     layer<-"WBD:huc12"
