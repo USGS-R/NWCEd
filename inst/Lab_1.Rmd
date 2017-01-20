@@ -161,7 +161,7 @@ What differences do you see between the Cumberland River-Browns Creek watershed 
 <br>
 
 #### Step 5
-Click back 3 times until you return to the page titled "Available Water Budget Components" as shown in **Figure 6-a**.  Click on the **`Plot County Water Use Data`**.  A new page is loaded which is shown in **Figure 10** below.
+Click back 2 times until you return to the page titled "Available Water Budget Components" as shown in **Figure 6-a**.  Click on the **`Plot County Water Use Data`**.  A new page is loaded which is shown in **Figure 10** below.
 
 <br>
 
