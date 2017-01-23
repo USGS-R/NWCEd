@@ -12,6 +12,10 @@
 #' @export
 #' @importFrom foreach foreach
 #' @importFrom iterators iter
+#' @importFrom graphics plot
+#' @importFrom stats na.omit
+#' @importFrom utils URLencode
+#' @importFrom utils data
 #' @examples
 #' \dontrun{
 #' variable_name<-getNWCData(huc = "160202030505", local = FALSE)
