@@ -89,7 +89,7 @@ After selecting the desired watershed, a new page will load which shows the HUC 
 
 <br>
 
-![**Figure 4: NWIS gage location and time series. graph.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab4_NWC-DP_Images/Figure4.JPG)
+![**Figure 4: NWIS gage location and time series. graph.**](https://cdn.rawgit.com/NWCEd/NWCEd/b1c57c25/inst/Lab4_NWC-DP_Images/Figure%204%20updated.JPG)
 
 <br>
 
