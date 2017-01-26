@@ -61,7 +61,7 @@ Double-Mass Curve  | A graphical method used to study consistency and trends in 
 
 #### Step 1
 <div style="text-align:justify">
-In this exercise we will learn how to obtain an HUC ID from the National Water Cenus Data-Portal (NWC-DP).  For this lab we will need to download runoff data in addition to the evapotranspiration (ET) and precipitation data which requires slightly different steps from those shown in **Lab 3**.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <http://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
+In this exercise we will learn how to obtain an HUC ID from the National Water Cenus Data-Portal (NWC-DP).  For this lab we will need to download runoff data in addition to the evapotranspiration (ET) and precipitation data which requires slightly different steps from those shown in **Lab 3**.  To begin, log on to the National Water Census Data Portal (NWC-DP) using the following URL: <https://cida.usgs.gov/nwc/>.  The home page is shown in **Figure 1** below.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
 </div>
 <br>
 
@@ -69,7 +69,7 @@ In this exercise we will learn how to obtain an HUC ID from the National Water C
 
 <br>
 
-In order to put together an accurate water balance, we need to know the streamflow within the desired watershed to account for all the water entering and leaving the site.  The United States Geological Survey (USGS) has put together a network called National Water Information System (NWIS).  The **NWIS** collects, records, and stores streamflow data through the use of gages which are installed in several locations throughout the United States.  For more information about the NWIS, please visit <http://waterdata.usgs.gov/nwis/sw>.  To obtain a HUC ID that meets the desired requirements, first select the **12 Digit** Huc layer in the **`Huc Layer:`** dropdown box. Next, click on the **`Turn Gages On`** to turn on the NWIS gages.  Your screen should look similar to the image shown below in **Figure 2** below.
+In order to put together an accurate water balance, we need to know the streamflow within the desired watershed to account for all the water entering and leaving the site.  The United States Geological Survey (USGS) has put together a network called National Water Information System (NWIS).  The **NWIS** collects, records, and stores streamflow data through the use of gages which are installed in several locations throughout the United States.  For more information about the NWIS, please visit <https://waterdata.usgs.gov/nwis/sw>.  To obtain a HUC ID that meets the desired requirements, first select the **12 Digit** Huc layer in the **`Huc Layer:`** dropdown box. Next, click on the **`Turn Gages On`** to turn on the NWIS gages.  Your screen should look similar to the image shown below in **Figure 2** below.
 
 <br>
 
@@ -418,7 +418,7 @@ names(coords)<-c('lon','lat')
 leaflet() %>% 
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
   addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}") %>%
-  addWMSTiles(baseUrl = "http://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
+  addWMSTiles(baseUrl = "https://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
               options = WMSTileOptions(format = "image/png", transparent = TRUE, opacity = 1),                attribution = "Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012") %>% 
   addGeoJSON(NWCwatershed, weight = 5, color = "#ff7800", fill = FALSE)
 ```
@@ -440,7 +440,7 @@ names(coords)<-c('lon','lat')
 leaflet() %>% 
   setView(lng = mean(coords$lon), lat = mean(coords$lat), zoom = 9) %>%
   addTiles("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}") %>%
-  addWMSTiles(baseUrl = "http://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
+  addWMSTiles(baseUrl = "https://cida.usgs.gov/nwc/geoserver/gwc/service/wms", 
               options = WMSTileOptions(format = "image/png", transparent = TRUE, opacity = 1),                attribution = "Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012") %>% 
   addGeoJSON(NWCwatershed, weight = 5, color = "#ff7800", fill = FALSE)
 ```  
@@ -454,7 +454,7 @@ Storage is mainly comprised of ground water, although additional storage areas c
 #### Step 4
 <br>
 
-How do we know if our precipitation data is good to use?  In the field, there is the possibility that rain gages are moved or are damaged for a period of time.  Problems that occur in the field must be taken into consideration and the data adjusted to reflect the conditions of the site being analyzed.  One method used to identify inconsistencies in a precipitation dataset is a **Double-Mass Curve**.  For analyzing precipitation data at a site, the annual precipitation data of nearby rain gages are collected and cumulated.  The mean cumulative annual data is then plotted against the mean annual cumulative precipitation for the surrounding sites including the site being analyzed.  For more information on double-mass curves, please visit <http://pubs.usgs.gov/wsp/1541b/report.pdf>.  
+How do we know if our precipitation data is good to use?  In the field, there is the possibility that rain gages are moved or are damaged for a period of time.  Problems that occur in the field must be taken into consideration and the data adjusted to reflect the conditions of the site being analyzed.  One method used to identify inconsistencies in a precipitation dataset is a **Double-Mass Curve**.  For analyzing precipitation data at a site, the annual precipitation data of nearby rain gages are collected and cumulated.  The mean cumulative annual data is then plotted against the mean annual cumulative precipitation for the surrounding sites including the site being analyzed.  For more information on double-mass curves, please visit <https://pubs.usgs.gov/wsp/1541b/report.pdf>.  
 
 <br>
 

@@ -54,7 +54,7 @@ ET           | Evapotranspiration - water transferred to the atmosphere through 
 
 #### Step 1
 <div style="text-align:justify">
-The purpose of Exercise 1 is to walk through the functionality of the **`Water Budget`** tool found in the NWC-DP.  To access the portal, log on to <http://cida.usgs.gov/nwc/>.  The homepage should look like **Figure 1 below**.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
+The purpose of Exercise 1 is to walk through the functionality of the **`Water Budget`** tool found in the NWC-DP.  To access the portal, log on to <https://cida.usgs.gov/nwc/>.  The homepage should look like **Figure 1 below**.  Click on the tab titled, "Water Budget" in the Menu ribbon on the left of the page or anywhere in the large Water Budget icon to access the Water Budget tool.
 </div>
 <br>
 
@@ -73,7 +73,7 @@ After selecting the Water Budget tool, a new page will open as shown in **Figure
 
 <br>
 <div style="text-align:justify">
-The **`Turn Gages On`** button toggles available stream gages on and off.  The stream gage sites are locations where flow is measured for the respective stream or river.  Streamflow is necessary for determining and managing storage.  For more information on how streamflow is measured, please visit <http://water.usgs.gov/edu/measureflow.html>.  
+The **`Turn Gages On`** button toggles available stream gages on and off.  The stream gage sites are locations where flow is measured for the respective stream or river.  Streamflow is necessary for determining and managing storage.  For more information on how streamflow is measured, please visit <https://water.usgs.gov/edu/measureflow.html>.  
 
 The continental United States has been subdivided into 8-digit and 12-digit HUC watersheds.  A **HUC** is a hydrologic unit code.  Each delineated **watershed** is assigned a HUC ID.  Zoom to your hometown or search for it in the search bar below the **`Turn Gages On`** button.  Click in the **`Huc Layer:`** dropdown box and select **`8 Digit`** for the watershed layer.  You may need to zoom out to see the black-outlined 8-digit HUC watersheds.  Observe the different watersheds displayed.  Now select **`12 Digit`** in the **`Huc Layer:`** dropdown box. </div> 
 
