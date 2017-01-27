@@ -98,7 +98,7 @@ Once the new page has loaded, verify that the HUC you selected is the intended H
 
 <br>
 
-![**Figure 5: Download precipitation dataset associated with HUC # 140200050803.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure5.JPG)
+![**Figure 5: Download precipitation dataset associated with HUC # 140200050803.**](https://cdn.rawgit.com/NWCEd/NWCEd/b1c57c25/inst/Lab5_NWC-DP_Images/Figure%205%20updated.JPG)
 
 <br>
 </div>
