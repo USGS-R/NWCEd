@@ -37,7 +37,7 @@ library(datasets)
 
 ## Introduction
 <div style="text-align:justify">
-Graphical representations of hydrologic datasets is a common and effective way to communicate important information to various stakeholders such as hydrologysts, engineers, and water managers.  Commonly used geographical representations are **Box Plots**, **Density Plots**, and **Histograms**.  The United States Geological Survey (USGS) has provided open access to precipitation, runoff, and evapotranspiration (ET) datasets.  These datasets have been compiled and catalogued according to their respective delineated watershed.  Each watershed has been assigned a number called a hydrologic unit code (HUC).  For more information regarding HUC's, see **Lab 1** and <https://water.usgs.gov/GIS/huc.html>.  By obtaining the desired HUC ID, the user can download all the water data available for the given watershed.  The purpose of this lab is to learn how to obtain a desired HUC ID and interpret the associated datasets using box plots, density plots, and histograms.  By learning these methods of analysis, you will be able to better understand the data you are working with as well as be able to communicate the analysis results more effectively to **stakeholders**.   
+Graphical representations of hydrologic datasets is a common and effective way to communicate important information to various stakeholders such as hydrologists, engineers, and water managers.  Commonly used geographical representations are **Box Plots**, **Density Plots**, and **Histograms**.  The United States Geological Survey (USGS) has provided open access to precipitation, runoff, and evapotranspiration (ET) datasets.  These datasets have been compiled and catalogued according to their respective delineated watershed.  Each watershed has been assigned a number called a hydrologic unit code (HUC).  For more information regarding HUC's, see **Lab 1** and <http://water.usgs.gov/GIS/huc.html>.  By obtaining the desired HUC ID, the user can download all the water data available for the given watershed.  The purpose of this lab is to learn how to obtain a desired HUC ID and interpret the associated datasets using box plots, density plots, and histograms.  By learning these methods of analysis, you will be able to better understand the data you are working with as well as be able to communicate the analysis results more effectively to **stakeholders**.   
 </div>
 
 ## Important Questions to Ask Yourself
@@ -49,15 +49,15 @@ Graphical representations of hydrologic datasets is a common and effective way t
 
 ## Useful Terms and Acronyms
 
-Term               | Defintion
+Term               | Definition
 ----------------   | ---------------------------------------------------
 Box plot           | A graphical display of the distribution of data for a given dataset
 Outlier            | A data point that is distinctly separate from the rest of the data
 Mean               | The mean or average used to derive the central tendency of the data in question
 Median             | The middle value in a list values sorted from smallest to largest
 Standard Deviation | Used as a measure of the variation in a distribution
-Spread             | Refers to how stretcehd or squeezed the distribution is
-Kurtosis           | A measure of the "taildness" of the probability distribution
+Spread             | Refers to how stretched or squeezed the distribution is
+Kurtosis           | A measure of the "tailedness" of the probability distribution
 Skewness           | A measure of the asymmetry of the probability distribution
 Quartile           | The median of either the upper or lower half of a dataset after the dataset has been ordered and and separated into two groups
 Stakeholder        | A person or group that has an interest or concern
@@ -83,7 +83,7 @@ Toggle **`Huc Layer:`** to **12 Digit**.  Note that both 12-Digit and 8-Digit HU
 ![**Figure 2: Selecting an HUC which encompasses Denver, Colorado.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab3_NWC-DP_Images/Figure2.jpg)
 
 <br>
-<div style= "width: 450px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 3: Viewing  HUC ID.**](https://cdn.rawgit.com/dblodgett-usgs/NWCEd/master/inst/Lab3_NWC-DP_Images/Figure3.jpg)
+<div style= "width: 450px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 3: Viewing  HUC ID.**](https://cdn.rawgit.com/NWCEd/NWCEd/b1c57c25/inst/Lab3_NWC-DP_Images/Figure%203%20updated.JPG)
 </div>
 <div style="text-align:justify">
 After clicking on the watershed, a new page opens as shown in **Figure 3** to the left.  The associated HUC ID is displayed both in the center of the screen as well as in the upper left corner of the page.  For this watershed, the HUC ID is **101900030304**.  For more information about the features and functionality of this page or other NWC-DP pages, please see **Lab 1**.  With the HUC ID obtained, we are ready to proceed to the next step.
@@ -94,7 +94,7 @@ After clicking on the watershed, a new page opens as shown in **Figure 3** to th
 <br>
 
 #### Step 2
-With the HUC ID obtained, we are ready to download the data and create our box plots.  For this lab, the box plots have already been produced using the datasets associated with HUC #101900030304.  For reproduction of graphs, please click on the **`Show Code`** button below each graph.  Embedded code can be run in the RStudio console.  Information on the functions used can be found at <https://github.com/dblodgett-usgs/NWCEd/tree/master/R>.  Before we jump into our analysis of ET and precipitation datasets, lets review how to interpret box plots.  Below is an example of a box plot.
+With the HUC ID obtained, we are ready to download the data and create our box plots.  For this lab, the box plots have already been produced using the datasets associated with HUC #101900030304.  For reproduction of graphs, please click on the **`Show Code`** button below each graph.  Embedded code can be run in the RStudio console.  Information on the functions used can be found at <https://github.com/NWCEd/NWCEd/tree/master/R>.  Before we jump into our analysis of ET and precipitation datasets, let's review how to interpret box plots.  Below is an example of a box plot.
 
 <br>
 
@@ -114,7 +114,7 @@ ggplot(cars, aes("var", speed)) + geom_boxplot(fill = "#E69F00", color = "black"
 
 <br>
 
-This box plot has been generated using the dataset called **cars** which is found in the preloaded library in RStudio called **datasets**.  The box plot is broken into 4 sections or **quartiles**.  The first quartile range is between the **"Smallest non-outlier value"** and the bottom line in of the box labeled **"1st Quartile"**.  Each quartile contains 1/4 of the data from the dataset.  The second quartile range is between the **1st Quartile** and the **Median**.  The third quartile range is between the **Median** and **"3rd Quartile"**.  And the 4th quartile range is between the **3rd Quartile** and **"Largest non-outlier value"**.  The **Outliers** which are indicated by blue circles have been added to the plot artificially and the respective values do not belong to the original dataset.  Identifying outliers can help improve the quality of a given dataset.  Now we are ready to look at the box plots for ET and precipitation for the HUC ID 101900030304.
+This box plot has been generated using the dataset called **cars** which is found in the preloaded library in RStudio called **datasets**.  The box plot is broken into 4 sections or **quartiles**.  The first quartile range is between the **"Smallest non-outlier value"** and the bottom line of the box labeled **"1st Quartile"**.  Each quartile contains 1/4 of the data from the dataset.  The second quartile range is between the **1st Quartile** and the **Median**.  The third quartile range is between the **Median** and **"3rd Quartile"**.  And lastly, the 4th quartile range is between the **3rd Quartile** and **"Largest non-outlier value"**.  The **Outliers** which are indicated by blue circles have been added to the plot artificially and the respective values do not belong to the original dataset.  Identifying outliers can help improve the quality of a given dataset.  Now we are ready to look at the box plots for ET and precipitation for the HUC ID 101900030304.
 
 <br>
 
@@ -147,7 +147,7 @@ describe(getetdata[[2]])
 ```
 <br>
 <div style="text-align:justify">
-The ET box plot above shows the center of the data, the **spread** or variation, the **skewness**, and any **outliers**.  Looking just at ET box plot, are there any outliers?  What is the value of the first quartile?  The third quartile?  There are no outliers.  The first quartile is 299.5. The third quartile is 318.5.  The values of approximately 75% of the data are 318.5mm and below.  Only 25% of the data analyzed were less than or equal to 299.5mm.  Lets take a look at the annual precipitation box plot now.
+The ET box plot above shows the center of the data, the **spread** or variation, the **skewness**, and any **outliers**.  Looking just at ET box plot, are there any outliers?  What is the value of the first quartile?  The third quartile?  There are no outliers.  The first quartile is 299.5. The third quartile is 318.5.  The values of approximately 75% of the data are 318.5mm and below.  Only 25% of the data analyzed were less than or equal to 299.5mm.  Let's take a look at the annual precipitation box plot now.
 
 <br>
 ```{r,fig.align='center',out.extra='angle=90',echo=FALSE}
@@ -176,7 +176,7 @@ describe(annualgetprcpdata[[2]])
 ```
 <br>
 
-What are the 1st and 3rd quartiles?  Are there any outliers?  What is the scale on this plot?  Is it different from the last plot?  Because box plots are simplistic in nature, it is important to remember the little details such as the scale.  For easier comparison, lets look at the ET box plot and the precipitation box plot side by side.  
+What are the 1st and 3rd quartiles?  Are there any outliers?  What is the scale on this plot?  Is it different from the last plot?  Because box plots are simplistic in nature, it is important to remember the little details such as the scale.  For easier comparison, let's look at the ET box plot and the precipitation box plot side by side.  
 
 <br>
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
@@ -191,6 +191,14 @@ grid.arrange(annualetgraph, annualprcpgraph, ncol = 2)
 ```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
 library(ggplot2)
 library(gridExtra)
+library(NWCEd)
+# Get the data from the NWC-DP website
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
+getprcpdata <- getdata[[2]]
+annualgetprcpdata <- annualize(getprcpdata, method = "sum")
+# Plot the data
 annualetgraph <- ggplot(annualgetetdata, aes("var", data)) + geom_boxplot(fill = "#009E73", color = "black", outlier.colour = "red", outlier.shape = 16, outlier.size = 2) + xlab("") + ylab("ET (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("ET for HUC 101900030304")
 annualprcpgraph <- ggplot(annualgetprcpdata, aes("var", data)) + geom_boxplot(fill = "#56B4E9", color = "black", outlier.colour = "red", outlier.shape = 19, outlier.size = 2) + xlab("") + ylab("Precipitation (mm per year)") + scale_x_discrete(breaks = NULL) + ggtitle("Precipitation for HUC 101900030304")
 grid.arrange(annualetgraph, annualprcpgraph, ncol = 2)
@@ -199,7 +207,7 @@ grid.arrange(annualetgraph, annualprcpgraph, ncol = 2)
 
 <br>
 
-Are the median lines centered between the lowest non-outlier to the highest non-outlier in either of the plots?  This may be difficult to see.  Whenever there is not a perfect balance of data above and below the median line, it is said that the data are **skewed**.  Lets look at a normal distribution curve as shown below.  
+Are the median lines centered between the lowest non-outlier to the highest non-outlier in either of the plots?  This may be difficult to see.  Whenever there is not a perfect balance of data above and below the median line, it is said that the data are **skewed**.  Let's look at a normal distribution curve as shown below.  
 </div>
 <br>
 
@@ -227,7 +235,7 @@ plot(x, hx, type="l", lty=2, xlab="x value",
 
 <br>
 <div style="text-align:justify">
-This is a density plot showing normal distribution.  It is completely symmetrical about median.  When the curve is skewed, the hump of the curve will shift either to the right side or the left side of the median.  Often the temptation arises to use histograms to observe data distribution. Lets take a look at the histogram for the annual ET data we have been working with.
+This is a density plot showing normal distribution.  It is completely symmetrical about the median.  When the curve is skewed, the hump of the curve will shift either to the right side or the left side of the median.  Often the temptation arises to use histograms to observe data distribution. Let's take a look at the histogram for the annual ET data we have been working with.
 
 <br>
 
@@ -241,6 +249,11 @@ ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "
   <div id="toggleText6" style="display: none">
 ```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
 library(ggplot2)
+library(NWCEd)
+# Get ET data from the NWC-DP website
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
 ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "black", fill = "forestgreen") + ggtitle("Annual ET Histogram") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
 ```
 </div>
@@ -248,13 +261,14 @@ ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 3, colour = "
 <br>
 
 <div style="text-align:justify">
-Briefly glancing at this histogram, it may be temptimg to say that the graph indeed indicates a negative skew, or skewed left, meaning the tail of the distribution curve is on the left side.  The data in this histogram have been divided into groups of 3 mm.  What if we changed the bin width, or the size of the group we are dividing the data into?  Below are several histogram plots of the same dataset with different bin widths.
+Briefly glancing at this histogram, it may be temptimg to say that the graph indeed indicates a negative skew, or skewed left, meaning the tail of the distribution curve is on the left side.  The data in this histogram have been divided into groups of 3 mm.  What if we changed the band width, or the size of the group we are dividing the data into?  Below are several histogram plots of the same dataset with different band widths.
 </div>
 
 <br>
  <!-- This code was used to produce comparative histograms -->
 ```{r,fig.align='center',out.extra='angle=90', echo=FALSE}
 library(ggplot2)
+library(gridExtra)
 # Plot of annualethist1 with binwidth = 0.5
 annualethist1 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 0.5, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 0.5") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 # Plot of annualethist2 with binwidth = 1
@@ -275,6 +289,13 @@ grid.arrange(annualethist1, annualethist2, annualethist3, annualethist4, annuale
   <div id="toggleText7" style="display: none">
 ```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
 library(ggplot2)
+library(gridExtra)
+library(NWCEd)
+
+#Get the ET data from the NWC-DP website
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
 # Plot of annualethist1 with binwidth = 0.5
 annualethist1 <- ggplot(annualgetetdata, aes(x = data)) + geom_histogram(binwidth = 0.5, colour = "black", fill = "forestgreen") + ggtitle("Band Width = 0.5") + xlab("mm ET") + ylab("Frequency") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 # Plot of annualethist2 with binwidth = 1
@@ -305,11 +326,16 @@ ggplot(annualgetetdata, aes(x = data)) + geom_histogram(aes(y = ..density..), bi
   <div id="toggleText8" style="display: none">
 ```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
 library(ggplot2)
+library(NWCEd)
+# Get the data from the NWC-DP website
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
 ggplot(annualgetetdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 3, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 310.00), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 320.20), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 330.46), color="purple", linetype = "solid", size = 2) + annotate("text", x=312.3, y=-.003, label = "50%") + annotate("text", x=322.5, y=-.003, label = "90%") + annotate("text", x=332.8, y=-.003, label = "99%") + xlab("mm ET") + ylab("Density")
 ```
 </div>
 <br>
-This plot shows a density curve plotted on top of the histogram of the annual ET data.  A vertical red dashed line indicates the median.  As you can see, the hump of the curve is shifted to the right with the tail on the left.  This much more clearly describes the distribution of the data.  The 90th and 99th percentiles have been plotted with vertical orange and purple lines, respectively.  The 90th percentile and 99th percentiles were found to be 320.20 and 330.34 mm ET, respectively.  This means that in a given year for our designated watershed, there is a 10% chance of losing more than 320.2 mm of water to ET and a 1% chance of losing more than 330.46 mm water to ET.  Lets take a look at the density plot for the annual precipitation dataset.
+This plot shows a density curve plotted on top of the histogram of the annual ET data.  A vertical red dashed line indicates the median.  As you can see, the hump of the curve is shifted to the right with the tail on the left.  This much more clearly describes the distribution of the data.  The 90th and 99th percentiles have been plotted with vertical orange and purple lines, respectively.  The 90th percentile and 99th percentile were found to be 320.20 and 330.34 mm ET, respectively.  This means that in a given year for our designated watershed, there is a 10% chance of losing more than 320.2 mm of water to ET and a 1% chance of losing more than 330.46 mm water to ET.  Let's take a look at the density plot for the annual precipitation dataset.
 
 <br>
 
@@ -322,6 +348,11 @@ ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), 
   <div id="toggleText9" style="display: none">
 ```{r,fig.align='center',out.extra='angle=90', echo=TRUE, eval=FALSE}
 library(ggplot2)
+library(NWCEd)
+# Get the data from the NWC-DP website
+getdata <- getNWCData(huc="101900030304")
+getetdata <- getdata[[1]]
+annualgetetdata <- annualize(getetdata, method = "sum")
 ggplot(annualgetprcpdata, aes(x = data)) + geom_histogram(aes(y = ..density..), binwidth = 12, colour = "black", fill = "white") + geom_density(alpha=.5, fill="#009E73") +  geom_vline(aes(xintercept = 378), color="red", linetype = "dashed", size = 2) + ggtitle("Density vs Histogram Plot") + geom_vline(aes(xintercept = 466.80), color="orange", linetype = "solid", size = 2) + geom_vline(aes(xintercept = 499.96), color="purple", linetype = "solid", size = 2) + annotate("text", x=390.5, y=-.0005, label = "50%") + annotate("text", x=479.5, y=-.0005, label = "90%") + annotate("text", x=512, y=-.0005, label = "99%") + xlab("mm ET") + ylab("Density")
 ```
 </div>

@@ -126,11 +126,11 @@ Notice at the top left corner of the screen are the buttons **`Show Accumulated 
 
 <br>
 
-![**Figure 7-a: A monthly time series plot of precipitation, evapotranspiration, and streamflow datasets.**](https://raw.githubusercontent.com/dblodgett-usgs/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetb.JPG)
+![**Figure 7-a: A monthly time series plot of precipitation, evapotranspiration, and streamflow datasets.**](https://cdn.rawgit.com/NWCEd/NWCEd/b1c57c25/inst/Lab1_NWC-DP_Images/Figure%207-a%20updated.JPG)
 
 <br>
 
-<div style= "width: 500px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 7-b: HUC information for water budget.**](https://cdn.rawgit.com/NWCEd/NWCEd/master/inst/Lab1_NWC-DP_Images/Figure6NashvilleWaterBudgetc.jpeg)
+<div style= "width: 500px; height= 300px;PADDING-RIGHT: 5px; float: left">![**Figure 7-b: HUC information for water budget.**](https://cdn.rawgit.com/NWCEd/NWCEd/b1c57c25/inst/Lab1_NWC-DP_Images/Figure%207-b%20updated.JPG)
 </div> 
 <div style="text-align:justify"> The streamflow is measured using a NWIS gage.  The gage location is represented on the map with a red diamond with a black dot in the center.  On the left of the screen, information about the selected HUC including HUC number, watershed name, and drainage area is displayed.  What is the gage name for this selected HUC?  What is the HUC watershed drainage area?  What is the gage watershed drainage area?  Are they the same?  If they are not the same, what would cause them to be different?
 
@@ -161,7 +161,7 @@ What differences do you see between the Cumberland River-Browns Creek watershed 
 <br>
 
 #### Step 5
-Click back 3 times until you return to the page titled "Available Water Budget Components" as shown in **Figure 6-a**.  Click on the **`Plot County Water Use Data`**.  A new page is loaded which is shown in **Figure 10** below.
+Click back 2 times until you return to the page titled "Available Water Budget Components" as shown in **Figure 6-a**.  Click on the **`Plot County Water Use Data`**.  A new page is loaded which is shown in **Figure 10** below.
 
 <br>
 

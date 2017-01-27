@@ -45,7 +45,7 @@ Water managers, hydrologists, and engineers are responsible for making decisions
 
 ## Useful Terms and Acronyms
 
-Term                 | Defintion
+Term                 | Definition
 ---------------------|--------------------------------------------------------------------------------------
 Log-Pearson Type III | A statistical method where hydrologic data is fixed to a probability distribution curve
 Water Year           | Describes a 12 month period beginning October 1st and ending the last day in September
@@ -98,14 +98,14 @@ Once the new page has loaded, verify that the HUC you selected is the intended H
 
 <br>
 
-![**Figure 5: Download precipitation dataset associated with HUC # 140200050803.**](https://cdn.rawgit.com/jnelson7/NWCEd/master/inst/Lab5_NWC-DP_Images/Figure5.JPG)
+![**Figure 5: Download precipitation dataset associated with HUC # 140200050803.**](https://cdn.rawgit.com/NWCEd/NWCEd/b1c57c25/inst/Lab5_NWC-DP_Images/Figure%205%20updated.JPG)
 
 <br>
 </div>
 
 #### Step 2
 <div style="text-align:justify">
-Once the file has been downloaded, open it in Microsoft Excel.  _Please note that while these steps are to be carried out in Microsoft Excel, similar open source software such as Google Sheets can run the steps with slight adjustments._  Once the file has been downloaded and upen in Excel, the spreadsheet should look similar to that displayed in Figure 6 below.
+Once the file has been downloaded, open it in Microsoft Excel.  _Please note that while these steps are to be carried out in Microsoft Excel, similar open source software such as Google Sheets can run the steps with slight adjustments._  Once the file has been downloaded and opened in Excel, the spreadsheet should look similar to that displayed in Figure 6 below.
 
 <br>
 
@@ -127,9 +127,9 @@ Next, select the empty cell **B6**.  Select all the empty cells in between the g
 <br>
 Now that the empty column B has been prepared, we are ready to convert the dates listed in column A into water years.  In the empty cell **B6**, enter the following statement:
 
-`$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$`
+$$=IF(MONTH(A6)<=9,YEAR(A6),1+YEAR(A6))$$
 
-This statement checks the month of the year in the A column to see if it is in the current water year.  If it is, the year is extracted from the cell in column A and inserted into the emtpy adjacent cell in column B.  If the month is greater than 9, then 1 is added to the current year to match the correct water year date.  Once the formula has been entered into **B6**, double click in the bottom-right corner of the cell to populate the proceeding cells in column B.
+This statement checks the month of the year in the A column to see if it is in the current water year.  If it is, the year is extracted from the cell in column A and inserted into the empty adjacent cell in column B.  If the month is greater than 9, then 1 is added to the current year to match the correct water year date.  Once the formula has been entered into **B6**, double click in the bottom-right corner of the cell to populate the proceeding cells in column B.
 </div>
 
 
@@ -150,7 +150,7 @@ We are now ready to begin the analysis.  As a check, make sure your spreadsheet 
 
 <br>
 
-We will now begin using a pivot table in excel to help us quickly run the Log-Pearson Type III distribution for our data.  The methods shown in this lab correspond to Microst Excel 2016.  These steps can also be performed in previous versions.  In your spreadsheet, select the **WtrYr** and **Area Weighted Mean Precipitation** columns including the headers as shown in Figure 9.  Under the **`Insert`** tab, click on **PivotTable** button in the upper left-hand corner of the screen.  A **Create PivotTable** popup window will then display on the screen.  Select **New Worksheet**.  Doing this will open the pivot table in a new sheet.
+We will now begin using a pivot table in Excel to help us quickly run the Log-Pearson Type III distribution for our data.  The methods shown in this lab correspond to Microsoft Excel 2016.  These steps can also be performed in previous versions.  In your spreadsheet, select the **WtrYr** and **Area Weighted Mean Precipitation** columns including the headers as shown in Figure 9.  Under the **`Insert`** tab, click on **PivotTable** button in the upper left-hand corner of the screen.  A **Create PivotTable** popup window will then display on the screen.  Select **New Worksheet**.  Doing this will open the pivot table in a new sheet.
 
 <br>
 
@@ -159,7 +159,7 @@ We will now begin using a pivot table in excel to help us quickly run the Log-Pe
 <br>
 </div>
 <div style="text-align:justify">
-After clicking **`OK`** a new sheet will open up as shown in Figure 10.  On the right of sheet is the **PivotTable Fields** ribbon.  Clicking anywhere in the sheet outside of the **PivotTable** box will hide the pivot table ribbon.  clicking anywhere inside the PivotTable box will show the ribbon again.  
+After clicking **`OK`** a new sheet will open up as shown in Figure 10.  On the right of the sheet is the **PivotTable Fields** ribbon.  Clicking anywhere in the sheet outside of the **PivotTable** box will hide the pivot table ribbon.  clicking anywhere inside the PivotTable box will show the ribbon again.  
 
 <br>
 </div>
@@ -197,7 +197,7 @@ In the **VALUES** box, click on the **`Count of Area`** drop down menu.  Click o
 
 <div style="text-align:justify">
 
-Now the max values for each water year have been calculated, copy and paste the values table you just created to the right in the same sheet. This new table should not be a pivottable. Make sure to only paste the values. This next part will not work in the pivottable. Select the **Max of Area Weighted Mean Precipitation** column, right click, and sort from largest to smallest. Make sure to expand the selection.  _Note that the pivot table generated a grand total value at the bottom of the column that needs to be deleted before sorting._  Create a new column titled **Rank**.  Rank the max precipitation column from 1 to 36 as shown in Figure 13 below.
+Now that the max values for each water year have been calculated, copy and paste the values table you just created to the right in the same sheet. This new table should not be a pivottable. Make sure to only paste the values. This next part will not work in the pivottable. Select the **Max of Area Weighted Mean Precipitation** column, right click, and sort from largest to smallest. Make sure to expand the selection.  _Note that the pivot table generated a grand total value at the bottom of the column that needs to be deleted before sorting._  Create a new column titled **Rank**.  Rank the max precipitation column from 1 to 36 as shown in Figure 13 below.
 
 <br>
 </div>
@@ -210,7 +210,7 @@ Now the max values for each water year have been calculated, copy and paste the 
 
 <div style="text-align:justify">
 
-Once the max precipitation values have been ranked, create a new column.  Title the column **Log(MaxPrecip)**.  Use the Excel formula **log(E4)** and copy it down the column as shown in Figure 14 below.  From there, calculate the average of the max preciptiation values and the max of the average of the log of the precipitation values.  To find the averages, use the Excel formula **=AVERAGE(E4:E39)** with the respective column range as the argument.  Figure 15 shows the averages for the max precipitation and log of max precipitation columns.
+Once the max precipitation values have been ranked, create a new column.  Title the column **Log(MaxPrecip)**.  Use the Excel formula **log(E4)** and copy it down the column as shown in Figure 14 below.  From there, calculate the average of the max precipitation values and the max of the average of the log of the precipitation values.  To find the averages, use the Excel formula **=AVERAGE(E4:E39)** with the respective column range as the argument.  Figure 15 shows the averages for the max precipitation and log of max precipitation columns.
 
 <br>
 </div>
@@ -265,7 +265,7 @@ $$\sigma log(MaxPrecip) = \sqrt{variance}$$
 The skew coefficient can be calculated using the following formula:
 
 
-$$\frac{\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$
+$$\frac{n*\sum_{i}^{n}(Log(MaxPrecip)-avg(Log(MaxPrecip))^3}{(n-1)(n-2)(\sigma log(MaxPrecip)^3}$$
 <br>
 <br>
 
@@ -285,12 +285,12 @@ We now need to create our final table in the spreadsheet.  Create three columns 
 </div>
 
 <div style="text-align:justify">
-Finally we are ready to calculate the **MaxPrecip** column.  The formula to do this is given below:
+Finally, we are ready to calculate the **MaxPrecip** column.  The formula to do this is given below:
 
 $$log(MaxPrecip) = avg(log(MaxPrecip))+[k(Tr,Cs)]*\sigma log(MaxPrecip)$$
 <br>
 
-With the formula, populate the **MaxPrecip** column.  _Hint: Remeber that Log base 10 is undone by 10^_.  With the last column filled in, the table should look similar to the table shown in Figure 19 below.
+With the formula, populate the **MaxPrecip** column.  _Hint: Remember that Log base 10 is undone by 10^_.  With the last column filled in, the table should look similar to the table shown in Figure 19 below.
 
 <br>
 </div>
@@ -303,7 +303,7 @@ With the formula, populate the **MaxPrecip** column.  _Hint: Remeber that Log ba
 
 <div style="text-align:justify">
 
-Create a scatter plot with smooth lines and markers of the return period and max precipitation.  Now right click on the x-axis and select **Format Axis**.  Under the Format Axis ribbon on the right, click in the **Logarithic scale** box.  This will change the scale on the plot to a logarithmic scale.  Feel free to add minor gridlines to plot.  The two plots are shown below.  How do they compare?  What differences do you see?  How can the logarithmic scale help to estimate values between known return periods?
+Create a scatter plot with smooth lines and markers of the return period and max precipitation.  Now right click on the x-axis and select **Format Axis**.  Under the Format Axis ribbon on the right, click in the **Logarithmic scale** box.  This will change the scale on the plot to a logarithmic scale.  Feel free to add minor gridlines to plot.  The two plots are shown below.  How do they compare?  What differences do you see?  How can the logarithmic scale help to estimate values between known return periods?
 
 <br>
 </div>
