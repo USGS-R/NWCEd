@@ -87,6 +87,13 @@ The description of each of the lab materials is provided in the table below as w
 [CIDA USGS THREDDS Data Server](https://cida.usgs.gov/thredds/catalog.html?dataset=cida.usgs.gov/ssebopeta/monthly)<br>
 [Log-Pearson Type III Distribution](http://ascelibrary.org/doi/pdf/10.1061/(ASCE)1084-0699(2007)12%3A5(482))
 
+## Package Status
+
+[![status](https://img.shields.io/badge/USGS-Support-yellow.svg)](https://owi.usgs.gov/R/packages.html#support)
+
+This package is considered a 'support' package. For more information, see:
+[https://owi.usgs.gov/R/packages.html#support](https://owi.usgs.gov/R/packages.html#support)
+
 <br>
 
 Disclaimer
