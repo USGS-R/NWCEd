@@ -20,3 +20,9 @@ test_that('we get back some geojson when calling the getNWCWatershed function',{
   expect_gt(length(outData$features[[1]]$geometry$coordinates[[1]][[1]]),100)
   expect_equal(outData$type,"FeatureCollection")
 })
+
+test_that("we get back some geojson for a huc08 watershed", {
+  outData<-getNWCWatershed("03160103",local=TRUE)
+  expect_gt(length(outData$features[[1]]$geometry$coordinates[[1]][[1]]),1000)
+  expect_equal(outData$type,"FeatureCollection")
+})
